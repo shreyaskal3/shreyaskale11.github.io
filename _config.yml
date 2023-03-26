@@ -82,8 +82,9 @@ theme_mode: # [light|dark]
 img_cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar: "assets\img\favicons\apple-touch-icon.png"
-
+avatar: "https://media.licdn.com/dms/image/C560BAQEZOY4Pi7Y56Q/company-logo_200_200/0/1640475386639?e=1687996800&v=beta&t=RzNt58LS2XApdua4tgwoYGnnVgr3HjZbBGQL5EssdFM"
+# "assets\img\favicons\favicon-32x32.png"
+# https://media.licdn.com/dms/image/C560BAQEZOY4Pi7Y56Q/company-logo_200_200/0/1640475386639?e=1687996800&v=beta&t=RzNt58LS2XApdua4tgwoYGnnVgr3HjZbBGQL5EssdFM
 # boolean type, the global switch for TOC in posts.
 toc: true
 
@@ -110,7 +111,7 @@ comments:
 # Self-hosted static assets, optional › https://github.com/cotes2020/chirpy-static-assets
 assets:
   self_host:
-    enabled: # boolean, keep empty means false
+    enabled:  # boolean, keep empty means false
     # specify the Jekyll environment, empty means both
     # only works if `assets.self_host.enabled` is 'true'
     env: # [development|production]
