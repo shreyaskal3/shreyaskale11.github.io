@@ -23,7 +23,7 @@ title: ML Notes # the main title
 tagline: 
 # Simplifying the complex, so you don't have to. # it will display as the sub-title
 
-description: >- # used by seo meta and the atom feed
+description: # used by seo meta and the atom feed
 #   Simplifying the complex, so you don't have to.
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
