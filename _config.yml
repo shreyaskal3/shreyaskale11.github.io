@@ -1,7 +1,7 @@
 # The Site Configuration
 
 # Import the theme
-theme: jekyll-theme-chirpy
+theme: --
 
 # Change the following value to '/PROJECT_NAME' ONLY IF your site type is GitHub Pages Project sites
 # and doesn't have a custom domain.
@@ -20,14 +20,15 @@ timezone: Asia/Kolkata
 
 title: ML Notes # the main title
 
-tagline: 
+tagline: ----
 # Simplifying the complex, so you don't have to. # it will display as the sub-title
 
-description: # used by seo meta and the atom feed
+description: ---- 
+# used by seo meta and the atom feed
 #   Simplifying the complex, so you don't have to.
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
-url: ""
+url: "https://no2some1.com"
 
 github:
   username: No2Some1 # change to your github username
