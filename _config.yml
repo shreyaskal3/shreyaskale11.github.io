@@ -18,7 +18,7 @@ timezone: Asia/Kolkata
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: ML Notes # the main title
+title: AI Notes # the main title
 
 tagline: ----
 # Simplifying the complex, so you don't have to. # it will display as the sub-title
