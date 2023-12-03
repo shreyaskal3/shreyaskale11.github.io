@@ -28,23 +28,23 @@ description: ----
 #   Simplifying the complex, so you don't have to.
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
-url: "https://no2some1.com"
+url: "https://ainotes.in"
 
 github:
-  username: No2Some1 # change to your github username
+  username: ainotes # change to your github username
 
 twitter:
-  username: No2Some1 # change to your twitter username
+  username: ainotes # change to your twitter username
 
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
-  name: No2Some1
-  email: No2Some1@gmail.com # change to your email address
+  name: ainotes
+  email: ainotes@gmail.com # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/No2Some1 # change to your twitter homepage
-    - https://github.com/No2Some1 # change to your github homepage
+    - https://twitter.com/ainotes # change to your twitter homepage
+    - https://github.com/ainotes # change to your github homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
     # - https://www.linkedin.com/in/username
