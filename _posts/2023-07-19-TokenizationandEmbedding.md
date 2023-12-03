@@ -10,7 +10,7 @@ tags: [GPT]
  There are many ways of tokenization of words, most common method is to use vocabulary of words and map each words to a unique number.This is called vocabulary mapping. 
 
 For eg: 
-```python
+
     sentence = "I love to eat apples" 
     vocabulary = ["I", "love", "to", "eat", "apples"] 
     vocabulary_mapping = {"I": 0, "love": 1, "to": 2, "eat": 3, "apples": 4}
@@ -18,7 +18,7 @@ For eg:
     Now we can map each word in the sentence to a unique number using the vocabulary mapping.
 
     sentence_tokenized = [0, 1, 2, 3, 4]
-```
+
 But the tokenized sentence is not useful for the model, as it does not have any information and relation between the words. So we need to convert the tokenized sentence to embedding.
 
 
