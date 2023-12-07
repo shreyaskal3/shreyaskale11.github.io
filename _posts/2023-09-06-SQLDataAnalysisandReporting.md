@@ -1,6 +1,6 @@
 ---
 title: SQL Advanced Data Analysis and Reporting
-date: 2023-07-19 00:00:00 +0800
+date: 2023-09-06 00:00:00 +0800
 categories: [SQL, Basic_SQL]
 tags: [SQL]
 ---
