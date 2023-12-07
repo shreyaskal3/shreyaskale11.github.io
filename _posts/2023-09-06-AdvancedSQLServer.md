@@ -1,5 +1,5 @@
 ---
-title: Advanced SQL Server 1
+title: Advanced SQL Server
 date: 2023-09-06 00:00:00 +0800
 categories: [SQL, Basic_SQL]
 tags: [SQL]
