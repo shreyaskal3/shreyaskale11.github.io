@@ -5,9 +5,6 @@ categories: [SQL, Basic_SQL]
 tags: [SQL]
 ---
 
-
-
-
 # Machine Learning Notes
 
 ## Table of Contents
