@@ -1,7 +1,7 @@
 ---
 title: Advanced SQL Server
-date: 2023-09-06 00:00:00 +0800
-categories: [SQL, Basic_SQL]
+date: 2023-09-05 00:00:00 +0800
+categories: [SQL, SQL_Server]
 tags: [SQL]
 ---
 
@@ -245,37 +245,6 @@ Dynamic SQL allows the construction of SQL statements at runtime.
 DECLARE @sql_query NVARCHAR(MAX);
 SET @sql_query = 'SELECT * FROM table WHERE column = ''value''';
 EXEC sp_executesql @sql_query;
-```
-
-## Window Functions
-
-Window functions operate on a set of rows related to the current row.
-
-### ROW_NUMBER()
-
-Assigns a unique integer to each row within a partition.
-
-```sql
-SELECT column1, column2, ROW_NUMBER() OVER (PARTITION BY column1 ORDER BY column2) AS row_num
-FROM table;
-```
-
-### RANK() and DENSE_RANK()
-
-Assigns a rank to each row based on the values in the ORDER BY clause.
-
-```sql
-SELECT column1, column2, RANK() OVER (ORDER BY column2) AS rank
-FROM table;
-```
-
-### LEAD() and LAG()
-
-Access data from subsequent or previous rows in the result set.
-
-```sql
-SELECT column1, LAG(column1) OVER (ORDER BY column2) AS previous_value
-FROM table;
 ```
 
 ## Full-Text Search

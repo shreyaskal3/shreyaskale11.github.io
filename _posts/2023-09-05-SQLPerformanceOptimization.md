@@ -1,11 +1,9 @@
 ---
 title: SQL Performance Optimization
-date: 2023-09-06 00:00:00 +0800
-categories: [SQL, Basic_SQL]
+date: 2023-09-05 00:00:00 +0800
+categories: [SQL, SQL_Performance_Optimization]
 tags: [SQL]
 ---
-
-# Performance Optimization
 
 ## Indexing Strategies
 

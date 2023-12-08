@@ -1,7 +1,7 @@
 ---
 title: Advanced SQL Server Administration and Performance Tuning and Security
 date: 2023-09-06 00:00:00 +0800
-categories: [SQL, Basic_SQL]
+categories: [SQL, SQL_Server_Administration]
 tags: [SQL]
 ---
 
