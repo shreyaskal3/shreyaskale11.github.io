@@ -5,6 +5,65 @@ categories: [Statistics]
 tags: [Statistics]
 ---
 
+## Mean, Median, and Mode
+
+```python
+mean = sum(x) / n
+
+median = (x[n // 2] + x[(n - 1) // 2]) / 2 if n % 2 == 0 else x[n // 2]
+
+count_dict = {}
+for num in x:
+    count_dict[num] = count_dict.get(num, 0) + 1
+
+mode = [key for key, value in count_dict.items() if value == max(count_dict.values())][0]
+```
+
+## Variance and Standard Deviation
+
+```python
+mean = sum(x) / n
+
+variance = sum((num - mean) ** 2 for num in x) / n
+
+std_dev = variance ** 0.5
+```
+
+## Weighted Mean
+
+```python
+def weightedMean(X, W):
+    # Write your code here
+    wm = sum([X[i]*W[i] for i in range(len(X))])/sum(W)
+    print("%.1f" % wm)
+```
+
+## Quartiles
+
+```python
+def median(arr):
+    n = len(arr)
+    return (arr[n // 2] + arr[(n - 1) // 2]) / 2 if n % 2 == 0 else arr[n // 2]
+
+def quartiles(arr):
+    arr.sort()
+    n = len(arr)
+    q2 = median(arr)
+    q1 = median(arr[:n // 2])
+    q3 = median(arr[(n + 1) // 2:])
+    return q1, q2, q3
+```
+
+## Interquartile Range
+
+```python
+def interquartileRange(values, freqs):
+    # Print your answer to 1 decimal place within this function
+    x = [values[i] for i in range(len(values)) for _ in range(freqs[i])]
+    q1, q2, q3 = quartiles(x)
+    return q3 - q1
+```
+
 ## Inadequate Reasoning in Statistical Analysis
 
 #### 1. Correlation vs. Causation
@@ -78,27 +137,57 @@ For further details on graphing data pairs, interpretation challenges, and data 
 
 ## Pearson Correlation Coefficient (rxy)
 
-The Pearson or Product Moment correlation coefficient, denoted as rxy, measures the linear association between two paired variables, x and y. It is often computed in data analysis exercises by plotting the variables and fitting a best-fit or regression line. The correlation coefficient is calculated as the ratio of covariance to the product of standard deviations. A positive value indicates a positive correlation, a negative value indicates a negative correlation, and 0 indicates no linear association. The coefficient of determination (r²) estimates the proportion of variance explained by the linear relationship.
+The Pearson or Product Moment correlation coefficient, denoted as rxy, measures the linear association between two paired variables, x and y. It is often computed in data analysis exercises by plotting the variables and fitting a best-fit or regression line. The correlation coefficient is calculated as the ratio of covariance to the product of standard deviations. A positive value indicates a positive correlation, a negative value indicates a negative correlation, and 0 indicates no linear association. The `coefficient of determination (r²)` estimates the proportion of variance explained by the linear relationship.
 
 ### Calculation:
+Equation represents the Pearson correlation coefficient,
 
+Correlation coefficient is calculated as the ratio of covariance to the product of standard deviations.
+
+$$ cov(x, y) = S_{xy} = \frac{\sum(x_i - \bar{x})(y_i - \bar{y})}{n-1} $$
+Where,
+$ \bar{x} $ is the mean of x, $ \bar{y} $ is the mean of y, and n is the number of observations.
+$$ s_x = \sqrt{\frac{\sum(x_i - \bar{x})^2}{n-1}} $$
 $$
 r_{xy} = \frac{cov(x, y)}{s_x \cdot s_y}
 $$
-
+$$ r_{xy} = \frac{\sum(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum(x_i - \bar{x})^2 \sum(y_i - \bar{y})^2}} $$
+Where,
+Equation denotes the coefficient of determination.
 $$
 r^2
 $$
 
-The first equation represents the Pearson correlation coefficient, and the second equation denotes the coefficient of determination.
+```python
+# Function to calculate Pearson correlation coefficient
+def pearson_correlation_coefficient(x, y):
+    n = len(x)
+
+    # Calculate means
+    mean_x = sum(x) / n
+    mean_y = sum(y) / n
+
+    # Calculate covariance
+    covariance = sum((x[i] - mean_x) * (y[i] - mean_y) for i in range(n))
+
+    # Calculate standard deviations
+    std_dev_x = (sum((xi - mean_x) ** 2 for xi in x) / n) ** 0.5
+    std_dev_y = (sum((yi - mean_y) ** 2 for yi in y) / n) ** 0.5
+
+    # Calculate Pearson correlation coefficient
+    correlation_coefficient = covariance / (n * std_dev_x * std_dev_y)
+
+    return correlation_coefficient
+```
+
 
 ## Scale Dependency
 
-Scale dependency refers to the impact of scale, grouping, and arrangement on data analysis. It can be challenging to identify using simple statistical methods. For example, a scattergram showing a strong positive correlation between the number of mammal species and forest productivity might reveal a different picture when colored based on grouping parameters. This phenomenon, known as the Yule-Simpson effect or Simpson's Paradox, emphasizes the importance of considering scale dependencies in analysis.
+`Scale dependency refers to the impact of scale, grouping, and arrangement on data analysis.` It can be challenging to identify using simple statistical methods. For example, a scattergram showing a strong positive correlation between the number of mammal species and forest productivity might reveal a different picture when colored based on grouping parameters. This phenomenon, known as the `Yule-Simpson effect or Simpson's Paradox`, emphasizes the importance of considering scale dependencies in analysis.
 
 ## Confidence Intervals and Bootstrapping
 
-Bootstrapping is a resampling technique used to estimate the distribution of a statistic. In correlation analysis, it involves generating multiple datasets by random sampling with replacement and computing correlation coefficients. Confidence intervals can be obtained from these bootstrapped distributions. Another method uses Fisher's transform on the correlation coefficient to approximate normal distribution for calculating confidence intervals. This ensures confidence limits under the assumption of bivariate normality.
+`Bootstrapping is a resampling technique used to estimate the distribution of a statistic.` In correlation analysis, it involves generating multiple datasets by random sampling with replacement and computing correlation coefficients. Confidence intervals can be obtained from these bootstrapped distributions. Another method uses `Fisher's transform` on the correlation coefficient to approximate normal distribution for calculating confidence intervals. This ensures confidence limits under the assumption of bivariate normality.
 
 ## Correlation Matrix
 
@@ -106,30 +195,44 @@ In analyzing datasets with multiple variables, a correlation matrix can be creat
 
 ## Partial Correlation
 
-Real-world problems involve interactions between correlated variables. Partial correlation coefficients, such as \( r_{yx.z} \), allow examining the relationship between two variables while controlling for a third. Adjustments are made automatically without grouping, providing insights into isolated relationships. The first-order partial correlation formula is extended to higher-order partial correlations.
+Real-world problems involve interactions between correlated variables. Partial correlation coefficients, such as $(r_{yx.z})$, allow examining the relationship between two variables while controlling for a third. Adjustments are made automatically without grouping, providing insights into isolated relationships. The first-order partial correlation formula is extended to higher-order partial correlations.
 
 ## Correlograms
 
 Correlograms are diagrams displaying the variation in correlation against an ordered variable, such as time or distance. The R package `corrgrams` offers a visualization tool for correlation matrices, aiding in exploratory data analysis.
 
-**References:**
-- Crawley M (2007) The R Book, John Wiley & Son, New York
-- Efron B, Tibshirani R J (1993) An Introduction to the Bootstrap. Chapman and Hall, New York
-- Fisher R A (1915) Frequency distribution of the values of the correlation coefficient in samples from an indefinitely large population. Biometrika, 10(4), 507–521
-- Fisher R A (1921) Metron., 1(4), 3-32
-- Wikipedia, Resampling: [Link](https://en.wikipedia.org/wiki/Resampling_%28statistics%29#Permutation_tests)
-
-
 # Summary of Rank Correlation
 
 ## Spearman's Rank Correlation, ρ
 
-Spearman's rank correlation is a non-parametric measure used to assess the monotonic relationship between paired observations. Given a set of paired observations (xi, yi), the data is ranked, and the difference in rankings (di) is calculated. Spearman's rank correlation coefficient (ρ) is computed using the formula:
+Spearman's rank correlation is a non-parametric measure used to assess the `monotonic relationship between paired observations`. Given a set of paired observations (xi, yi), the data is ranked, and the difference in rankings (di) is calculated. Spearman's rank correlation coefficient (ρ) is computed using the formula:
 
 $$ \rho = 1 - \frac{6 \sum d_i^2}{n(n^2 - 1)} $$
+where
+- $ d_i = rank(x_i) - rank(y_i) $
+- $ n = \text{number of observations} $
+
 If tied values exist, the ranks are adjusted by replacing ties with their average ranks. The statistic ranges from -1 to 1, indicating perfect negative to perfect positive correlation.
 
 The significance of ρ is often assessed using a t-distribution with (n-2) degrees of freedom.
+
+```python
+# Function to calculate Spearman's rank correlation coefficient
+def spearman_rank_correlation(x, y):
+    n = len(x)
+
+    # Sorting x and y, and getting ranks
+    x_s = sorted(x)
+    y_s = sorted(y)
+    x_r = [x_s.index(ele) + 1 for ele in x]
+    y_r = [y_s.index(ele) + 1 for ele in y]
+
+    # Calculating Spearman's rank correlation coefficient
+    d_sqr = [(x_r[i] - y_r[i])**2 for i in range(n)]
+    r = 1 - ((6 * sum(d_sqr)) / (n * (n**2 - 1)))
+
+    return r
+```
 
 ## Kendall's Rank Correlation, τB
 
