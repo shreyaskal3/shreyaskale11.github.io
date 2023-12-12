@@ -1,8 +1,8 @@
 ---
 title: Tokenization and Embedding
 date: 2023-07-19 00:00:00 +0800
-categories: [NLP, Basics]
-tags: [GPT]
+categories: [NLP]
+tags: [NLP]
 ---
 
 ## Tokenization

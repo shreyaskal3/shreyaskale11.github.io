@@ -1,317 +1,252 @@
 ---
-title: Basic SQL
-date: 2023-09-06 00:00:00 +0800
-categories: [SQL, Basic_SQL]
-tags: [SQL]
+title: Machine Learning Notes
+
+date: 2023-11-07 00:00:00 +0800
+categories: [ML]
+tags: [ML]
 ---
 
-# Machine Learning Notes
-
-## Table of Contents
-1. [Introduction to Machine Learning](#introduction-to-machine-learning)
-2. [Supervised Learning](#supervised-learning)
-   - [Linear Regression](#linear-regression)
-   - [Logistic Regression](#logistic-regression)
-   - [Support Vector Machines (SVM)](#support-vector-machines-svm)
-   - [Decision Trees](#decision-trees)
-   - [Random Forests](#random-forests)
-   - [K-Nearest Neighbors (KNN)](#k-nearest-neighbors-knn)
-3. [Unsupervised Learning](#unsupervised-learning)
-   - [K-Means Clustering](#k-means-clustering)
-   - [Hierarchical Clustering](#hierarchical-clustering)
-   - [Principal Component Analysis (PCA)](#principal-component-analysis-pca)
-   - [Association Rule Mining](#association-rule-mining)
-4. [Neural Networks and Deep Learning](#neural-networks-and-deep-learning)
-   - [Artificial Neural Networks (ANN)](#artificial-neural-networks-ann)
-   - [Convolutional Neural Networks (CNN)](#convolutional-neural-networks-cnn)
-   - [Recurrent Neural Networks (RNN)](#recurrent-neural-networks-rnn)
-   - [Transfer Learning](#transfer-learning)
-5. [Evaluation Metrics](#evaluation-metrics)
-   - [Confusion Matrix](#confusion-matrix)
-   - [Precision, Recall, F1 Score](#precision-recall-f1-score)
-   - [ROC Curve](#roc-curve)
-6. [Feature Engineering](#feature-engineering)
-   - [Feature Scaling](#feature-scaling)
-   - [Feature Selection](#feature-selection)
-   - [One-Hot Encoding](#one-hot-encoding)
-7. [Hyperparameter Tuning](#hyperparameter-tuning)
-   - [Grid Search](#grid-search)
-   - [Random Search](#random-search)
-8. [Model Deployment](#model-deployment)
-   - [Containerization (Docker)](#containerization-docker)
-   - [Model APIs](#model-apis)
-9. [Ethical Considerations](#ethical-considerations)
-   - [Bias and Fairness](#bias-and-fairness)
-   - [Interpretability](#interpretability)
-   - [Privacy](#privacy)
-10. [Machine Learning Libraries](#machine-learning-libraries)
-    - [Scikit-Learn](#scikit-learn)
-    - [TensorFlow](#tensorflow)
-    - [PyTorch](#pytorch)
-
-## Introduction to Machine Learning
-- Definition of Machine Learning
-- Types of Machine Learning (Supervised, Unsupervised, Reinforcement Learning)
-- Applications of Machine Learning
-
-## Supervised Learning
-### Linear Regression
-- Basics of Linear Regression
-- Simple Linear Regression
-- Multiple Linear Regression
-- Assumptions and Evaluation
-
-### Logistic Regression
-- Basics of Logistic Regression
-- Binary and Multinomial Logistic Regression
-- Evaluation Metrics for Classification
-
-### Support Vector Machines (SVM)
-- Linear SVM
-- Non-linear SVM
-- Kernel Trick
-
-### Decision Trees
-- Basics of Decision Trees
-- Gini Index and Entropy
-- Pruning
-
-### Random Forests
-- Ensemble Learning
-- Bagging and Random Forests
-
-### K-Nearest Neighbors (KNN)
-- Distance Metrics
-- KNN Algorithm
+#
 
-## Unsupervised Learning
-### K-Means Clustering
-- Basics of Clustering
-- K-Means Algorithm
-- Evaluation Metrics for Clustering
+## ROC Curve
+A Receiver Operating Characteristic (ROC) curve is a graphical representation of the performance of a binary classification model at various classification thresholds. It illustrates the trade-off between the true positive rate (sensitivity) and the false positive rate (1 - specificity) as the discrimination threshold is varied.
 
-### Hierarchical Clustering
-- Agglomerative and Divisive Clustering
+Here's how the ROC curve works:
 
-### Principal Component Analysis (PCA)
-- Dimensionality Reduction
-- Eigenvectors and Eigenvalues
+1. **Binary Classification**:
+   - The ROC curve is commonly used for binary classification problems, where the goal is to distinguish between two classes (positive and negative).
 
-### Association Rule Mining
-- Apriori Algorithm
-- Support, Confidence, and Lift
+2. **True Positive Rate (Sensitivity)**:
+   - The true positive rate (TPR), also known as sensitivity or recall, is the proportion of actual positive instances correctly predicted by the model.
+   - \(TPR = \frac{TP}{TP + FN}\)
 
-Certainly! Here are more detailed explanations for each of the topics you specified, formatted in Markdown:
+3. **False Positive Rate (1 - Specificity)**:
+   - The false positive rate (FPR), also known as the complement of specificity, is the proportion of actual negative instances incorrectly predicted as positive by the model.
+   - \(FPR = \frac{FP}{FP + TN}\)
 
----
+4. **Threshold Variation**:
+   - The ROC curve is created by varying the discrimination threshold of the classifier and plotting the TPR against the FPR at each threshold.
+   - As the threshold increases, the TPR usually decreases, and the FPR also decreases.
 
-## K-Means Clustering
+5. **Random Classifier Line**:
+   - The ROC curve of a random classifier (one that makes predictions irrespective of the input features) is represented by a diagonal line from the bottom left to the top right (the line y = x).
 
-### Basics of Clustering
+6. **Ideal Classifier Point**:
+   - The ideal classifier would have a TPR of 1 and an FPR of 0, resulting in a point at the top left corner of the ROC curve.
 
-Clustering is a type of unsupervised learning that involves grouping similar data points into clusters. The objective is to maximize the intra-cluster similarity and minimize the inter-cluster similarity. Clustering is widely used in various domains, such as customer segmentation, image segmentation, and anomaly detection.
+7. **Area Under the ROC Curve (AUC-ROC)**:
+   - The AUC-ROC value provides a single scalar measure of the performance of a binary classification model. A perfect classifier has an AUC-ROC value of 1, while a random classifier has an AUC-ROC of 0.5.
+   - AUC-ROC measures the area under the ROC curve.
 
-### K-Means Algorithm
+8. **Choosing the Threshold**:
+   - The choice of the threshold depends on the specific requirements of the classification task. A higher threshold may prioritize specificity, while a lower threshold may prioritize sensitivity.
 
-K-Means is a popular clustering algorithm that partitions data into K clusters based on similarity. The algorithm works iteratively:
+9. **Use in Model Evaluation**:
+   - ROC curves are widely used to evaluate the performance of classifiers, especially in situations where the class distribution is imbalanced.
 
-1. **Initialization:**
-   - Randomly select K data points as initial centroids.
-  
-2. **Assignment:**
-   - Assign each data point to the nearest centroid, forming K clusters.
-  
-3. **Update Centroids:**
-   - Recalculate the centroids as the mean of data points in each cluster.
-  
-4. **Iteration:**
-   - Repeat steps 2 and 3 until convergence (when centroids no longer change significantly).
+the ROC curve provides a visual representation of the performance of a binary classification model across different discrimination thresholds. It is a valuable tool for understanding the trade-off between true positive rate and false positive rate and for selecting an appropriate threshold based on the specific needs of the application.
 
-K-Means converges to a local minimum, and the choice of K is crucial. Common methods for selecting K include the elbow method and silhouette analysis.
+# 
 
-### Evaluation Metrics for Clustering
+## Bias
 
-Evaluation metrics help assess the quality of clustering results. Common metrics include:
+- **Definition**:
+  - Bias refers to the error introduced by approximating a real-world problem, which may be extremely complex, by a much simpler model.
+  - High bias implies that the model is too simplistic and unable to capture the underlying patterns in the data.
 
-- **Silhouette Score:**
-  - Measures how similar an object is to its own cluster (cohesion) compared to other clusters (separation). Ranges from -1 to 1, where a higher score indicates better-defined clusters.
+- **Characteristics**:
+  - Models with high bias tend to oversimplify the relationships in the data and may perform poorly on both the training and unseen data.
+  - Commonly associated with underfitting.
 
-- **Davies-Bouldin Index:**
-  - Measures the compactness and separation of clusters. Lower values indicate better clustering.
+- **Examples**:
+  - A linear regression model applied to a dataset with a nonlinear underlying pattern may exhibit high bias.
 
----
+## Variance
 
-## Hierarchical Clustering
+- **Definition**:
+  - Variance refers to the model's sensitivity to small fluctuations or noise in the training data.
+  - High variance implies that the model is capturing not only the underlying patterns but also the noise in the data.
 
-### Agglomerative and Divisive Clustering
+- **Characteristics**:
+  - Models with high variance may perform well on the training data but poorly on unseen data, as they adapt too closely to the specific training dataset.
+  - Commonly associated with overfitting.
 
-Hierarchical clustering builds a tree of clusters. There are two main approaches:
+- **Examples**:
+  - A complex polynomial regression model applied to a dataset with some random noise may exhibit high variance.
 
-1. **Agglomerative (Bottom-Up):**
-   - Start with individual data points as clusters.
-   - Merge the closest clusters iteratively until all points belong to a single cluster.
+## Bias-Variance Trade-Off
 
-2. **Divisive (Top-Down):**
-   - Start with all data points in one cluster.
-   - Split the cluster recursively until each point is in its cluster.
+- **Trade-Off**:
+  - There is often a trade-off between bias and variance. Increasing model complexity tends to decrease bias but increase variance, and vice versa.
+  - The goal is to find the right level of model complexity that minimizes both bias and variance, resulting in optimal predictive performance on new, unseen data.
 
-Agglomerative clustering is more common. The choice of linkage criteria (single, complete, average, etc.) determines how the distance between clusters is calculated.
+- **Underfitting and Overfitting**:
+  - **Underfitting**: Occurs when a model is too simple, leading to high bias and poor performance on both training and test data.
+  - **Overfitting**: Occurs when a model is too complex, capturing noise in the training data and leading to high variance. Performance on training data may be good, but it generalizes poorly to new data.
 
----
+- **Model Evaluation**:
+  - The bias-variance trade-off is crucial when evaluating models. Models should be assessed not only on their performance on training data but also on their ability to generalize to new, unseen data.
 
-## Principal Component Analysis (PCA)
+- **Regularization**:
+  - Techniques such as regularization are used to control the trade-off between bias and variance by penalizing overly complex models.
 
-### Dimensionality Reduction
+Understanding the bias-variance trade-off is fundamental for selecting appropriate machine learning models, tuning hyperparameters, and achieving models that generalize well to new, unseen data.
 
-PCA is a technique for reducing the dimensionality of data while preserving its variability. It transforms the data into a new coordinate system (principal components) where the variance is maximized along the axes.
+# 
 
-### Eigenvectors and Eigenvalues
+## Bayes' Theorem
 
-In PCA, eigenvectors and eigenvalues are crucial. The eigenvectors represent the directions of maximum variance, and the corresponding eigenvalues indicate the magnitude of variance along those directions. The higher the eigenvalue, the more important the corresponding eigenvector in describing the data.
+**Definition**:
+- Bayes' Theorem is a mathematical formula that describes the probability of an event based on prior knowledge of conditions that might be related to the event.
+- It is named after Thomas Bayes, an 18th-century statistician and theologian.
 
----
+**Formula**:
+$ P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)} $ 
 
-## Association Rule Mining
+- \( P(A|B) \) is the probability of event A occurring given that B has occurred.
+- \( P(B|A) \) is the probability of event B occurring given that A has occurred.
+- \( P(A) \) and \( P(B) \) are the probabilities of events A and B occurring independently.
 
-### Apriori Algorithm
+**Application**:
+- Bayes' Theorem is widely used in statistics, probability theory, and machine learning, especially in Bayesian statistics and Bayesian inference.
 
-The Apriori algorithm is used for discovering interesting relationships (associations) among variables in large datasets. It works by iteratively finding frequent itemsets and generating association rules. Key steps include:
+## Naive Bayes
 
-1. **Support Calculation:**
-   - Identify itemsets that meet a minimum support threshold.
+**Definition**:
+- Naive Bayes is a classification algorithm based on Bayes' Theorem with the assumption that features are conditionally independent given the class label. This assumption simplifies the computation and leads to the term "naive."
 
-2. **Rule Generation:**
-   - Create rules from the frequent itemsets.
+**Types of Naive Bayes**:
+- **Gaussian Naive Bayes**: Assumes that the features follow a Gaussian distribution.
+- **Multinomial Naive Bayes**: Commonly used for discrete data, such as text data (e.g., document classification).
+- **Bernoulli Naive Bayes**: Suitable for binary data (e.g., spam detection).
 
-3. **Confidence and Lift:**
-   - Assess the quality of rules using confidence (conditional probability) and lift (how much more likely the consequent is, given the antecedent).
+**Assumption of Independence**:
+- The "naive" assumption in Naive Bayes is that features are independent, which might not hold in real-world scenarios. Despite this simplification, Naive Bayes can perform well, especially in text classification tasks.
 
----
+**Application**:
+- Naive Bayes is commonly used in spam filtering, text classification, sentiment analysis, and other tasks where the conditional independence assumption holds reasonably well.
 
-Feel free to use these detailed explanations as a foundation and add more specific details, examples, or code snippets based on your requirements.
+## Example: Text Classification with Naive Bayes
 
-### Dimensionality Reduction
-- Curse of Dimensionality
-- Techniques beyond PCA (t-SNE, UMAP)
+Suppose we want to classify an email as spam (S) or not spam (NS) based on the occurrence of words "free" and "discount."
 
-### Density-Based Clustering
-- DBSCAN (Density-Based Spatial Clustering of Applications with Noise)
-- OPTICS (Ordering Points To Identify the Clustering Structure)
+**Features**:
+- \( P(\text{"free"}|S) = 0.8 \)
+- \( P(\text{"discount"}|S) = 0.6 \)
+- \( P(\text{"free"}|NS) = 0.1 \)
+- \( P(\text{"discount"}|NS) = 0.2 \)
 
-### Gaussian Mixture Models (GMM)
-- Probability-Based Clustering
-- Expectation-Maximization (EM) Algorithm
+**Prior Probabilities**:
+- \( P(S) = 0.4 \)
+- \( P(NS) = 0.6 \)
 
-### Association Rule Mining
-- FP-growth (Frequent Pattern growth) Algorithm
-- ECLAT (Equivalence Class Transformation) Algorithm
+**Naive Bayes Calculation**:
+$$ P(S|\text{"free", "discount"}) \propto P(S) \cdot P(\text{"free"}|S) \cdot P(\text{"discount"}|S) $$
+$$ P(NS|\text{"free", "discount"}) \propto P(NS) \cdot P(\text{"free"}|NS) \cdot P(\text{"discount"}|NS) $$
 
-### Semi-Supervised Learning
-- Combining elements of supervised and unsupervised learning
-- Label Propagation
+By comparing the probabilities, we can classify the email as spam or not spam.
 
-### Self-Supervised Learning
-- Learning from the data itself without external labels
-- Contrastive Learning
+These concepts are foundational in probability theory, statistics, and machine learning, providing a basis for making probabilistic inferences and classifications.
 
-### Transfer Learning in Unsupervised Settings
-- Pre-training and Fine-tuning for Unsupervised Tasks
 
-### Generative Models
-- Overview of Generative Models
-- Variational Autoencoders (VAEs)
 
-### Clustering Evaluation Metrics
-- Silhouette Score
-- Davies-Bouldin Index
+## Introduction to Navie Bayes
 
-### Outlier Detection
-- Isolation Forest
-- One-Class SVM
+Navie Bayes is a classification algorithm based on Bayes' theorem. According to Bayes' theorem, the conditional probability of an event A, given another event B, is given by P(A|B) = P(B|A)P(A)/P(B). In the context of classification, we can think of P(A) as the prior probability of A, and P(A|B) as the posterior probability of A. In other words, we can think of the posterior probability as the probability of A given the data B.
 
-### Applications of Unsupervised Learning
-- Anomaly Detection in Cybersecurity
-- Market Basket Analysis in Retail
-- Topic Modeling in Natural Language Processing
+## Conditional Probability
 
-## Neural Networks and Deep Learning
-### Artificial Neural Networks (ANN)
-- Neurons and Layers
-- Backpropagation
-- Activation Functions
+Conditional probability is the probability of an event given that another event has occurred. For example, let's say that we have two events A and B. The probability of A given that B has occurred is given by:
 
-### Convolutional Neural Networks (CNN)
-- Convolutional Layers
-- Pooling Layers
-- Image Classification
+$$ P(A|B) = \frac{P(A \cap B)}{P(B)} $$
+where P(A ∩ B) is the probability of A and B occurring together.
 
-### Recurrent Neural Networks (RNN)
-- Sequential Data
-- Long Short-Term Memory (LSTM)
-- Gated Recurrent Unit (GRU)
+## Bayes' Rule:
 
-### Transfer Learning
-- Pre-trained Models
-- Fine-tuning
+Probability of A given B is equal to the probability of interestion of A and B divided by the probability of B.
+$$ P(A|B) = \frac{P(A \cap B)}{P(B)} $$
+Similarly, we can write the probability of B given A as:
+$$ P(B|A) = \frac{P(A \cap B)}{P(A)} $$
 
-## Evaluation Metrics
-### Confusion Matrix
-- True Positive, True Negative, False Positive, False Negative
+If we rearrange the above equation, we get:
+$$ P(A|B) = \frac{P(B|A)P(A)}{P(B)} $$
 
-### Precision, Recall, F1 Score
-- Formulas and Interpretation
+In the context of classification, we can think of P(A) as the prior probability of A, and P(A|B) as the posterior probability of A. In other words, we can think of the posterior probability as the probability of A given the data B.
 
-### ROC Curve
-- Receiver Operating Characteristic Curve
+## Navie Bayes Classifier
 
-## Feature Engineering
-### Feature Scaling
-- Standardization and Normalization
+For tweets classification, we can use Navie Bayes classifier to classify tweets into positive and negative tweets. 
 
-### Feature Selection
-- Methods for Selecting Relevant Features
+product of conditional probability of words in tweet of positive class and negative class:
+$$ P(positive|tweet) = P(w_1|positive) * P(w_2|positive) * P(w_3|positive) * ... * P(w_n|positive) $$
+$$ P(negative|tweet) = P(w_1|negative) * P(w_2|negative) * P(w_3|negative) * ... * P(w_n|negative) $$
+where w1, w2, w3, ... , wn are words in tweet.
+Calculate likelihood of tweet being positive and negative:
+$$
+\frac{P(\text{positive}|\text{tweet})}{P(\text{negative}|\text{tweet})} = 
+\begin{cases} >1, & \text{positive} \\ <1, & \text{negative} \end{cases}
+$$
 
-### One-Hot Encoding
-- Categorical Variable Encoding
+## Laplacian Smoothing
 
-## Hyperparameter Tuning
-### Grid Search
-- Exhaustive Search
-- Cross-Validation
+We usually compute the probability of a word given a class as follows:
 
-### Random Search
-- Randomized Search for Hyperparameter Optimization
+$$
+P(w_i|\text{class}) = \frac{\text{freq}(w_i, \text{class})}{N_{\text{class}}} \qquad \text{class} \in \{\text{Positive}, \text{Negative}\} 
+$$
 
-## Model Deployment
-### Containerization (Docker)
-- Packaging Models with Docker Containers
+However, if a word does not appear in the training, then it automatically gets a probability of 0, to fix this we add smoothing as follows
 
-### Model APIs
-- Building APIs for Model Deployment
+$$
+P(w_i|\text{class}) = \frac{\text{freq}(w_i, \text{class}) + 1}{(N_{\text{class}} + V)}
+$$
 
-## Ethical Considerations
-### Bias and Fairness
-- Sources of Bias
-- Fairness in Machine Learning
+Note that we added a 1 in the numerator, and since there are $V$ words to normalize, we add $V$ in the denominator.
 
-### Interpretability
-- Interpretable Machine Learning Models
+$N_{\text{class}}$: number of words in class
 
-### Privacy
-- Data Privacy Considerations
+$V$: number of unique words in vocabulary
 
-## Machine Learning Libraries
-### Scikit-Learn
-- Overview and Basic Usage
+## Log Likelihood
 
-### TensorFlow
-- Introduction and High-level Overview
+We can use log likelihood to avoid underflow. The log likelihood is given by:
 
-### PyTorch
-- Basics and Comparison with TensorFlow
-```
+$$ \lambda(w) = \log \frac{P(w|\text{pos})}{P(w|\text{neg})} $$
 
-You can use this outline as a starting point and add details, examples, and code snippets to each section based on your needs.
+where $P(w|\text{pos})$ and $P(w|\text{neg})$ are computed using Laplacian smoothing.
 
 
+## train naïve Bayes classifier
 
+1) Get or annotate a dataset with positive and negative tweets
+
+2) Preprocess the tweets:
+
+    Lowercase, Remove punctuation, urls, names , Remove stop words , Stemming , Tokenize sentences
+    
+3) Compute $\text{freq}(w, \text{class})$:
+
+4) Get $P(w|\text{pos}), P(w|\text{neg})$
+
+5) Get $\lambda(w)$
+
+$$
+\lambda(w) = \log \frac{P(w|\text{pos})}{P(w|\text{neg})}
+$$
+
+6) Compute $\text{logprior}$
+
+$$
+\text{logprior} = \log \frac{D_{\text{pos}}}{D_{\text{neg}}}
+$$
+
+where $D_{\text{pos}}$ and $D_{\text{neg}}$ correspond to the number of positive and negative documents respectively.
+
+7) Compute Score 
+$$\text{logprior} + \sum_{w \in \text{tweet}} \lambda(w) = 
+\begin{cases} >1, & \text{positive} \\ <1, & \text{negative} \end{cases}
+$$
+
+
+
+#
