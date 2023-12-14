@@ -7,6 +7,27 @@ tags: [Statistics]
 
 ## Mean, Median, and Mode
 
+The average (mean), median, and mode are measures of central tendency in statistics, and each provides different insights into a set of data. Here's a brief overview of when to use each measure:
+
+1. **Average (Mean):**
+   - **Use Cases:** The mean is often used when dealing with numerical data. It is sensitive to extreme values (outliers), so it may not be the best representation of central tendency when outliers are present.
+   - **Example:** When calculating the average test score in a class.
+
+2. **Median:**
+   - **Use Cases:** The median is robust to extreme values, making it a better choice when dealing with skewed distributions or datasets with outliers. It is especially useful when the data is not normally distributed.
+   - **Example:** When determining the median income in a neighborhood.
+
+3. **Mode:**
+   - **Use Cases:** The mode is suitable for categorical data or discrete values. It represents the most frequently occurring value in a dataset.
+   - **Example:** When identifying the most common blood type in a population.
+
+**Summary:**
+- Use the **mean** when dealing with numerical data and the distribution is roughly symmetric.
+- Use the **median** when the data is skewed or has outliers, as it is less affected by extreme values.
+- Use the **mode** when dealing with categorical or discrete data to identify the most common category or value.
+
+It's also important to note that in some cases, using multiple measures of central tendency can provide a more comprehensive understanding of the data. For example, reporting both the mean and median can give a sense of the data's typical value while also indicating whether extreme values are influencing the mean.
+
 ```python
 mean = sum(x) / n
 
