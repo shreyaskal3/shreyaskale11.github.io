@@ -74,6 +74,7 @@ $$ J_{w,b} = \frac{1}{2m}\sum\limits_{i=1}^{m-1} (f_{w,b}(x^{(i)})  - y^{(i)})^2
 
 ```
 
+\[\text{repeat until converge } \begin{cases} w := w - \alpha \frac{\partial J(w,b)}{\partial w} \\ b := b - \alpha \frac{\partial J(w,b)}{\partial b} \end{cases}\]
 
 gradient descent defined as 
 
