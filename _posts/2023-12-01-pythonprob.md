@@ -758,6 +758,58 @@ print (out_)
 ```
 
 
+### Letter Combinations of a Phone Number
+You are given a string str containing only digits from 2 to 9 (including 2 and 9). You are also given the following mapping of digits, such as they are on a telephone. Return all possible letter combinations that the number could represent. The resultant array must be in ascending order.
 
+Input:
+
+str - A string 
+
+Output:
+
+A string array containing all possible combinations, sorted in ascending order
+
+Constraints:
+
+1 <= str.length <= 10
+
+str consists of only digits from 2 to 9
+
+```
+SAMPLE INPUT 
+68
+SAMPLE OUTPUT 
+mt
+mu
+mv
+nt
+nu
+nv
+ot
+ou
+ov
+```
+
+```python
+def letter_combinations(digits):
+    d = {'2':'abc', '3':'def', '4':'ghi', '5':'jkl', '6':'mno', '7':'pqrs', '8':'tuv', '9':'wxyz'}
+    
+    def backtrack(index, current):
+        if index == len(digits):
+            combinations.append(current)
+            return
+
+        for letter in d[digits[index]]:
+            backtrack(index + 1, current + letter)
+    combinations = []
+    if digits:
+        backtrack(0, '')
+    return sorted(combinations)
+
+str = input()
+output = letter_combinations(str)
+for i in output:
+    print(i)
+```
 
 
