@@ -610,6 +610,122 @@ print(output)
 ```
 
 
+### Rotate Matrix
+You are given an n*n matrix. You must rotate it to the right by 90 degrees.
+
+Before Rotation:
+```
+1 2 3
+4 5 6
+7 8 9
+```
+After Rotation:
+```
+7 4 1
+8 5 2
+9 6 3
+```
+All modifications must take place on the same matrix. Do not create a new 2D array.
+
+Input:
+
+n - the dimensions of the matrix
+
+arr - the matrix itself
+
+Output:
+
+A rotated matrix
+
+Constraints:
+
+1 <= n <= 20
+
+-1000 <= arr[i] <= 1000
+```
+SAMPLE INPUT 
+3
+1 2 3
+4 5 6
+7 8 9
+SAMPLE OUTPUT 
+7 4 1
+8 5 2
+9 6 3
+```
+```python
+def rotate_matrix (n, arr):
+    # Write your code here
+    out = [[0 for i in range(n)] for j in range(n)]
+    for i in range(n):
+        for j in range(n):
+            out[j][n-1-i] = arr[i][j]
+    return out
+
+n = int(input())
+arr = [list(map(int, input().split())) for i in range(n)]
+
+out_ = rotate_matrix(n, arr)
+for i_out_ in out_:
+    print (' '.join(map(str, i_out_)))
+```
+
+### Jump Game
+You are given an array arr. You start from index 0, and the element at each index denotes the maximum distance you can jump from that index. For instance, in the following example:
+
+3 1 2 1 7
+
+If you start from index 0, the element at arr[0], ie 3, indicates that the maximum index you can jump to is 3.
+
+If it is possible to reach the last index, print 1. If not, print 0.
+
+Input:
+
+n - the size of arr
+
+arr - the array itself
+
+Output:
+
+1 if it is possible to reach the end of the array, 0 if it is not.
+
+Constraints:
+
+1 <= arr.length <= 1000
+
+0 <= arr[i] <= 1000
+```
+SAMPLE INPUT 
+6
+4 1 1 1 0 9
+SAMPLE OUTPUT 
+0
+```
+```python
+def can_jump (n, arr):
+    # Write your code here
+    """
+    4
+    4 1
+    4 
+    """
+
+    max = 0
+    for i in range(n):
+        # print(i,max)
+        if i>max:
+            return 0
+        if i+arr[i]>max:
+            max = i+arr[i]
+    return 1
+
+n = int(input())
+arr = list(map(int, input().split()))
+
+out_ = can_jump(n, arr)
+print (out_)
+```
+
 ## Hard
 
 ### Verify the Alien Dictionary
@@ -794,7 +910,7 @@ ov
 def letter_combinations(digits):
     d = {'2':'abc', '3':'def', '4':'ghi', '5':'jkl', '6':'mno', '7':'pqrs', '8':'tuv', '9':'wxyz'}
     
-    def backtrack(index, current):
+    def backtrack(index=0, current=''):
         if index == len(digits):
             combinations.append(current)
             return
@@ -803,7 +919,7 @@ def letter_combinations(digits):
             backtrack(index + 1, current + letter)
     combinations = []
     if digits:
-        backtrack(0, '')
+        backtrack()
     return sorted(combinations)
 
 str = input()
@@ -811,5 +927,64 @@ output = letter_combinations(str)
 for i in output:
     print(i)
 ```
+
+### Generate Parentheses
+You are given an integer n. Generate all possible balanced parentheses containing n opening and closing parentheses and return a sorted array.
+
+A string of parentheses is considered well balanced if there are never more closing than opening parentheses at any point in the string.
+
+Input:
+
+n - an integer
+
+Output:
+
+A sorted array of all possible parentheses containing n opening and closing parentheses.
+
+Constraints:
+
+1 <= n <= 10
+
+```
+SAMPLE INPUT 
+3
+SAMPLE OUTPUT 
+((()))
+(()())
+(())()
+()(())
+()()()
+```
+
+```python
+
+def gen_para (n):
+    # Write your code here
+    """
+    2
+    (
+    ()
+    """
+    def com(s="",left=0 ,right=0):
+        if len(s)==2*n:
+            result.append(s)
+            return
+        if left<n:
+            s1 = s+'('
+            com(s1,left+1 ,right)
+        if right<left:
+            s2 = s+')'
+            com(s2,left ,right+1)
+    result = []
+    com()
+    return result
+
+n = int(input())
+
+out_ = gen_para(n)
+for i_out_ in out_:
+    print (i_out_)
+```
+
 
 

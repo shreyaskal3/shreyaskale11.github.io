@@ -1,17 +1,9 @@
 ---
 title: Finetuning LLM
-date: 2023-12-02 00:00:00 +0800
-categories: [Finetuning_LLM]
+date: 2023-12-01 00:00:00 +0800
+categories: [NLP, Transformer , Finetuning_LLM]
 tags: [finetuningllm]
 ---
-
-
-
-
-
-
-
-
 
 
 # 
@@ -490,6 +482,46 @@ Categorize error
 - misspelling
 - Too Long
 - Repetitive
+
+- **ROUGE Metrics:**
+  - ROUGE stands for Recall-Oriented Understudy for Gisting Evaluation.
+  - Evaluation of automatically generated summaries by comparing them to human-generated reference summaries.
+  - Utilizes recall, precision, and F1 scores based on unigrams, bigrams, and longest common subsequence (LCS).
+  - Consideration of ordering of words through bigrams and LCS.
+
+- **ROUGE-1 Metric:**
+  - Focuses on unigrams (single words) in the comparison.
+  - Calculation involves recall, precision, and F1 score for unigram matches between reference and generated output.
+  
+- **ROUGE-2 Metric (Bigrams):**
+  - Takes into account bigrams (pairs of words) for a more nuanced evaluation.
+  - Scores are lower than ROUGE-1 as bigram matches are less likely in longer sentences.
+  
+- **ROUGE-L Metric (Longest Common Subsequence):**
+  - Considers the longest common subsequence in both reference and generated output.
+  - Calculates recall, precision, and F1 score based on the length of the longest common subsequence.
+  - Addresses issues with simple ROUGE scores that may yield high scores for poor completions.
+
+- **Issues with Simple ROUGE Scores:**
+  - Potential for a bad completion to result in a good score.
+  - Example: Repeating a word multiple times in the generated output.
+  - Clipping function with modified precision helps limit unigram matches to the maximum count in the reference.
+
+- **BLEU Score (Bilingual Evaluation Understudy):**
+  - Evaluates the quality of machine-translated text.
+  - Calculates average precision over multiple n-gram sizes (unigrams, bigrams, etc.).
+  - Average precision is then averaged across all n-gram sizes to obtain the BLEU score.
+  - Simple yet widely used for translation tasks.
+
+- **Calculation of BLEU Score:**
+  - Average precision is computed for each n-gram size.
+  - These individual calculations are averaged to determine the final BLEU score.
+  - Example: Candidate sentences evaluated against a human-generated reference sentence.
+
+- **Use of ROUGE and BLEU:**
+  - Both metrics provide automated, structured ways to measure the similarity of sentences.
+  - Useful for diagnostic evaluation of summarization (ROUGE) and translation tasks (BLEU).
+  - Should be used in conjunction with larger evaluation benchmarks for a comprehensive model assessment.
 
 ### Evaluation
 

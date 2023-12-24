@@ -51,13 +51,13 @@ But the tokenized sentence is not useful for the model, as it does not have any 
            
     Models learn word embeddings using different techniques, but generally through an unsupervised learning process over large text corpora:
 
-    - Word2Vec: Word2vec uses techniques like skip-gram or continuous bag of words to predict context words around target words. As it trains on the corpus to improve these predictions, it adjusts internal vector representations for each word. These vectors effectively embed semantic information about each word based on its usage contexts.
+    - Word2Vec: Word2vec uses techniques like skip-gram or continuous bag of words to predict context words around target words. As it trains on the corpus to improve these predictions, it adjusts internal vector representations for each word. These vectors ``effectively embed semantic information about each word based on its usage contexts``.
 
     - GloVe: GloVe creates word vectors by essentially doing matrix factorization on a co-occurrence count matrix for all words in a corpus. Words that appear in similar contexts have similar co-occurrence counts, which leads to similar embeddings.
 
-    - BERT: BERT is trained on masked language modeling and next sentence prediction tasks on large text. As it trains on these tasks, the internal representations that it learns for each word contain contextual semantic information, which can be used as dynamic word embeddings.
+    - BERT: BERT is trained on masked language modeling and next sentence prediction tasks on large text. As it trains on these tasks, the internal representations that it learns for each word ``contain contextual semantic information``, which can be ``used as dynamic word embeddings.``
 
-    - ELMo: ELMo uses internal BiLSTM layers trained on a language modeling objective to capture contextual information, including syntax and semantics. The internal representations capture this useful embedding information about words in context.
+    - ELMo: ELMo uses internal BiLSTM layers trained on a language modeling objective to ``capture contextual information, including syntax and semantics``. The internal representations capture this useful embedding information about words in context.
 
     The key difference across models is the exact training techniques. But they all rely on the distributional hypothesis - words appearing in similar contexts have similar meanings. The models learn vector representations capturing these semantic relationships between words across their large training corpora.
 

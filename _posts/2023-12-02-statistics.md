@@ -5,6 +5,8 @@ categories: [Statistics]
 tags: [Statistics]
 ---
 
+# Basic
+
 ## Mean, Median, and Mode
 
    - **Use Cases:** The mean is often used when dealing with numerical data. It is sensitive to extreme values (outliers), so it may not be the best representation of central tendency when outliers are present.
@@ -264,7 +266,68 @@ Significance is often evaluated by comparing the observed τB to the distributio
 
 
 
+# statistical concepts
 
+1. **Descriptive Statistics:**
+   - Definition: Descriptive statistics involve methods and measures that describe the data.
+   - Key Components:
+     - Measures of Central Tendency `(Mean, Median, Mode)`.They help us understand where the “average” or “central” point lies amidst a collection of data points.
+     - Measures of Variability `(Range, Variance, Standard Deviation, Quartile Range)`.These provide valuable insights into the degree of variability or uniformity in the data.   
+
+2. **Inferential Statistics:**
+   - Definition: Inferential statistics `draw conclusions about a population from a sample`, using techniques like `hypothesis testing and regression analysis` to determine the likelihood of observed patterns occurring by chance and to estimate population parameters.
+   - Importance: Enables data scientists to make data-driven decisions and formulate hypotheses about broader contexts.
+
+3. **Probability Distributions:**
+   - Definition: Probability distributions provide a structured framework for characterizing the `probabilities of various outcomes in random events`.
+   - Key Distributions: `Normal, Binomial, Poisson`.
+   - Significance: Essential for statistical analysis, hypothesis testing, and predictive modeling.
+
+4. **Sampling Methods:**
+   - Importance: Ensures that the sample is representative of the population in inferential statistics.
+   - Common Methods:
+        - **Simple Random Sampling:** Each member of the population has an equal chance of being selected for the sample through random processes.
+
+        - **Stratified Sampling:** Population is divided into subgroups (strata), and a random sample is taken from each stratum in proportion to its size.
+
+        - **Systematic Sampling:** Selecting every "kth" element from a population list, using a systematic approach to create the sample.
+
+        - **Cluster Sampling:** Population is divided into clusters, and a random sample of clusters is selected, with all members in selected clusters included.
+
+        - **Convenience Sampling:** Selection of individuals/items based on convenience or availability, often leading to non-representative samples.
+
+        - **Purposive (Judgmental) Sampling:** Researchers deliberately select specific individuals/items based on their expertise or judgment, potentially introducing bias.
+
+        - **Quota Sampling:** The population is divided into subgroups, and individuals are purposively selected from each subgroup to meet predetermined quotas.
+
+        - **Snowball Sampling:** Used in hard-to-reach populations, where participants refer researchers to others, leading to an expanding sample.
+
+5. **Regression Analysis:**
+   - Definition: Quantifies the relationship between a `dependent variable and one or more independent variables`.
+   - Models: `Linear Regression, Logistic Regression`.
+   - Applications: Used in various fields for predicting and understanding relationships.
+
+6. **Hypothesis Testing:**
+   - Definition: Assesses claims or `hypotheses about a population using sample data`.
+   - Process: Formulate null and alternative hypotheses, use statistical tests to evaluate support for the alternative hypothesis.
+
+7. **Data Visualizations:**
+   - Definition: Represents complex data visually for easy comprehension.
+   - Importance: Enables the identification of trends, patterns, and outliers, facilitating data analysis and decision-making.
+
+8. **ANOVA (Analysis of Variance):**
+   - Definition: Compares means of two or more groups to determine significant differences.
+   - Process: Calculates a test statistic and p-value to assess whether observed differences are statistically significant.
+   - Applications: Widely used in research to assess the impact of different factors on a dependent variable.
+
+9. **Time Series Analysis:**
+   - Definition: Focuses on studying data points collected over time to understand patterns and trends.
+   - Techniques: Data visualization, smoothing, forecasting, and modeling.
+   - Applications: Used in finance, economics, climate science, and stock market predictions.
+
+10. **Bayesian Statistics:**
+    - Definition: Bayesian statistics treats probability as a measure of uncertainty, updating beliefs based on prior information and new evidence.
+    - Applications: Particularly useful for complex, uncertain, or small-sample data in fields like machine learning, Bayesian networks, and decision analysis.
 
 
 
