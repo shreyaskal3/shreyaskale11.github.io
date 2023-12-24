@@ -616,7 +616,6 @@ pd.DataFrame(evaluation_dataset)
 
 ```
 
-![Alt text](..\assets\img\favicons\peft.png)
 
 ###
 
