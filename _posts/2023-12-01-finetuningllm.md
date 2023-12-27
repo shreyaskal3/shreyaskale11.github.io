@@ -783,6 +783,13 @@ https://www.lamini.ai/blog/guarantee-valid-json-output-with-lamini
 
 
 
+# LangChain for LLM Application Development
 
+## LangChain: Memory
+Outline
+- ConversationBufferMemory
+- ConversationBufferWindowMemory
+- ConversationTokenBufferMemory
+- ConversationSummaryMemory
 
 
