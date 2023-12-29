@@ -4,7 +4,6 @@ date: 2023-11-07 00:00:00 +0800
 categories: [ML]
 tags: [ML]
 math: true
-img_path: assets/img/ml/
 ---
 
 #
@@ -19,7 +18,7 @@ l1 l2 regularization
 http://www.stat.yale.edu/Courses/1997-98/101/linreg.htm#:~:text=A%20linear%20regression%20line%20has,y%20when%20x%20%3D%200). 
 
 <div align="center">
-  <img src="image.png" alt="Alt text" width="500" height="300" />
+  <img src="/assets/img/ml/image.png" alt="Alt text" width="500" height="300" />
 </div>
 
 ## Residuals
@@ -82,8 +81,11 @@ you utilize input training data to fit the parameters $w$,$b$ by minimizing a me
 
 $$ J_{w,b} = \frac{1}{2m}\sum\limits_{i=1}^{m-1} (f_{w,b}(x^{(i)})  - y^{(i)})^2  $$
 
-![Desktop View](gd.png){: w="300" h="200" }
 
+<div align="center">
+  <img src="/assets/img/ml/image.png" alt="Alt text" width="500" height="300" />
+</div>
+  
 
 gradient descent defined as 
 
