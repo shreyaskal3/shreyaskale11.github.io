@@ -6,6 +6,12 @@ tags: [ML]
 ---
 
 #
+
+each algo optimization function there working and comparison
+
+
+l1 l2 regularization
+
 # Linear Regression
 
 http://www.stat.yale.edu/Courses/1997-98/101/linreg.htm#:~:text=A%20linear%20regression%20line%20has,y%20when%20x%20%3D%200). 
@@ -64,6 +70,15 @@ the ROC curve provides a visual representation of the performance of a binary cl
 
 
 ## Gradient descent 
+
+It can be used for any optimization linear regresion and deep learning also
+
+<div style="display: flex;">
+  <div style="flex: 1; padding-right: 5px;">
+    <img src="/assets/img/ml/gd.png" width="330" height="200" />
+    <img src="/assets/img/ml/gdd.png" width="330" height="200" />
+  </div>
+</div>
 
 In linear regression, you utilize input training data to fit the parameters $w$,$b$ by minimizing a measure of the error between our predictions $f_{w,b}(x^{(i)})$ and the actual data $y^{(i)}$. The measure is called the $cost$, $J(w,b)$. In training you measure the cost over all of our training samples $x^{(i)},y^{(i)}$
 
