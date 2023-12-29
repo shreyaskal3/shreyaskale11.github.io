@@ -18,7 +18,8 @@ l1 l2 regularization
 http://www.stat.yale.edu/Courses/1997-98/101/linreg.htm#:~:text=A%20linear%20regression%20line%20has,y%20when%20x%20%3D%200). 
 
 <div align="center">
-  <img src="/assets/img/ml/image.png" alt="Alt text" width="500" height="300" />
+  <img src="../assets/img/ml/gd.png" alt="Alt text" width="400" height="200" />
+  <img src="../assets/img/ml/gdd.png" alt="Alt text" width="400" height="200" />
 </div>
 
 ## Residuals
