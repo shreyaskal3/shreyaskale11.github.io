@@ -15,12 +15,7 @@ l1 l2 regularization
 
 # Linear Regression
 
-http://www.stat.yale.edu/Courses/1997-98/101/linreg.htm#:~:text=A%20linear%20regression%20line%20has,y%20when%20x%20%3D%200). 
-
-<div align="center">
-  <img src="/assets/img/ml/gd.png" alt="Alt text" width="400" height="200" />
-  <img src="/assets/img/ml/gdd.png" alt="Alt text" width="400" height="200" />
-</div>
+http://www.stat.yale.edu/Courses/1997-98/101/linreg.htm#:~:text=A%20linear%20regression%20line%20has,y%20when%20x%20%3D%200  
 
 ## Residuals
 Once a regression model has been fit to a group of data, examination of the residuals (the deviations from the fitted line to the observed values) allows the modeler to investigate the validity of his or her assumption that a linear relationship exists. Plotting the residuals on the y-axis against the explanatory variable on the x-axis reveals any possible non-linear relationship among the variables, or might alert the modeler to investigate lurking variables. In our example, the residual plot amplifies the presence of outliers.
@@ -78,18 +73,18 @@ It can be used for any optimization linear regresion as well as deep learning.
 In linear regression,
 $$f_{w,b}(x^{(i)}) = w*x^{(i)}+b $$
 
-you utilize input training data to fit the parameters $w$,$b$ by minimizing a measure of the error between our predictions $f_{w,b}(x^{(i)})$ and the actual data $y^{(i)}$. The measure is called the $cost$, $J(w,b)$. In training you measure the cost over all of our training samples $x^{(i)},y^{(i)}$
+we utilize input training data to fit the parameters $w$,$b$ by` minimizing a measure of the error between our predictions $f_{w,b}(x^{(i)})$` and the actual data $y^{(i)}$. The measure is called the $cost$, $J(w,b)$. In training we measure the cost over all of our training samples $x^{(i)},y^{(i)}$.
 
-$$ J_{w,b} = \frac{1}{2m}\sum\limits_{i=1}^{m-1} (f_{w,b}(x^{(i)})  - y^{(i)})^2  $$
-
+$$\text{Objective - } min (J_{w,b}) = \frac{1}{2m}\sum\limits_{i=1}^{m-1} (f_{w,b}(x^{(i)})  - y^{(i)})^2  $$
 
 <div align="center">
-  <img src="/assets/img/ml/image.png" alt="Alt text" width="500" height="300" />
+  <img src="/assets/img/ml/gd.png"  width="400" height="200" />
+  <img src="/assets/img/ml/gdd.png"  width="400" height="200" />
 </div>
-  
 
-gradient descent defined as 
+> This cost function graph is for deep learning.For linear regression mostly it is in convex shape.
 
+Simultaneously update w and b,
 $$ 
 \text{repeat until converge } 
 \begin{cases}
@@ -98,10 +93,14 @@ b := b - \alpha \frac{\partial J(w,b)}{\partial b}
 \end{cases}
 $$
                                                    
+> After updating w, pre-updated w should be passed while calculating $\frac{\partial J(w,b)}{\partial b}$
 
 if $\frac{\partial J(w,b)}{\partial w}$ is slope when 
     +ve  -> w decreases (moves towards left) 
     -ve  -> w increases (moves towards right) 
+<div align="center">
+  <img src="/assets/img/ml/gdlr.png"  width="400" height="200" />
+</div>
 
 the gradient descent is with gradient of cost w.r.t to w and b
 
@@ -112,7 +111,22 @@ w := w - \alpha \frac{1}{m}\sum\limits_{i=1}^{m-1} (f_{w,b}(x^{(i)})  - y^{(i)})
 b := b - \alpha \frac{1}{m}\sum\limits_{i=1}^{m-1} (f_{w,b}(x^{(i)})  - y^{(i)})
 \end{cases}
 $$
-                                               
+
+When using `square error cost function`,the cost function does not and `will never have multiple local minima`. It has a single global minimum because of this bowl-shape. The technical term for this is that this cost function is a `convex function`. Informally, a convex function is of bowl-shaped function and it cannot have any local minima other than the single global minimum. When you implement `gradient descent on a convex function`, one nice property is that so long as you're learning rate is chosen appropriately, it will always converge to the global minimum.
+<div align="center">
+  <img src="/assets/img/ml/gdsqerror.png"  width="400" height="200" />
+</div>
+
+
+Here's a plot of the model and data on the upper left and a contour plot of the cost function on the upper right and at the bottom is the surface plot of the same cost function. Often w and b will both be initialized to 0, but for this demonstration, lets initialized `w = -0.1 and b = 900`. So this corresponds to `f(x) = -0.1x + 900`.
+
+The cost is decreasing at each update. So the parameters w and b are following this trajectory.
+<div align="center">
+  <img src="../assets/img/ml/gdeg.png"  width="400" height="200" />
+</div>
+
+So in computing grading descent, when computing derivatives, batch gradient descent is computing the sum from i =1 to m, smaller subsets of the training data at each update step.
+
 ```python
 import numpy as np
 
@@ -180,14 +194,65 @@ prediction: 427.02, target value: 460
 prediction: 285.62, target value: 232
 prediction: 169.82, target value: 178
 ```
+## Multiple Linear Regression
+Multiple regression refers to a statistical technique that extends simple linear regression to handle the relationship between `a dependent variable and two or more independent variables`.
+<div align="center">
+  <img src="/assets/img/ml/multireg.png"  width="400" height="200" />
+</div>
 
-#
+> Multivariate Regression: Multivariate regression is a more general term that encompasses regression models with multiple dependent variables. It allows for the simultaneous modeling of the relationships between `multiple independent variables and multiple dependent variables`.
 
-## Polynomial Regression
+Gradient descent for multiple regression 
+<div align="center">
+  <img src="/assets/img/ml/multiregg.png"  width="400" height="200" />
+</div>
 
+## Normal Equation
+The normal equation is a method used to find the optimal parameters (coefficients) for a linear regression model analytically. It provides a closed-form solution for the coefficients that minimize the cost function. Here is the normal equation for linear regression:
 
-generate the data for polynomial regression
-  
+For a linear regression model with \(n\) training examples, \(m\) features, and a target variable, the normal equation is given by:
+
+$$\theta = (X^TX)^{-1}X^TY $$
+
+Where:
+- $\theta$ is the vector of coefficients (parameters) that minimizes the cost function.
+- $X$ is the matrix of features (design matrix) with dimensions $n \times (m+1)$, where each row represents a training example, and the first column is all ones (for the bias term).
+- $Y$ is the vector of target values with dimensions $n \times 1$.
+
+Steps to use the normal equation:
+
+1. **Feature Scaling:** Ensure that the features are on a similar scale to help the optimization converge faster.
+
+2. **Add Bias Term:** Include a column of ones in the feature matrix \(X\) for the bias term.
+
+3. **Apply the Normal Equation:** Use the formula to calculate the optimal coefficients $\theta$.
+
+4. **Make Predictions:** Once you have the coefficients, you can use them to make predictions on new data.
+
+It's worth noting that while the normal equation provides an analytical solution, it may `not be efficient for very large datasets` because the matrix inversion operation $(X^TX)^{-1}$ has a time complexity of approximately $O(m^3)$, where \(m\) is the number of features.
+
+<div align="center">
+  <img src="/assets/img/ml/normaleq.png"  width="400" height="200" />
+</div>
+
+## Feature Scaling
+When a possible `range of values of a feature is large`, like the size and square feet which goes all the way up to 2000. It's more likely that a good model will learn to choose a `relatively small parameter value`, like 0.1. Likewise, when the possible values of the feature are small, like the number of bedrooms, then a reasonable value for its parameters will be relatively large like 50. 
+<div align="center">
+  <img src="../assets/img/ml/feasc0.png"  width="400" height="200" />
+</div>
+
+A contour plot where the horizontal axis has a much narrower range, say between zero and one, whereas the vertical axis takes on much larger values, say between 10 and 100. So the `contours form ovals or ellipses` and they're short on one side and longer on the other. And this is because a very small change to w1 can have a very large impact on the estimated price and that's a very large impact on the cost J. Because w1 tends to be multiplied by a very large number, the size and square feet. In contrast, it takes a much larger change in w2 in order to change the predictions much. And thus small changes to w2, don't change the cost function nearly as much.
+
+Because the contours are so tall and skinny gradient descent may end up bouncing back and forth for a long time before it can finally find its way to the global minimum. In situations like this, a useful thing to do is to scale the features.
+<div align="center">
+  <img src="../assets/img/ml/feasc.png"  width="400" height="200" />
+</div>
+
+The key point is that the re scale x1 and x2 are both now taking comparable ranges of values to each other. And if you run gradient descent on a cost function to find on this, re scaled x1 and x2 using this transformed data, then the contours will look more like this more like circles and less tall and skinny. And gradient descent can find a much more direct path to the global minimum.
+<div align="center">
+  <img src="../assets/img/ml/feasc1.png"  width="400" height="200" />
+</div>
+
 **Feature Scaling**
 
 Feature scaling is a method used to normalize the range of independent variables or features of data. In data processing, it is also known as data normalization and is generally performed during the data preprocessing step.
@@ -201,6 +266,12 @@ standardization(standard scores (also called z scores))
 $$x_{std} = \frac{x - \mu}{\sigma}$$
 
 where $\mu$ is the mean (average) and $\sigma$ is the standard deviation from the mean 
+
+## Polynomial Regression
+
+When data doesn't fit linearly,so try for higher dimensions.
+  
+
 
 **Evaluate model**
 
@@ -466,31 +537,74 @@ print(f"Lowest CV MSE is found in the model number= {model_number} and training 
 
 ```
 
+## Logistic Regression 
 
-**Diagnose a model via Bias and Variance**
+<div align="center">
+  <img src="../assets/img/ml/logreg0.png"  width="400" height="200" />
+</div>
 
-Bias is the difference between the average prediction of our model and the correct value which we are trying to predict. A model with high bias pays very little attention to the training data and oversimplifies the model. It always leads to high error on training and test data.
+<div align="center">
+  <img src="../assets/img/ml/logreg1.png"  width="400" height="200" />
+</div>
 
-Variance is the variability of model prediction for a given data point or a value which tells us spread of our data. A model with high variance pays a lot of attention to training data and does not generalize on the data which it hasn’t seen before. As a result, such models perform very well on training data but have high error rates on test data.
+<div align="center">
+  <img src="../assets/img/ml/logreg2.png"  width="400" height="200" />
+</div>
 
-level of performance of a model:
+<div align="center">
+  <img src="../assets/img/ml/logreg3.png"  width="400" height="200" />
+</div>
 
-human-level performance > training set performance > validation set performance > test set performance
+Logistic Regression uses a loss function more suited to the task of categorization where the target is 0 or 1 rather than any number. 
 
-
-- High bias and low variance: model is underfitting
-- Low bias and high variance: model is overfitting
-- Low bias and low variance: model is good
-- High bias and high variance: model is bad
-
-table 
-
-|  | High Variance | Low Variance |
-| --- | --- | --- |
-| High Bias | Overfitting | Underfitting |
-| Low Bias | Good | Good |
+>**Definition Note:**   In this course, these definitions are used:  
+**Loss** is a measure of the difference of a single example to its target value while the  
+**Cost** is a measure of the losses over the training set
 
 
+This is defined: 
+* $loss(f_{\mathbf{w},b}(\mathbf{x}^{(i)}), y^{(i)})$ is the cost for a single data point, which is:
+$$
+\begin{equation}
+  loss(f_{\mathbf{w},b}(\mathbf{x}^{(i)}), y^{(i)}) = \begin{cases}
+    - \log\left(f_{\mathbf{w},b}\left( \mathbf{x}^{(i)} \right) \right) & \text{if $y^{(i)}=1$}\\
+    - \log \left( 1 - f_{\mathbf{w},b}\left( \mathbf{x}^{(i)} \right) \right) & \text{if $y^{(i)}=0$}
+  \end{cases}
+\end{equation}
+$$
+
+*  $f_{\mathbf{w},b}(\mathbf{x}^{(i)})$ is the model's prediction, while $y^{(i)}$ is the target value.
+
+*  $f_{\mathbf{w},b}(\mathbf{x}^{(i)}) = g(\mathbf{w} \cdot\mathbf{x}^{(i)}+b)$ where function $g$ is the sigmoid function.
+
+The defining feature of this loss function is the fact that it uses two separate curves. One for the case when the target is zero or ($y=0$) and another for when the target is one ($y=1$). Combined, these curves provide the behavior useful for a loss function, namely, being zero when the prediction matches the target and rapidly increasing in value as the prediction differs from the target. Consider the curves below:
+<div align="center">
+  <img src="../assets/img/ml/logreg4.png"  width="400" height="200" />
+</div>
+<div align="center">
+  <img src="../assets/img/ml/logreg5.png"  width="400" height="200" />
+</div>
+
+The loss function above can be rewritten to be easier to implement.
+    $$loss(f_{\mathbf{w},b}(\mathbf{x}^{(i)}), y^{(i)}) = (-y^{(i)} \log\left(f_{\mathbf{w},b}\left( \mathbf{x}^{(i)} \right) \right) - \left( 1 - y^{(i)}\right) \log \left( 1 - f_{\mathbf{w},b}\left( \mathbf{x}^{(i)} \right) \right)$$
+  
+This is a rather formidable-looking equation. It is less daunting when you consider $y^{(i)}$ can have only two values, 0 and 1. One can then consider the equation in two pieces:  
+when $ y^{(i)} = 0$, the left-hand term is eliminated:
+$$
+\begin{align}
+loss(f_{\mathbf{w},b}(\mathbf{x}^{(i)}), 0) &= (-(0) \log\left(f_{\mathbf{w},b}\left( \mathbf{x}^{(i)} \right) \right) - \left( 1 - 0\right) \log \left( 1 - f_{\mathbf{w},b}\left( \mathbf{x}^{(i)} \right) \right) \\
+&= -\log \left( 1 - f_{\mathbf{w},b}\left( \mathbf{x}^{(i)} \right) \right)
+\end{align}
+$$
+and when $ y^{(i)} = 1$, the right-hand term is eliminated:
+$$
+\begin{align}
+  loss(f_{\mathbf{w},b}(\mathbf{x}^{(i)}), 1) &=  (-(1) \log\left(f_{\mathbf{w},b}\left( \mathbf{x}^{(i)} \right) \right) - \left( 1 - 1\right) \log \left( 1 - f_{\mathbf{w},b}\left( \mathbf{x}^{(i)} \right) \right)\\
+  &=  -\log\left(f_{\mathbf{w},b}\left( \mathbf{x}^{(i)} \right) \right)
+\end{align}
+$$
+
+OK, with this new logistic loss function, a cost function can be produced that incorporates the loss from all the examples. This will be the topic of the next lab. For now, let's take a look at the cost vs parameters curve for the simple example we considered above:
 
 # 
 
@@ -537,6 +651,29 @@ table
   - Techniques such as regularization are used to control the trade-off between bias and variance by penalizing overly complex models.
 
 Understanding the bias-variance trade-off is fundamental for selecting appropriate machine learning models, tuning hyperparameters, and achieving models that generalize well to new, unseen data.
+
+**Diagnose a model via Bias and Variance**
+
+Bias is the difference between the average prediction of our model and the correct value which we are trying to predict. A model with high bias pays very little attention to the training data and oversimplifies the model. It always leads to high error on training and test data.
+
+Variance is the variability of model prediction for a given data point or a value which tells us spread of our data. A model with high variance pays a lot of attention to training data and does not generalize on the data which it hasn’t seen before. As a result, such models perform very well on training data but have high error rates on test data.
+
+level of performance of a model:
+
+human-level performance > training set performance > validation set performance > test set performance
+
+
+- High bias and low variance: model is underfitting
+- Low bias and high variance: model is overfitting
+- Low bias and low variance: model is good
+- High bias and high variance: model is bad
+
+table 
+
+|  | High Variance | Low Variance |
+| --- | --- | --- |
+| High Bias | Overfitting | Underfitting |
+| Low Bias | Good | Good |
 
 
 
