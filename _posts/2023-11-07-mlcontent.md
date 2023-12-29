@@ -3,8 +3,8 @@ title: Machine Learning Notes
 date: 2023-11-07 00:00:00 +0800
 categories: [ML]
 tags: [ML]
-image:
-  path: /assets/img/ml/image.png
+# image:
+#   path: /assets/img/ml/image.png
 ---
 
 #
