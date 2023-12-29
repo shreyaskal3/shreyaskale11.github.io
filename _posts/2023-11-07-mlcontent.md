@@ -4,7 +4,7 @@ date: 2023-11-07 00:00:00 +0800
 categories: [ML]
 tags: [ML]
 math: true
-img_path: /img/ml/
+img_path: assets/img/ml/
 ---
 
 #
