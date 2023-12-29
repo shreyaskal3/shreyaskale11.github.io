@@ -3,6 +3,8 @@ title: Machine Learning Notes
 date: 2023-11-07 00:00:00 +0800
 categories: [ML]
 tags: [ML]
+math: true
+img_path: /img/ml/
 ---
 
 #
@@ -17,7 +19,7 @@ l1 l2 regularization
 http://www.stat.yale.edu/Courses/1997-98/101/linreg.htm#:~:text=A%20linear%20regression%20line%20has,y%20when%20x%20%3D%200). 
 
 <div align="center">
-  <img src="/assets/img/ml/image.png" alt="Alt text" width="500" height="300" />
+  <img src="image.png" alt="Alt text" width="500" height="300" />
 </div>
 
 ## Residuals
@@ -71,18 +73,16 @@ the ROC curve provides a visual representation of the performance of a binary cl
 
 ## Gradient descent 
 
-It can be used for any optimization linear regresion and deep learning also
+It can be used for any optimization linear regresion as well as deep learning.
 
-<div style="display: flex;">
-  <div style="flex: 1; padding-right: 5px;">
-    <img src="/assets/img/ml/gd.png" width="330" height="200" />
-    <img src="/assets/img/ml/gdd.png" width="330" height="200" />
-  </div>
-</div>
+In linear regression,
+$$f_{w,b}(x^{(i)}) = w*x^{(i)}+b $$
 
-In linear regression, you utilize input training data to fit the parameters $w$,$b$ by minimizing a measure of the error between our predictions $f_{w,b}(x^{(i)})$ and the actual data $y^{(i)}$. The measure is called the $cost$, $J(w,b)$. In training you measure the cost over all of our training samples $x^{(i)},y^{(i)}$
+you utilize input training data to fit the parameters $w$,$b$ by minimizing a measure of the error between our predictions $f_{w,b}(x^{(i)})$ and the actual data $y^{(i)}$. The measure is called the $cost$, $J(w,b)$. In training you measure the cost over all of our training samples $x^{(i)},y^{(i)}$
 
 $$ J_{w,b} = \frac{1}{2m}\sum\limits_{i=1}^{m-1} (f_{w,b}(x^{(i)})  - y^{(i)})^2  $$
+
+![Desktop View](gd.png){: w="300" h="200" }
 
 
 gradient descent defined as 
