@@ -122,7 +122,7 @@ Here's a plot of the model and data on the upper left and a contour plot of the 
 
 The cost is decreasing at each update. So the parameters w and b are following this trajectory.
 <div align="center">
-  <img src="../assets/img/ml/gdeg.png"  width="400" height="200" />
+  <img src="/assets/img/ml/gdeg.png"  width="400" height="200" />
 </div>
 
 So in computing grading descent, when computing derivatives, batch gradient descent is computing the sum from i =1 to m, smaller subsets of the training data at each update step.
@@ -238,19 +238,19 @@ It's worth noting that while the normal equation provides an analytical solution
 ## Feature Scaling
 When a possible `range of values of a feature is large`, like the size and square feet which goes all the way up to 2000. It's more likely that a good model will learn to choose a `relatively small parameter value`, like 0.1. Likewise, when the possible values of the feature are small, like the number of bedrooms, then a reasonable value for its parameters will be relatively large like 50. 
 <div align="center">
-  <img src="../assets/img/ml/feasc0.png"  width="400" height="200" />
+  <img src="/assets/img/ml/feasc0.png"  width="400" height="200" />
 </div>
 
 A contour plot where the horizontal axis has a much narrower range, say between zero and one, whereas the vertical axis takes on much larger values, say between 10 and 100. So the `contours form ovals or ellipses` and they're short on one side and longer on the other. And this is because a very small change to w1 can have a very large impact on the estimated price and that's a very large impact on the cost J. Because w1 tends to be multiplied by a very large number, the size and square feet. In contrast, it takes a much larger change in w2 in order to change the predictions much. And thus small changes to w2, don't change the cost function nearly as much.
 
 Because the contours are so tall and skinny gradient descent may end up bouncing back and forth for a long time before it can finally find its way to the global minimum. In situations like this, a useful thing to do is to scale the features.
 <div align="center">
-  <img src="../assets/img/ml/feasc.png"  width="400" height="200" />
+  <img src="/assets/img/ml/feasc.png"  width="400" height="200" />
 </div>
 
 The key point is that the re scale x1 and x2 are both now taking comparable ranges of values to each other. And if you run gradient descent on a cost function to find on this, re scaled x1 and x2 using this transformed data, then the contours will look more like this more like circles and less tall and skinny. And gradient descent can find a much more direct path to the global minimum.
 <div align="center">
-  <img src="../assets/img/ml/feasc1.png"  width="400" height="200" />
+  <img src="/assets/img/ml/feasc1.png"  width="400" height="200" />
 </div>
 
 **Feature Scaling**
@@ -540,19 +540,19 @@ print(f"Lowest CV MSE is found in the model number= {model_number} and training 
 ## Logistic Regression 
 
 <div align="center">
-  <img src="../assets/img/ml/logreg0.png"  width="400" height="200" />
+  <img src="/assets/img/ml/logreg0.png"  width="400" height="200" />
 </div>
 
 <div align="center">
-  <img src="../assets/img/ml/logreg1.png"  width="400" height="200" />
+  <img src="/assets/img/ml/logreg1.png"  width="400" height="200" />
 </div>
 
 <div align="center">
-  <img src="../assets/img/ml/logreg2.png"  width="400" height="200" />
+  <img src="/assets/img/ml/logreg2.png"  width="400" height="200" />
 </div>
 
 <div align="center">
-  <img src="../assets/img/ml/logreg3.png"  width="400" height="200" />
+  <img src="/assets/img/ml/logreg3.png"  width="400" height="200" />
 </div>
 
 Logistic Regression uses a loss function more suited to the task of categorization where the target is 0 or 1 rather than any number. 
@@ -579,10 +579,10 @@ $$
 
 The defining feature of this loss function is the fact that it uses two separate curves. One for the case when the target is zero or ($y=0$) and another for when the target is one ($y=1$). Combined, these curves provide the behavior useful for a loss function, namely, being zero when the prediction matches the target and rapidly increasing in value as the prediction differs from the target. Consider the curves below:
 <div align="center">
-  <img src="../assets/img/ml/logreg4.png"  width="400" height="200" />
+  <img src="/assets/img/ml/logreg4.png"  width="400" height="200" />
 </div>
 <div align="center">
-  <img src="../assets/img/ml/logreg5.png"  width="400" height="200" />
+  <img src="/assets/img/ml/logreg5.png"  width="400" height="200" />
 </div>
 
 The loss function above can be rewritten to be easier to implement.
