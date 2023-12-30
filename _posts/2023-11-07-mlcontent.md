@@ -113,17 +113,17 @@ b := b - \alpha \frac{1}{m}\sum\limits_{i=1}^{m-1} (f_{w,b}(x^{(i)})  - y^{(i)})
 $$
 
 When using `square error cost function`,the cost function does not and `will never have multiple local minima`. It has a single global minimum because of this bowl-shape. The technical term for this is that this cost function is a `convex function`. Informally, a convex function is of bowl-shaped function and it cannot have any local minima other than the single global minimum. When you implement `gradient descent on a convex function`, one nice property is that so long as you're learning rate is chosen appropriately, it will always converge to the global minimum.
-<!-- <div align="center">
-  <img src="/assets/img/ml/gdsqerror.png"  width="400" height="200" />
-</div> -->
+<div align="center">
+  <img src="/assets/img/ml/gdsqerror.png"  alt= "gdsqerror" width="400" height="200" />
+</div>
 
 
 Here's a plot of the model and data on the upper left and a contour plot of the cost function on the upper right and at the bottom is the surface plot of the same cost function. Often w and b will both be initialized to 0, but for this demonstration, lets initialized `w = -0.1 and b = 900`. So this corresponds to `f(x) = -0.1x + 900`.
 
 The cost is decreasing at each update. So the parameters w and b are following this trajectory.
-<!-- <div align="center">
-  <img src="/assets/img/ml/gdeg.png"  width="400" height="200" />
-</div> -->
+<div align="center">
+  <img src="/assets/img/ml/gdeg.png" alt= "gdeg" width="400" height="200" />
+</div>
 
 So in computing grading descent, when computing derivatives, batch gradient descent is computing the sum from i =1 to m, smaller subsets of the training data at each update step.
 
@@ -231,27 +231,27 @@ Steps to use the normal equation:
 
 It's worth noting that while the normal equation provides an analytical solution, it may `not be efficient for very large datasets` because the matrix inversion operation $(X^TX)^{-1}$ has a time complexity of approximately $O(m^3)$, where \(m\) is the number of features.
 
-<!-- <div align="center">
-  <img src="/assets/img/ml/normaleq.png"  width="400" height="200" />
-</div> -->
+<div align="center">
+  <img src="/assets/img/ml/normaleq.png" alt= "normaleq" width="400" height="200" />
+</div>
 
 ## Feature Scaling
 When a possible `range of values of a feature is large`, like the size and square feet which goes all the way up to 2000. It's more likely that a good model will learn to choose a `relatively small parameter value`, like 0.1. Likewise, when the possible values of the feature are small, like the number of bedrooms, then a reasonable value for its parameters will be relatively large like 50. 
-<!-- <div align="center">
-  <img src="/assets/img/ml/feasc0.png"  width="400" height="200" />
-</div> -->
+<div align="center">
+  <img src="/assets/img/ml/feasc0.png" alt= "feasc0" width="400" height="200" />
+</div>
 
 A contour plot where the horizontal axis has a much narrower range, say between zero and one, whereas the vertical axis takes on much larger values, say between 10 and 100. So the `contours form ovals or ellipses` and they're short on one side and longer on the other. And this is because a very small change to w1 can have a very large impact on the estimated price and that's a very large impact on the cost J. Because w1 tends to be multiplied by a very large number, the size and square feet. In contrast, it takes a much larger change in w2 in order to change the predictions much. And thus small changes to w2, don't change the cost function nearly as much.
 
 Because the contours are so tall and skinny gradient descent may end up bouncing back and forth for a long time before it can finally find its way to the global minimum. In situations like this, a useful thing to do is to scale the features.
-<!-- <div align="center">
-  <img src="/assets/img/ml/feasc.png"  width="400" height="200" />
-</div> -->
+<div align="center">
+  <img src="/assets/img/ml/feasc.png" alt= "feasc" width="400" height="200" />
+</div>
 
 The key point is that the re scale x1 and x2 are both now taking comparable ranges of values to each other. And if you run gradient descent on a cost function to find on this, re scaled x1 and x2 using this transformed data, then the contours will look more like this more like circles and less tall and skinny. And gradient descent can find a much more direct path to the global minimum.
-<!-- <div align="center">
-  <img src="/assets/img/ml/feasc1.png"  width="400" height="200" />
-</div> -->
+<div align="center">
+  <img src="/assets/img/ml/feasc1.png" alt= "feasc1" width="400" height="200" />
+</div>
 
 **Feature Scaling**
 
@@ -539,21 +539,21 @@ print(f"Lowest CV MSE is found in the model number= {model_number} and training 
 
 ## Logistic Regression 
 
-<!-- <div align="center">
-  <img src="/assets/img/ml/logreg0.png"  width="400" height="200" />
+<div align="center">
+  <img src="/assets/img/ml/logreg0.png" alt= "logreg0" width="400" height="200" />
 </div>
 
 <div align="center">
-  <img src="/assets/img/ml/logreg1.png"  width="400" height="200" />
+  <img src="/assets/img/ml/logreg1.png" alt= "logreg1" width="400" height="200" />
 </div>
 
 <div align="center">
-  <img src="/assets/img/ml/logreg2.png"  width="400" height="200" />
+  <img src="/assets/img/ml/logreg2.png" alt= "logreg2" width="400" height="200" />
 </div>
 
 <div align="center">
-  <img src="/assets/img/ml/logreg3.png"  width="400" height="200" />
-</div> -->
+  <img src="/assets/img/ml/logreg3.png" alt= "logreg3" width="400" height="200" />
+</div>
 
 Logistic Regression uses a loss function more suited to the task of categorization where the target is 0 or 1 rather than any number. 
 
@@ -578,12 +578,12 @@ $$
 *  $f_{\mathbf{w},b}(\mathbf{x}^{(i)}) = g(\mathbf{w} \cdot\mathbf{x}^{(i)}+b)$ where function $g$ is the sigmoid function.
 
 The defining feature of this loss function is the fact that it uses two separate curves. One for the case when the target is zero or ($y=0$) and another for when the target is one ($y=1$). Combined, these curves provide the behavior useful for a loss function, namely, being zero when the prediction matches the target and rapidly increasing in value as the prediction differs from the target. Consider the curves below:
-<!-- <div align="center">
-  <img src="/assets/img/ml/logreg4.png"  width="400" height="200" />
+<div align="center">
+  <img src="/assets/img/ml/logreg4.png" alt= "logreg4" width="400" height="200" />
 </div>
 <div align="center">
-  <img src="/assets/img/ml/logreg5.png"  width="400" height="200" />
-</div> -->
+  <img src="/assets/img/ml/logreg5.png" alt= "logreg5" width="400" height="200" />
+</div>
 
 The loss function above can be rewritten to be easier to implement.
     $$loss(f_{\mathbf{w},b}(\mathbf{x}^{(i)}), y^{(i)}) = (-y^{(i)} \log\left(f_{\mathbf{w},b}\left( \mathbf{x}^{(i)} \right) \right) - \left( 1 - y^{(i)}\right) \log \left( 1 - f_{\mathbf{w},b}\left( \mathbf{x}^{(i)} \right) \right)$$
