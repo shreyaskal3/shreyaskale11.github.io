@@ -1011,8 +1011,50 @@ Derivation
   <img src="/assets/img/probability/bcd.png" alt= "logreg5" width="400" height="200" />
 </div>
 
+## Bernoulli distribution
+
+## Continuous Distribution
+
+We can continue splitting these intervals and getting discrete distributions. And if we were to do this infinitely many times, then what we get a continuous distribution. Imagine just a bunch of very, very skinny bars, infinitely many of them, that become just a curve. Now, in the discrete distribution, we had that the sum of heights have to be equal to 1. The sum of heights was the same as saying the blue area. So in the continuous distribution, we have the same condition, the area under the curve is equal to 1.
+
+<div align="center">
+  <img src="/assets/img/probability/cont.png" alt= "cont" width="400" height="200" />
+</div>
+
+## Probability Density Function
+
+we divide the intervals into smaller and smaller, also the areas get smaller and smaller until they get to zero. So that's why we have to look into intervals and not just heights. So as I told you before, this function is called a probability density function, or PDF for short, and it's usually denoted as a lowercase f. It is the equivalent of the lowercase p in the discrete distribution. The equivalent of the mass function is now it's called probability density function.
+
+PDFs are a function defined only for continuous variables and it represents the rate at which you accumulate probability around each point. You can use the PDF to calculate probabilities. How do you do that? Simply by getting the area under the PDF curve between points A and B.
+
+ it needs to be defined for all the numbers in the real line. That means that it can actually be zero for many values. For example, before zero or after the cutoff at the right. But it doesn't need to, it could be positive for all the numbers and the area still being 1 if it gets really, really, really tiny at the tails. And it also needs to be positive or 0 for all values. 
+
+And it also needs to be positive or 0 for all values. This is reasonable because otherwise it would get placed in negative probabilities.
+
+the area under the curve has to be 1
+
+<div align="center">
+  <img src="/assets/img/probability/pdf.png" alt= "cont" width="400" height="200" />
+</div>
 
 
+**Summary PMF and PDF**
 
+Let's take a look at discrete random variables, and remember, that they can only take a finite or at most accountable number of values. While continuous random variables are used to model experiments where the outcome can take any value in an interval. Because of this difference between discrete and continuous random variables, each kind will have their own way of describing the behavior and computing probabilities. To measure the probability of events in the case of a discrete random variable, you have a probability mass function, which is defined as the probability that x takes on a particular value. For the continuous random variable, you have the probability density function. And remember that for this type of variable, the probability that the variable takes on a particular value is always 0. So you need to look at areas on this side.
 
+<div align="center">
+  <img src="/assets/img/probability/sprob.png" alt= "cont" width="400" height="200" />
+</div>
+
+## CDF
+
+<div align="center">
+  <img src="/assets/img/probability/cdf.png" alt= "cont" width="400" height="200" />
+</div>
+
+To really summarize, on the left, you have a PDF which is written as a function f(x), let's say. It's a function that's always positive and has a total area of one underneath the curve. The CDF has a left endpoint of zero, our right endpoint of one, and it's always positive, and it's always increasing. Sometimes you're going to be using the PDF, and some other times you're going to be using the CDF depending on which one's more convenient at the moment, but it's good to know both really well.
+
+<div align="center">
+  <img src="/assets/img/probability/cdf1.png" alt= "cont" width="400" height="200" />
+</div>
 #
