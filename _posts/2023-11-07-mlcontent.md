@@ -782,7 +782,7 @@ The following code implements the entropy and information gain equations:
 
 
 
-
+Both decision trees and gradient boosting are machine learning techniques that can be used for making predictions by dividing the input space.
 
 
 
@@ -940,6 +940,78 @@ where $D_{\text{pos}}$ and $D_{\text{neg}}$ correspond to the number of positive
 $$\text{logprior} + \sum_{w \in \text{tweet}} \lambda(w) = 
 \begin{cases} >1, & \text{positive} \\ <1, & \text{negative} \end{cases}
 $$
+
+
+
+# Bayes Theorem - 
+
+
+## Prior and Posterior
+
+Bayes' theorem in action, where first you find the prior the probability that an email is spam, but just the initial probability, namely dividing the number of spam emails divided by the total number of emails. Then there was an event, for example, the email contains the word lottery and then a posterior which refined this probability by creating a tree of possibilities. This gave us four possibilities that the email was spam and lottery, that it was spam and no lottery, that it was ham and lottery, and that it was ham and no lottery. And then, you further calculated the probability of spam and lottery by forgetting all the emails that don't contain the word lottery and doing the calculation there. Then the probability of spam given lottery is equal to the probability of spam and lottery divided by the sum of the probabilities of spam and lottery and ham and lottery and that was the posterior.
+
+<div align="center">
+  <img src="/assets/img/probability/posterior.png" alt= "logreg5" width="400" height="200" />
+</div>
+
+<div align="center">
+  <img src="/assets/img/probability/posterior1.png" alt= "logreg5" width="400" height="200" />
+</div>
+
+## Naive Bayes
+
+Naive Bayes is a probabilistic algorithm used for classification tasks, particularly in spam email filtering. The algorithm is based on Bayes' theorem, which calculates the probability of an event based on prior knowledge of conditions related to that event. In the case of spam classification, Naive Bayes calculates the probability that an email is spam given the occurrence of certain words.
+
+The challenge arises when dealing with multiple words (features). Calculating the joint probability of an email containing all these words can be problematic, especially if the dataset lacks instances where all words co-occur. The solution lies in the "naive" assumption that the appearances of words are independent, although this is not true in reality. Despite this simplification, Naive Bayes often produces effective results.
+
+The algorithm calculates the posterior probability of an email being spam given certain words by multiplying the individual probabilities of each word given spam. This product is then normalized by adding similar products for the ham (non-spam) class. The result is a posterior probability that helps classify emails as spam or non-spam.
+
+In a practical example, the Naive Bayes algorithm is applied to emails containing the words "lottery" and "winning." The probabilities of these words given spam or ham are calculated, and the algorithm yields a posterior probability indicating the likelihood of an email being spam given the presence of these words. Naive Bayes is considered powerful and useful, especially when dealing with large feature sets in classification tasks.
+
+<div align="center">
+  <img src="/assets/img/probability/naive.png" alt= "logreg5" width="400" height="200" />
+</div>
+
+## Application of probablity in ML
+
+<div align="center">
+  <img src="/assets/img/probability/proapp.png" alt= "logreg5" width="400" height="200" />
+</div>
+<div align="center">
+  <img src="/assets/img/probability/proapp1.png" alt= "logreg5" width="400" height="200" />
+</div>
+
+## PMF
+
+<div align="center">
+  <img src="/assets/img/probability/pmf.png" alt= "logreg5" width="400" height="200" />
+</div>
+
+<div align="center">
+  <img src="/assets/img/probability/bc.png" alt= "logreg5" width="400" height="200" />
+</div>
+
+
+<div align="center">
+  <img src="/assets/img/probability/bd.png" alt= "logreg5" width="400" height="200" />
+</div>
+
+When p = 0.5
+<div align="center">
+  <img src="/assets/img/probability/bd1.png" alt= "logreg5" width="400" height="200" />
+</div>
+when p = 0.3 (biased coin)
+<div align="center">
+  <img src="/assets/img/probability/bd2.png" alt= "logreg5" width="400" height="200" />
+</div>
+
+Derivation 
+
+<div align="center">
+  <img src="/assets/img/probability/bcd.png" alt= "logreg5" width="400" height="200" />
+</div>
+
+
 
 
 
