@@ -78,8 +78,8 @@ we utilize input training data to fit the parameters $w$,$b$ by` minimizing a me
 $$\text{Objective - } min (J_{w,b}) = \frac{1}{2m}\sum\limits_{i=1}^{m-1} (f_{w,b}(x^{(i)})  - y^{(i)})^2  $$
 
 <div align="center">
-  <img src="/assets/img/ml/gd.png"  width="400" height="200" />
-  <img src="/assets/img/ml/gdd.png"  width="400" height="200" />
+  <img src="/assets/img/ml/gd.png" alt="gd" width="400" height="200" />
+  <img src="/assets/img/ml/gdd.png" alt="gdd" width="400" height="200" />
 </div>
 
 > This cost function graph is for deep learning.For linear regression mostly it is in convex shape.
@@ -99,7 +99,7 @@ if $\frac{\partial J(w,b)}{\partial w}$ is slope when
     +ve  -> w decreases (moves towards left) 
     -ve  -> w increases (moves towards right) 
 <div align="center">
-  <img src="/assets/img/ml/gdlr.png"  width="400" height="200" />
+  <img src="/assets/img/ml/gdlr.png" alt="gdlr" width="400" height="200" />
 </div>
 
 the gradient descent is with gradient of cost w.r.t to w and b
