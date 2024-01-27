@@ -13,58 +13,15 @@ each algo optimization function there working and comparison
 
 l1 l2 regularization
 
-# Linear Regression
+# Supervised Learning
 
 http://www.stat.yale.edu/Courses/1997-98/101/linreg.htm#:~:text=A%20linear%20regression%20line%20has,y%20when%20x%20%3D%200  
 
-## Residuals
-Once a regression model has been fit to a group of data, examination of the residuals (the deviations from the fitted line to the observed values) allows the modeler to investigate the validity of his or her assumption that a linear relationship exists. Plotting the residuals on the y-axis against the explanatory variable on the x-axis reveals any possible non-linear relationship among the variables, or might alert the modeler to investigate lurking variables. In our example, the residual plot amplifies the presence of outliers.
 
-<!-- ![Alt text](images/residuals.png) -->
+## Extrapolation 
+`Attempting to use a regression equation to predict values outside of this range is often inappropriate.This is called Extrapolation`
 
-## Lurking Variables
-If non-linear trends are visible in the relationship between an explanatory and dependent variable, there may be other influential variables to consider. A lurking variable exists when the relationship between two variables is significantly affected by the presence of a third variable which has not been included in the modeling effort. Since such a variable might be a factor of time (for example, the effect of political or economic cycles), a time series plot of the data is often a useful tool in identifying the presence of lurking variables.
-
-## Extrapolation
 Whenever a linear regression model is fit to a group of data, the range of the data should be carefully observed. Attempting to use a regression equation to predict values outside of this range is often inappropriate, and may yield incredible answers. This practice is known as extrapolation. Consider, for example, a linear model which relates weight gain to age for young children. Applying such a model to adults, or even teenagers, would be absurd, since the relationship between age and weight gain is not consistent for all age groups.
-## ROC Curve
-A Receiver Operating Characteristic (ROC) curve is a graphical representation of the performance of a binary classification model at various classification thresholds. It illustrates the trade-off between the true positive rate (sensitivity) and the false positive rate (1 - specificity) as the discrimination threshold is varied.
-
-Here's how the ROC curve works:
-
-1. **Binary Classification**:
-   - The ROC curve is commonly used for binary classification problems, where the goal is to distinguish between two classes (positive and negative).
-
-2. **True Positive Rate (Sensitivity)**:
-   - The true positive rate (TPR), also known as sensitivity or recall, is the proportion of actual positive instances correctly predicted by the model.
-   - \(TPR = \frac{TP}{TP + FN}\)
-
-3. **False Positive Rate (1 - Specificity)**:
-   - The false positive rate (FPR), also known as the complement of specificity, is the proportion of actual negative instances incorrectly predicted as positive by the model.
-   - \(FPR = \frac{FP}{FP + TN}\)
-
-4. **Threshold Variation**:
-   - The ROC curve is created by varying the discrimination threshold of the classifier and plotting the TPR against the FPR at each threshold.
-   - As the threshold increases, the TPR usually decreases, and the FPR also decreases.
-
-5. **Random Classifier Line**:
-   - The ROC curve of a random classifier (one that makes predictions irrespective of the input features) is represented by a diagonal line from the bottom left to the top right (the line y = x).
-
-6. **Ideal Classifier Point**:
-   - The ideal classifier would have a TPR of 1 and an FPR of 0, resulting in a point at the top left corner of the ROC curve.
-
-7. **Area Under the ROC Curve (AUC-ROC)**:
-   - The AUC-ROC value provides a single scalar measure of the performance of a binary classification model. A perfect classifier has an AUC-ROC value of 1, while a random classifier has an AUC-ROC of 0.5.
-   - AUC-ROC measures the area under the ROC curve.
-
-8. **Choosing the Threshold**:
-   - The choice of the threshold depends on the specific requirements of the classification task. A higher threshold may prioritize specificity, while a lower threshold may prioritize sensitivity.
-
-9. **Use in Model Evaluation**:
-   - ROC curves are widely used to evaluate the performance of classifiers, especially in situations where the class distribution is imbalanced.
-
-the ROC curve provides a visual representation of the performance of a binary classification model across different discrimination thresholds. It is a valuable tool for understanding the trade-off between true positive rate and false positive rate and for selecting an appropriate threshold based on the specific needs of the application.
-
 
 ## Gradient descent 
 
@@ -606,8 +563,66 @@ $$
 \end{align}
 $$
 
+### ROC Curve
+`Evaluates binary classification by showing how the true positive rate and false positive rate change with different discrimination thresholds.`
 
-# 
+A Receiver Operating Characteristic (ROC) curve is a graphical representation of the performance of a binary classification model at various classification thresholds. It illustrates the trade-off between the true positive rate (sensitivity) and the false positive rate (1 - specificity) as the discrimination threshold is varied.
+
+Here's how the ROC curve works:
+
+|                | Predicted Positive | Predicted Negative |
+|----------------|---------------------|---------------------|
+| Actual Positive | True Positive (TP)  | False Negative (FN) |
+| Actual Negative | False Positive (FP) | True Negative (TN)  |
+
+1. **Binary Classification**:
+   - The ROC curve is commonly used for binary classification problems, where the goal is to distinguish between two classes (positive and negative).
+
+2. **True Positive Rate (Sensitivity)**:
+   - The true positive rate (TPR), also known as sensitivity or recall, is the proportion of actual positive instances correctly predicted by the model.
+    $$ TPR = \frac{TP}{TP + FN} $$
+
+3. **False Positive Rate (1 - Specificity)**:
+   - The false positive rate (FPR), also known as the complement of specificity, is the proportion of actual negative instances incorrectly predicted as positive by the model.
+   $$ FPR = \frac{FP}{FP + TN} $$
+
+4. **Threshold Variation**:
+   - The ROC curve is created by varying the discrimination threshold of the classifier and plotting the TPR against the FPR at each threshold.
+   - As the threshold increases, the TPR usually decreases, and the FPR also decreases.
+
+5. **Random Classifier Line**:
+   - The ROC curve of a random classifier (one that makes predictions irrespective of the input features) is represented by a diagonal line from the bottom left to the top right (the line y = x).
+
+6. **Ideal Classifier Point**:
+   - The ideal classifier would have a TPR of 1 and an FPR of 0, resulting in a point at the top left corner of the ROC curve.
+
+7. **Area Under the ROC Curve (AUC-ROC)**:
+   - The AUC-ROC value provides a single scalar measure of the performance of a binary classification model. A perfect classifier has an AUC-ROC value of 1, while a random classifier has an AUC-ROC of 0.5.
+   - AUC-ROC measures the area under the ROC curve.
+
+8. **Choosing the Threshold**:
+   - The choice of the threshold depends on the specific requirements of the classification task. A higher threshold may prioritize specificity, while a lower threshold may prioritize sensitivity.
+
+9. **Use in Model Evaluation**:
+   - ROC curves are widely used to evaluate the performance of classifiers, especially in situations where the class distribution is imbalanced.
+
+the ROC curve provides a visual representation of the performance of a binary classification model across different discrimination thresholds. It is a valuable tool for understanding the trade-off between true positive rate and false positive rate and for selecting an appropriate threshold based on the specific needs of the application.
+
+## Residuals
+`Residual plots can help determine whether a model provides a good fit.`
+Once a regression model has been fit to a group of data, examination of the residuals (the deviations from the fitted line to the observed values) allows the modeler to investigate the validity of his or her assumption that a linear relationship exists. Plotting the residuals on the y-axis against the explanatory variable on the x-axis reveals any possible non-linear relationship among the variables, or might alert the modeler to investigate lurking variables. In our example, the residual plot amplifies the presence of outliers.
+
+ - A residual plot displays the residuals on the vertical axis and the independent variable on the horizontal axis. The ideal residual plot, called the null residual plot, shows a random scatter of points forming a band around the identity line. 
+ - A negative residual means that the predicted value is too high, and a positive residual means that the predicted value was too low.  
+
+<div align="center">
+  <img src="/assets/img/ml/residualp.png" alt="gdlr" width="400" height="300" />
+</div>
+
+## Lurking Variables
+`A lurking variable is a third variable not considered in the model that significantly influences the relationship between two other variables.`
+
+If non-linear trends are visible in the relationship between an explanatory and dependent variable, there may be other influential variables to consider. A lurking variable exists when the relationship between two variables is significantly affected by the presence of a third variable which has not been included in the modeling effort. Since such a variable might be a factor of time (for example, the effect of political or economic cycles), a time series plot of the data is often a useful tool in identifying the presence of lurking variables.
 
 ## Bias
 
@@ -639,7 +654,7 @@ $$
 
 - **Trade-Off**:
   - There is often a trade-off between bias and variance. Increasing model complexity tends to decrease bias but increase variance, and vice versa.
-  - The goal is to find the right level of model complexity that minimizes both bias and variance, resulting in optimal predictive performance on new, unseen data.
+  - The goal is to find the `right level of model complexity` that `minimizes both bias and variance`, resulting in optimal predictive performance on new, unseen data.
 
 - **Underfitting and Overfitting**:
   - **Underfitting**: Occurs when a model is too simple, leading to high bias and poor performance on both training and test data.
@@ -649,11 +664,22 @@ $$
   - The bias-variance trade-off is crucial when evaluating models. Models should be assessed not only on their performance on training data but also on their ability to generalize to new, unseen data.
 
 - **Regularization**:
-  - Techniques such as regularization are used to control the trade-off between bias and variance by penalizing overly complex models.
+  `Used to control the trade-off between bias and variance by penalizing overly complex models.`
+  Techniques such as regularization are used to control the trade-off between bias and variance by penalizing overly complex models.Helps prevent overfitting, making the model more generalizable to new, unseen data.
+  Can improve the interpretability of the model by reducing the impact of irrelevant features.
+
+  - L1 Regularization (Lasso): Adds the absolute values of the coefficients as a penalty term to the objective function. It can lead to sparse models by encouraging some coefficients to become exactly zero.
+  - L2 Regularization (Ridge): Adds the squared values of the coefficients as a penalty term. It discourages overly large weights in the model.
+  - Elastic Net: Combines both L1 and L2 regularization. It is a linear combination of the L1 and L2 penalty terms.
+
+- **Parameter Tuning**:
+  The strength of regularization is controlled by a hyperparameter (usually denoted as lambda or alpha). Higher values of this hyperparameter result in stronger regularization.
+
+  The appropriate value for the regularization hyperparameter is often determined through techniques like cross-validation.
 
 Understanding the bias-variance trade-off is fundamental for selecting appropriate machine learning models, tuning hyperparameters, and achieving models that generalize well to new, unseen data.
 
-**Diagnose a model via Bias and Variance**
+## Diagnose a model via Bias and Variance
 
 Bias is the difference between the average prediction of our model and the correct value which we are trying to predict. A model with high bias pays very little attention to the training data and oversimplifies the model. It always leads to high error on training and test data.
 
@@ -663,18 +689,16 @@ level of performance of a model:
 
 human-level performance > training set performance > validation set performance > test set performance
 
-
 - High bias and low variance: model is underfitting
 - Low bias and high variance: model is overfitting
 - Low bias and low variance: model is good
 - High bias and high variance: model is bad
 
-table 
 
 |  | High Variance | Low Variance |
 | --- | --- | --- |
 | High Bias | Overfitting | Underfitting |
-| Low Bias | Good | Good |
+| Low Bias | bad | Good |
 
 
 
