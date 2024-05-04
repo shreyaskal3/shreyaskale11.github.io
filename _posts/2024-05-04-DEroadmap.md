@@ -49,7 +49,7 @@ math: True
 > 4. [What is a Fact Table?](https://www.youtube.com/watch?v=hQvCOBv_-LE){:target="_blank"}  
 > 5. [What is a Dimension Table?](https://www.youtube.com/watch?v=hQvCOBv_-LE){:target="_blank"} 
 > 6. [Data Modelling: Star Schema vs Snowflake Schema](https://www.youtube.com/watch?v=hQvCOBv_-LE){:target="_blank"}
-> 7. [Slowly Changing Dimensions (SCD)- Type 1 and Type 2: What is SCD - Slowly Changing Dimension | Data Engineering Tutorial | Data Engineering Concepts - YouTube](https://www.youtube.com/watch?v=kDRwHPxagJc&t=31s){:target="_blank"} 
+> 7. [Slowly Changing Dimensions - Type 1 and Type 2: What is SCD - Slowly Changing Dimension | Data Engineering Tutorial | Data Engineering Concepts - YouTube](https://www.youtube.com/watch?v=kDRwHPxagJc&t=31s){:target="_blank"} 
 > 8. [What is a Data Mart? Data Mart vs Datawarehouse How Data Mart actually works? We are here to show you! - YouTube](https://www.youtube.com/watch?v=kDRwHPxagJc&t=31s){:target="_blank"} 
 > 9. [What is Extract Transform Load (ETL)?](https://www.youtube.com/watch?v=j5HUv8RvuL4&t=3s){:target="_blank"} (understand the ETL part) 
 > 10. [What is a Data Lake? DataLake vs Data Warehouse vs Database KNOW the difference between Data Base // Data Warehouse // Data Lake (Easy Explanation👌) - YouTube](https://www.youtube.com/watch?v=WgIbvkyY4mI){:target="_blank"} 
