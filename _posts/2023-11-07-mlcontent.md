@@ -10,20 +10,19 @@ math: true
 
 each algo optimization function there working and comparison
 
-
 l1 l2 regularization
 
 # Supervised Learning
 
-http://www.stat.yale.edu/Courses/1997-98/101/linreg.htm#:~:text=A%20linear%20regression%20line%20has,y%20when%20x%20%3D%200  
+http://www.stat.yale.edu/Courses/1997-98/101/linreg.htm#:~:text=A%20linear%20regression%20line%20has,y%20when%20x%20%3D%200
 
+## Extrapolation
 
-## Extrapolation 
 `Attempting to use a regression equation to predict values outside of this range is often inappropriate.This is called Extrapolation`
 
 Whenever a linear regression model is fit to a group of data, the range of the data should be carefully observed. Attempting to use a regression equation to predict values outside of this range is often inappropriate, and may yield incredible answers. This practice is known as extrapolation. Consider, for example, a linear model which relates weight gain to age for young children. Applying such a model to adults, or even teenagers, would be absurd, since the relationship between age and weight gain is not consistent for all age groups.
 
-## Gradient descent 
+## Gradient descent
 
 It can be used for any optimization linear regresion as well as deep learning.
 
@@ -42,27 +41,29 @@ $$\text{Objective - } min (J_{w,b}) = \frac{1}{2m}\sum\limits_{i=1}^{m-1} (f_{w,
 > This cost function graph is for deep learning.For linear regression mostly it is in convex shape.
 
 Simultaneously update w and b,
-$$ 
-\text{repeat until converge } 
+
+$$
+\text{repeat until converge }
 \begin{cases}
 w := w - \alpha \frac{\partial J(w,b)}{\partial w} \\
 b := b - \alpha \frac{\partial J(w,b)}{\partial b}
 \end{cases}
 $$
-                                                   
+
 > After updating w, pre-updated w should be passed while calculating $\frac{\partial J(w,b)}{\partial b}$
 
-if $\frac{\partial J(w,b)}{\partial w}$ is slope when 
-    +ve  -> w decreases (moves towards left) 
-    -ve  -> w increases (moves towards right) 
+if $\frac{\partial J(w,b)}{\partial w}$ is slope when
++ve -> w decreases (moves towards left)
+-ve -> w increases (moves towards right)
+
 <div align="center">
   <img src="/assets/img/ml/gdlr.png" alt="gdlr" width="400" height="200" />
 </div>
 
 the gradient descent is with gradient of cost w.r.t to w and b
 
-$$ 
-\text{repeat until converge } 
+$$
+\text{repeat until converge }
 \begin{cases}
 w := w - \alpha \frac{1}{m}\sum\limits_{i=1}^{m-1} (f_{w,b}(x^{(i)})  - y^{(i)})x^{(i)} \\
 b := b - \alpha \frac{1}{m}\sum\limits_{i=1}^{m-1} (f_{w,b}(x^{(i)})  - y^{(i)})
@@ -70,14 +71,15 @@ b := b - \alpha \frac{1}{m}\sum\limits_{i=1}^{m-1} (f_{w,b}(x^{(i)})  - y^{(i)})
 $$
 
 When using `square error cost function`,the cost function does not and `will never have multiple local minima`. It has a single global minimum because of this bowl-shape. The technical term for this is that this cost function is a `convex function`. Informally, a convex function is of bowl-shaped function and it cannot have any local minima other than the single global minimum. When you implement `gradient descent on a convex function`, one nice property is that so long as you're learning rate is chosen appropriately, it will always converge to the global minimum.
+
 <div align="center">
   <img src="/assets/img/ml/gdsqerror.png"  alt= "gdsqerror" width="400" height="200" />
 </div>
 
-
 Here's a plot of the model and data on the upper left and a contour plot of the cost function on the upper right and at the bottom is the surface plot of the same cost function. Often w and b will both be initialized to 0, but for this demonstration, lets initialized `w = -0.1 and b = 900`. So this corresponds to `f(x) = -0.1x + 900`.
 
 The cost is decreasing at each update. So the parameters w and b are following this trajectory.
+
 <div align="center">
   <img src="/assets/img/ml/gdeg.png" alt= "gdeg" width="400" height="200" />
 </div>
@@ -116,8 +118,8 @@ def compute_gradient_descent(x,y,w,b,alpha,iterations=100):
             print(i,cost_function(x,y,w,b))
     return w,b
 
-X_train = np.array([[2104, 5, 1, 45], 
-                    [1416, 3, 2, 40], 
+X_train = np.array([[2104, 5, 1, 45],
+                    [1416, 3, 2, 40],
                     [852, 2, 1, 35]])
 y_train = np.array([460, 232, 178])
 
@@ -135,6 +137,7 @@ for i in range(X_train.shape[0]):
 ```
 
 Result:
+
 ```python
 0 209314.1336159363
 100 671.6664448665141
@@ -151,20 +154,25 @@ prediction: 427.02, target value: 460
 prediction: 285.62, target value: 232
 prediction: 169.82, target value: 178
 ```
+
 ## Multiple Linear Regression
+
 Multiple regression refers to a statistical technique that extends simple linear regression to handle the relationship between `a dependent variable and two or more independent variables`.
+
 <!-- <div align="center">
   <img src="/assets/img/ml/multireg.png"  width="400" height="200" />
 </div> -->
 
 > Multivariate Regression: Multivariate regression is a more general term that encompasses regression models with multiple dependent variables. It allows for the simultaneous modeling of the relationships between `multiple independent variables and multiple dependent variables`.
 
-Gradient descent for multiple regression 
+Gradient descent for multiple regression
+
 <!-- <div align="center">
   <img src="/assets/img/ml/multiregg.png"  width="400" height="200" />
 </div> -->
 
 ## Normal Equation
+
 The normal equation is a method used to find the optimal parameters (coefficients) for a linear regression model analytically. It provides a closed-form solution for the coefficients that minimize the cost function. Here is the normal equation for linear regression:
 
 For a linear regression model with \(n\) training examples, \(m\) features, and a target variable, the normal equation is given by:
@@ -172,6 +180,7 @@ For a linear regression model with \(n\) training examples, \(m\) features, and 
 $$\theta = (X^TX)^{-1}X^TY $$
 
 Where:
+
 - $\theta$ is the vector of coefficients (parameters) that minimizes the cost function.
 - $X$ is the matrix of features (design matrix) with dimensions $n \times (m+1)$, where each row represents a training example, and the first column is all ones (for the bias term).
 - $Y$ is the vector of target values with dimensions $n \times 1$.
@@ -193,7 +202,9 @@ It's worth noting that while the normal equation provides an analytical solution
 </div>
 
 ## Feature Scaling
-When a possible `range of values of a feature is large`, like the size and square feet which goes all the way up to 2000. It's more likely that a good model will learn to choose a `relatively small parameter value`, like 0.1. Likewise, when the possible values of the feature are small, like the number of bedrooms, then a reasonable value for its parameters will be relatively large like 50. 
+
+When a possible `range of values of a feature is large`, like the size and square feet which goes all the way up to 2000. It's more likely that a good model will learn to choose a `relatively small parameter value`, like 0.1. Likewise, when the possible values of the feature are small, like the number of bedrooms, then a reasonable value for its parameters will be relatively large like 50.
+
 <div align="center">
   <img src="/assets/img/ml/feasc0.png" alt= "feasc0" width="400" height="200" />
 </div>
@@ -201,11 +212,13 @@ When a possible `range of values of a feature is large`, like the size and squar
 A contour plot where the horizontal axis has a much narrower range, say between zero and one, whereas the vertical axis takes on much larger values, say between 10 and 100. So the `contours form ovals or ellipses` and they're short on one side and longer on the other. And this is because a very small change to w1 can have a very large impact on the estimated price and that's a very large impact on the cost J. Because w1 tends to be multiplied by a very large number, the size and square feet. In contrast, it takes a much larger change in w2 in order to change the predictions much. And thus small changes to w2, don't change the cost function nearly as much.
 
 Because the contours are so tall and skinny gradient descent may end up bouncing back and forth for a long time before it can finally find its way to the global minimum. In situations like this, a useful thing to do is to scale the features.
+
 <div align="center">
   <img src="/assets/img/ml/feasc.png" alt= "feasc" width="400" height="200" />
 </div>
 
 The key point is that the re scale x1 and x2 are both now taking comparable ranges of values to each other. And if you run gradient descent on a cost function to find on this, re scaled x1 and x2 using this transformed data, then the contours will look more like this more like circles and less tall and skinny. And gradient descent can find a much more direct path to the global minimum.
+
 <div align="center">
   <img src="/assets/img/ml/feasc1.png" alt= "feasc1" width="400" height="200" />
 </div>
@@ -222,13 +235,11 @@ standardization(standard scores (also called z scores))
 
 $$x_{std} = \frac{x - \mu}{\sigma}$$
 
-where $\mu$ is the mean (average) and $\sigma$ is the standard deviation from the mean 
+where $\mu$ is the mean (average) and $\sigma$ is the standard deviation from the mean
 
 ## Polynomial Regression
 
 When data doesn't fit linearly,so try for higher dimensions.
-  
-
 
 **Evaluate model**
 
@@ -237,8 +248,9 @@ Mean Squared Error (MSE)
 $$MSE = \frac{1}{n}\sum_{i=1}^{n}(y_i - \hat{y_i})^2$$
 $$or$$
 $$MSE = \frac{1}{2n}\sum_{i=1}^{n}(y_i - f(x_i))^2$$
-where 
-- $y_i$ is the true value and $\hat{y_i}$ is the predicted value 
+where
+
+- $y_i$ is the true value and $\hat{y_i}$ is the predicted value
 - $n$ is the number of observations
 
 Root Mean Squared Error (RMSE)
@@ -248,17 +260,17 @@ $$RMSE = \sqrt{\frac{1}{n}\sum_{i=1}^{n}(y_i - \hat{y_i})^2}$$
 R-squared (Coefficient of Determination)
 
 $$R^2 = 1 - \frac{SS_{res}}{SS_{tot}}$$
-$$ SS_{res} = \sum_{i=1}^{n}(y_i - \hat{y_i})^2$$
-$$ SS_{tot} = \sum_{i=1}^{n}(y_i - \bar{y_i})^2$$
+$$ SS*{res} = \sum*{i=1}^{n}(y*i - \hat{y_i})^2$$
+$$ SS*{tot} = \sum\_{i=1}^{n}(y_i - \bar{y_i})^2$$
 
-where 
-- $SS_{res}$ is the sum of squares of residuals 
+where
+
+- $SS_{res}$ is the sum of squares of residuals
 - $SS_{tot}$ is the total sum of squares
 - $y_i$ is the true value
 - $\bar{y_i}$ is the mean of $y_i$
 - $\hat{y_i}$ is the predicted value
 - $n$ is the number of observations
-
 
 **Adding Polynomial Feature**
 
@@ -267,10 +279,10 @@ Polynomial regression is a form of regression analysis in which the relationship
 $$y = b + w_1x + w_2x^2 + w_3x^3 + ... + w_dx^d$$
 
 where
+
 - $y$ is the target
 - $b$ is the bias
 - $w_1$ is the weight of feature $x$
-
 
 ```python
 # Import necessary libraries
@@ -327,7 +339,6 @@ plt.show()
 Mean squared error: 69.36
 
 ```
-
 
 ```python
 # Import necessary libraries
@@ -388,7 +399,6 @@ print(f"Lowest CV MSE is found in the model with degree= {degree} and training e
 
 ```
 
-
 ```python
 
 # same process to choose bet diff neural network models
@@ -438,7 +448,7 @@ def build_bc_models():
     )
 
     models_bc = [model_1_bc, model_2_bc, model_3_bc]
-    
+
     return models_bc
 
 models_bc = build_bc_models()
@@ -494,7 +504,7 @@ print(f"Lowest CV MSE is found in the model number= {model_number} and training 
 
 ```
 
-## Logistic Regression 
+## Logistic Regression
 
 <div align="center">
   <img src="/assets/img/ml/logreg0.png" alt= "logreg0" width="400" height="200" />
@@ -512,29 +522,30 @@ print(f"Lowest CV MSE is found in the model number= {model_number} and training 
   <img src="/assets/img/ml/logreg3.png" alt= "logreg3" width="400" height="200" />
 </div>
 
-Logistic Regression uses a loss function more suited to the task of categorization where the target is 0 or 1 rather than any number. 
+Logistic Regression uses a loss function more suited to the task of categorization where the target is 0 or 1 rather than any number.
 
->**Definition Note:**   In this course, these definitions are used:  
-**Loss** is a measure of the difference of a single example to its target value while the  
-**Cost** is a measure of the losses over the training set
+> **Definition Note:** In this course, these definitions are used:  
+> **Loss** is a measure of the difference of a single example to its target value while the  
+> **Cost** is a measure of the losses over the training set
 
+This is defined:
 
-This is defined: 
-* $loss(f_{\mathbf{w},b}(\mathbf{x}^{(i)}), y^{(i)})$ is the cost for a single data point, which is:
+- $loss(f_{\mathbf{w},b}(\mathbf{x}^{(i)}), y^{(i)})$ is the cost for a single data point, which is:
 
 $$
 \begin{equation}
-  loss(f_{\mathbf{w},b}(\mathbf{x}^{(i)}), y^{(i)}) = 
+  loss(f_{\mathbf{w},b}(\mathbf{x}^{(i)}), y^{(i)}) =
   \begin{cases}- \log\left(f_{\mathbf{w},b}\left( \mathbf{x}^{(i)} \right) \right) & \text{if $y^{(i)}=1$}\\- \log \left( 1 - f_{\mathbf{w},b}\left( \mathbf{x}^{(i)} \right) \right) & \text{if $y^{(i)}=0$}
   \end{cases}
 \end{equation}
 $$
 
-*  $f_{\mathbf{w},b}(\mathbf{x}^{(i)})$ is the model's prediction, while $y^{(i)}$ is the target value.
+- $f_{\mathbf{w},b}(\mathbf{x}^{(i)})$ is the model's prediction, while $y^{(i)}$ is the target value.
 
-*  $f_{\mathbf{w},b}(\mathbf{x}^{(i)}) = g(\mathbf{w} \cdot\mathbf{x}^{(i)}+b)$ where function $g$ is the sigmoid function.
+- $f_{\mathbf{w},b}(\mathbf{x}^{(i)}) = g(\mathbf{w} \cdot\mathbf{x}^{(i)}+b)$ where function $g$ is the sigmoid function.
 
 The defining feature of this loss function is the fact that it uses two separate curves. One for the case when the target is zero or ($y=0$) and another for when the target is one ($y=1$). Combined, these curves provide the behavior useful for a loss function, namely, being zero when the prediction matches the target and rapidly increasing in value as the prediction differs from the target. Consider the curves below:
+
 <div align="center">
   <img src="/assets/img/ml/logreg4.png" alt= "logreg4" width="400" height="200" />
 </div>
@@ -543,10 +554,11 @@ The defining feature of this loss function is the fact that it uses two separate
 </div>
 
 The loss function above can be rewritten to be easier to implement.
-    $$loss(f_{\mathbf{w},b}(\mathbf{x}^{(i)}), y^{(i)}) = (-y^{(i)} \log\left(f_{\mathbf{w},b}\left( \mathbf{x}^{(i)} \right) \right) - \left( 1 - y^{(i)}\right) \log \left( 1 - f_{\mathbf{w},b}\left( \mathbf{x}^{(i)} \right) \right)$$
-  
+$$loss(f_{\mathbf{w},b}(\mathbf{x}^{(i)}), y^{(i)}) = (-y^{(i)} \log\left(f_{\mathbf{w},b}\left( \mathbf{x}^{(i)} \right) \right) - \left( 1 - y^{(i)}\right) \log \left( 1 - f_{\mathbf{w},b}\left( \mathbf{x}^{(i)} \right) \right)$$
+
 This is a rather formidable-looking equation. It is less daunting when you consider $y^{(i)}$ can have only two values, 0 and 1. One can then consider the equation in two pieces:  
 when $ y^{(i)} = 0$, the left-hand term is eliminated:
+
 $$
 \begin{align}
 loss(f_{\mathbf{w},b}(\mathbf{x}^{(i)}), 0) &= (-(0) \log\left(f_{\mathbf{w},b}\left( \mathbf{x}^{(i)} \right) \right) - \left( 1 - 0\right) \log \left( 1 - f_{\mathbf{w},b}\left( \mathbf{x}^{(i)} \right) \right) \\
@@ -564,43 +576,52 @@ $$
 $$
 
 ### ROC Curve
+
 `Evaluates binary classification by showing how the true positive rate and false positive rate change with different discrimination thresholds.`
 
 A Receiver Operating Characteristic (ROC) curve is a graphical representation of the performance of a binary classification model at various classification thresholds. It illustrates the trade-off between the true positive rate (sensitivity) and the false positive rate (1 - specificity) as the discrimination threshold is varied.
 
 Here's how the ROC curve works:
 
-|                | Predicted Positive | Predicted Negative |
-|----------------|---------------------|---------------------|
+|                 | Predicted Positive  | Predicted Negative  |
+| --------------- | ------------------- | ------------------- |
 | Actual Positive | True Positive (TP)  | False Negative (FN) |
 | Actual Negative | False Positive (FP) | True Negative (TN)  |
 
 1. **Binary Classification**:
+
    - The ROC curve is commonly used for binary classification problems, where the goal is to distinguish between two classes (positive and negative).
 
 2. **True Positive Rate (Sensitivity)**:
+
    - The true positive rate (TPR), also known as sensitivity or recall, is the proportion of actual positive instances correctly predicted by the model.
-    $$ TPR = \frac{TP}{TP + FN} $$
+     $$ TPR = \frac{TP}{TP + FN} $$
 
 3. **False Positive Rate (1 - Specificity)**:
+
    - The false positive rate (FPR), also known as the complement of specificity, is the proportion of actual negative instances incorrectly predicted as positive by the model.
-   $$ FPR = \frac{FP}{FP + TN} $$
+     $$ FPR = \frac{FP}{FP + TN} $$
 
 4. **Threshold Variation**:
+
    - The ROC curve is created by varying the discrimination threshold of the classifier and plotting the TPR against the FPR at each threshold.
    - As the threshold increases, the TPR usually decreases, and the FPR also decreases.
 
 5. **Random Classifier Line**:
+
    - The ROC curve of a random classifier (one that makes predictions irrespective of the input features) is represented by a diagonal line from the bottom left to the top right (the line y = x).
 
 6. **Ideal Classifier Point**:
+
    - The ideal classifier would have a TPR of 1 and an FPR of 0, resulting in a point at the top left corner of the ROC curve.
 
 7. **Area Under the ROC Curve (AUC-ROC)**:
+
    - The AUC-ROC value provides a single scalar measure of the performance of a binary classification model. A perfect classifier has an AUC-ROC value of 1, while a random classifier has an AUC-ROC of 0.5.
    - AUC-ROC measures the area under the ROC curve.
 
 8. **Choosing the Threshold**:
+
    - The choice of the threshold depends on the specific requirements of the classification task. A higher threshold may prioritize specificity, while a lower threshold may prioritize sensitivity.
 
 9. **Use in Model Evaluation**:
@@ -609,17 +630,19 @@ Here's how the ROC curve works:
 the ROC curve provides a visual representation of the performance of a binary classification model across different discrimination thresholds. It is a valuable tool for understanding the trade-off between true positive rate and false positive rate and for selecting an appropriate threshold based on the specific needs of the application.
 
 ## Residuals
+
 `Residual plots can help determine whether a model provides a good fit.`
 Once a regression model has been fit to a group of data, examination of the residuals (the deviations from the fitted line to the observed values) allows the modeler to investigate the validity of his or her assumption that a linear relationship exists. Plotting the residuals on the y-axis against the explanatory variable on the x-axis reveals any possible non-linear relationship among the variables, or might alert the modeler to investigate lurking variables. In our example, the residual plot amplifies the presence of outliers.
 
- - A residual plot displays the residuals on the vertical axis and the independent variable on the horizontal axis. The ideal residual plot, called the null residual plot, shows a random scatter of points forming a band around the identity line. 
- - A negative residual means that the predicted value is too high, and a positive residual means that the predicted value was too low.  
+- A residual plot displays the residuals on the vertical axis and the independent variable on the horizontal axis. The ideal residual plot, called the null residual plot, shows a random scatter of points forming a band around the identity line.
+- A negative residual means that the predicted value is too high, and a positive residual means that the predicted value was too low.
 
 <div align="center">
   <img src="/assets/img/ml/residualp.png" alt="gdlr" width="400" height="300" />
 </div>
 
 ## Lurking Variables
+
 `A lurking variable is a third variable not considered in the model that significantly influences the relationship between two other variables.`
 
 If non-linear trends are visible in the relationship between an explanatory and dependent variable, there may be other influential variables to consider. A lurking variable exists when the relationship between two variables is significantly affected by the presence of a third variable which has not been included in the modeling effort. Since such a variable might be a factor of time (for example, the effect of political or economic cycles), a time series plot of the data is often a useful tool in identifying the presence of lurking variables.
@@ -627,10 +650,12 @@ If non-linear trends are visible in the relationship between an explanatory and 
 ## Bias
 
 - **Definition**:
+
   - Bias refers to the error introduced by approximating a real-world problem, which may be extremely complex, by a much simpler model.
   - High bias implies that the model is too simplistic and unable to capture the underlying patterns in the data.
 
 - **Characteristics**:
+
   - Models with high bias tend to oversimplify the relationships in the data and may perform poorly on both the training and unseen data.
   - Commonly associated with underfitting.
 
@@ -640,10 +665,12 @@ If non-linear trends are visible in the relationship between an explanatory and 
 ## Variance
 
 - **Definition**:
+
   - Variance refers to the model's sensitivity to small fluctuations or noise in the training data.
   - High variance implies that the model is capturing not only the underlying patterns but also the noise in the data.
 
 - **Characteristics**:
+
   - Models with high variance may perform well on the training data but poorly on unseen data, as they adapt too closely to the specific training dataset.
   - Commonly associated with overfitting.
 
@@ -653,14 +680,17 @@ If non-linear trends are visible in the relationship between an explanatory and 
 ## Bias-Variance Trade-Off
 
 - **Trade-Off**:
+
   - There is often a trade-off between bias and variance. Increasing model complexity tends to decrease bias but increase variance, and vice versa.
   - The goal is to find the `right level of model complexity` that `minimizes both bias and variance`, resulting in optimal predictive performance on new, unseen data.
 
 - **Underfitting and Overfitting**:
+
   - **Underfitting**: Occurs when a model is too simple, leading to high bias and poor performance on both training and test data.
   - **Overfitting**: Occurs when a model is too complex, capturing noise in the training data and leading to high variance. Performance on training data may be good, but it generalizes poorly to new data.
 
 - **Model Evaluation**:
+
   - The bias-variance trade-off is crucial when evaluating models. Models should be assessed not only on their performance on training data but also on their ability to generalize to new, unseen data.
 
 - **Regularization**:
@@ -694,13 +724,10 @@ human-level performance > training set performance > validation set performance 
 - Low bias and low variance: model is good
 - High bias and high variance: model is bad
 
-
-|  | High Variance | Low Variance |
-| --- | --- | --- |
-| High Bias | Overfitting | Underfitting |
-| Low Bias | bad | Good |
-
-
+|           | High Variance | Low Variance |
+| --------- | ------------- | ------------ |
+| High Bias | Overfitting   | Underfitting |
+| Low Bias  | bad           | Good         |
 
 # Decision Tree
 
@@ -734,7 +761,8 @@ $$
 H(D) = -\sum_{i=1}^{c} p_i \log_2(p_i)
 $$
 
-where 
+where
+
 - $p_i$ is the proportion of the ith class
 - $c$ is the number of classes
 - $y$ is the class label.
@@ -745,7 +773,8 @@ $$
 H(D_1) = -p_1 \log_2(p_1) - (1 - p_1) \log_2(1 - p_1)
 $$
 
-where 
+where
+
 - $ p_1 $ is the proportion of the positive class
 - $p_2 = 1 - p_1$ is the proportion of the negative class
 - $D_1$ is the dataset of the left node.
@@ -759,7 +788,9 @@ $$
 $$
 IG(D_p, f) = H(D_p) - \sum_{j=1}^{m} \frac{N_j}{N_p} \left(-p_{j1} \log_2(p_{j1}) - p_{j2} \log_2(p_{j2})\right)
 $$
-where 
+
+where
+
 - $f$ is the feature to perform the split
 - $D_p$ and $D_j$ are the dataset of the parent and $j$th child node
 - $N_p$ is the total number of samples at the parent node
@@ -767,16 +798,18 @@ where
 - $m$ is the number of child nodes
 
 For $y = 0$ and $y = 1$ and $m = 2$(binary class setting) and two child nodes, we can rewrite the equation as follows:
-$$ IG(D_p, f) = H(D_p) - \sum_{j=1}^{2} \frac{N_j}{N_p} H(D_j) $$
-$$ IG(D_p, f) = H(D_p) - (\frac{N_{left}}{N_p} H(D_{left}) + \frac{N_{right}}{N_p} H(D_{right})) $$
-$$ IG(D_p, f) = H(D_p) - (\frac{N_{left}}{N_p} \left(-p_{left1} \log_2(p_{left1}) - (1 - p_{left1}) \log_2(1 - p_{left1})\right) + \frac{N_{right}}{N_p} \left(-p_{right1} \log_2(p_{right1}) - (1 - p_{right1}) \log_2(1 - p_{right1})\right)) $$
+$$ IG(D*p, f) = H(D_p) - \sum*{j=1}^{2} \frac{N*j}{N_p} H(D_j) $$
+$$ IG(D_p, f) = H(D_p) - (\frac{N*{left}}{N*p} H(D*{left}) + \frac{N*{right}}{N_p} H(D*{right})) $$
+$$ IG(D*p, f) = H(D_p) - (\frac{N*{left}}{N*p} \left(-p*{left1} \log*2(p*{left1}) - (1 - p*{left1}) \log_2(1 - p*{left1})\right) + \frac{N*{right}}{N_p} \left(-p*{right1} \log*2(p*{right1}) - (1 - p*{right1}) \log_2(1 - p*{right1})\right)) $$
 
 where
 where
+
 - $p_{j1}$ is the proportion of the positive class in the $j$th child node
 - $p_{j2} = 1 - p_{j1}$ is the proportion of the negative class in the $j$th child node
 
-## Gini impurity 
+## Gini impurity
+
 Gini impurity is another criterion that is often used in training decision trees:
 
 $$Gini(p) = \sum_{k=1}^{|\mathcal{Y}|} p_{k} (1 - p_{k}) = \sum_{k=1}^{|\mathcal{Y}|} p_{k} - \sum_{k=1}^{|\mathcal{Y}|} p_{k}^2 = 1 - \sum_{k=1}^{|\mathcal{Y}|} p_{k}^2$$
@@ -790,6 +823,7 @@ $$IG(D_p, f) = Gini(D_p) - \sum_{j=1}^{m} \frac{N_j}{N_p} Gini(D_j)$$
 where $f$ is the feature to perform the split, $D_p$ and $D_j$ are the dataset of the parent and $j$th child node, $N_p$ is the total number of samples at the parent node, and $N_j$ is the number of samples in the $j$th child node.
 
 ## Classification error
+
 The classification error is another criterion that is often used in training decision trees:
 
 $$E = 1 - \max_k p_{k}$$
@@ -804,44 +838,46 @@ where $f$ is the feature to perform the split, $D_p$ and $D_j$ are the dataset o
 
 The following code implements the entropy and information gain equations:
 
-
-
 Both decision trees and gradient boosting are machine learning techniques that can be used for making predictions by dividing the input space.
 
-
-
-# 
+#
 
 ## Bayes' Theorem
 
 **Definition**:
+
 - Bayes' Theorem is a mathematical formula that describes the probability of an event based on prior knowledge of conditions that might be related to the event.
 - It is named after Thomas Bayes, an 18th-century statistician and theologian.
 
 **Formula**:
-$ P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)} $ 
+$ P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)} $
 
 - \( P(A|B) \) is the probability of event A occurring given that B has occurred.
 - \( P(B|A) \) is the probability of event B occurring given that A has occurred.
 - \( P(A) \) and \( P(B) \) are the probabilities of events A and B occurring independently.
 
 **Application**:
+
 - Bayes' Theorem is widely used in statistics, probability theory, and machine learning, especially in Bayesian statistics and Bayesian inference.
 
 ## Naive Bayes
 
 **Definition**:
+
 - Naive Bayes is a classification algorithm based on Bayes' Theorem with the assumption that features are conditionally independent given the class label. This assumption simplifies the computation and leads to the term "naive."
 
 **Types of Naive Bayes**:
+
 - **Gaussian Naive Bayes**: Assumes that the features follow a Gaussian distribution.
 - **Multinomial Naive Bayes**: Commonly used for discrete data, such as text data (e.g., document classification).
 - **Bernoulli Naive Bayes**: Suitable for binary data (e.g., spam detection).
 
 **Assumption of Independence**:
+
 - The "naive" assumption in Naive Bayes is that features are independent, which might not hold in real-world scenarios. Despite this simplification, Naive Bayes can perform well, especially in text classification tasks.
 
 **Application**:
+
 - Naive Bayes is commonly used in spam filtering, text classification, sentiment analysis, and other tasks where the conditional independence assumption holds reasonably well.
 
 ## Example: Text Classification with Naive Bayes
@@ -849,12 +885,14 @@ $ P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)} $
 Suppose we want to classify an email as spam (S) or not spam (NS) based on the occurrence of words "free" and "discount."
 
 **Features**:
+
 - \( P(\text{"free"}|S) = 0.8 \)
 - \( P(\text{"discount"}|S) = 0.6 \)
 - \( P(\text{"free"}|NS) = 0.1 \)
 - \( P(\text{"discount"}|NS) = 0.2 \)
 
 **Prior Probabilities**:
+
 - \( P(S) = 0.4 \)
 - \( P(NS) = 0.6 \)
 
@@ -865,8 +903,6 @@ $$ P(NS|\text{"free", "discount"}) \propto P(NS) \cdot P(\text{"free"}|NS) \cdot
 By comparing the probabilities, we can classify the email as spam or not spam.
 
 These concepts are foundational in probability theory, statistics, and machine learning, providing a basis for making probabilistic inferences and classifications.
-
-
 
 ## Introduction to Navie Bayes
 
@@ -893,15 +929,16 @@ In the context of classification, we can think of P(A) as the prior probability 
 
 ## Navie Bayes Classifier
 
-For tweets classification, we can use Navie Bayes classifier to classify tweets into positive and negative tweets. 
+For tweets classification, we can use Navie Bayes classifier to classify tweets into positive and negative tweets.
 
 product of conditional probability of words in tweet of positive class and negative class:
-$$ P(positive|tweet) = P(w_1|positive) * P(w_2|positive) * P(w_3|positive) * ... * P(w_n|positive) $$
-$$ P(negative|tweet) = P(w_1|negative) * P(w_2|negative) * P(w_3|negative) * ... * P(w_n|negative) $$
+$$ P(positive|tweet) = P(w*1|positive) * P(w*2|positive) * P(w*3|positive) * ... _ P(w_n|positive) $$
+$$ P(negative|tweet) = P(w_1|negative) _ P(w*2|negative) * P(w*3|negative) * ... \_ P(w_n|negative) $$
 where w1, w2, w3, ... , wn are words in tweet.
 Calculate likelihood of tweet being positive and negative:
+
 $$
-\frac{P(\text{positive}|\text{tweet})}{P(\text{negative}|\text{tweet})} = 
+\frac{P(\text{positive}|\text{tweet})}{P(\text{negative}|\text{tweet})} =
 \begin{cases} >1, & \text{positive} \\ <1, & \text{negative} \end{cases}
 $$
 
@@ -910,7 +947,7 @@ $$
 We usually compute the probability of a word given a class as follows:
 
 $$
-P(w_i|\text{class}) = \frac{\text{freq}(w_i, \text{class})}{N_{\text{class}}} \qquad \text{class} \in \{\text{Positive}, \text{Negative}\} 
+P(w_i|\text{class}) = \frac{\text{freq}(w_i, \text{class})}{N_{\text{class}}} \qquad \text{class} \in \{\text{Positive}, \text{Negative}\}
 $$
 
 However, if a word does not appear in the training, then it automatically gets a probability of 0, to fix this we add smoothing as follows
@@ -933,26 +970,25 @@ $$ \lambda(w) = \log \frac{P(w|\text{pos})}{P(w|\text{neg})} $$
 
 where $P(w|\text{pos})$ and $P(w|\text{neg})$ are computed using Laplacian smoothing.
 
-
 ## train naïve Bayes classifier
 
-1) Get or annotate a dataset with positive and negative tweets
+1. Get or annotate a dataset with positive and negative tweets
 
-2) Preprocess the tweets:
+2. Preprocess the tweets:
 
-    Lowercase, Remove punctuation, urls, names , Remove stop words , Stemming , Tokenize sentences
-    
-3) Compute $\text{freq}(w, \text{class})$:
+   Lowercase, Remove punctuation, urls, names , Remove stop words , Stemming , Tokenize sentences
 
-4) Get $P(w|\text{pos}), P(w|\text{neg})$
+3. Compute $\text{freq}(w, \text{class})$:
 
-5) Get $\lambda(w)$
+4. Get $P(w|\text{pos}), P(w|\text{neg})$
+
+5. Get $\lambda(w)$
 
 $$
 \lambda(w) = \log \frac{P(w|\text{pos})}{P(w|\text{neg})}
 $$
 
-6) Compute $\text{logprior}$
+6. Compute $\text{logprior}$
 
 $$
 \text{logprior} = \log \frac{D_{\text{pos}}}{D_{\text{neg}}}
@@ -960,15 +996,13 @@ $$
 
 where $D_{\text{pos}}$ and $D_{\text{neg}}$ correspond to the number of positive and negative documents respectively.
 
-7) Compute Score 
-$$\text{logprior} + \sum_{w \in \text{tweet}} \lambda(w) = 
-\begin{cases} >1, & \text{positive} \\ <1, & \text{negative} \end{cases}
-$$
+7. Compute Score
+   $$
+   \text{logprior} + \sum_{w \in \text{tweet}} \lambda(w) =
+   \begin{cases} >1, & \text{positive} \\ <1, & \text{negative} \end{cases}
+   $$
 
-
-
-# Bayes Theorem - 
-
+# Bayes Theorem -
 
 ## Prior and Posterior
 
@@ -1015,12 +1049,12 @@ In a practical example, the Naive Bayes algorithm is applied to emails containin
   <img src="/assets/img/probability/bc.png" alt= "logreg5" width="400" height="200" />
 </div>
 
-
 <div align="center">
   <img src="/assets/img/probability/bd.png" alt= "logreg5" width="400" height="200" />
 </div>
 
 When p = 0.5
+
 <div align="center">
   <img src="/assets/img/probability/bd1.png" alt= "logreg5" width="400" height="200" />
 </div>
@@ -1029,7 +1063,7 @@ when p = 0.3 (biased coin)
   <img src="/assets/img/probability/bd2.png" alt= "logreg5" width="400" height="200" />
 </div>
 
-Derivation 
+Derivation
 
 <div align="center">
   <img src="/assets/img/probability/bcd.png" alt= "logreg5" width="400" height="200" />
@@ -1051,7 +1085,7 @@ we divide the intervals into smaller and smaller, also the areas get smaller and
 
 PDFs are a function defined only for continuous variables and it represents the rate at which you accumulate probability around each point. You can use the PDF to calculate probabilities. How do you do that? Simply by getting the area under the PDF curve between points A and B.
 
- it needs to be defined for all the numbers in the real line. That means that it can actually be zero for many values. For example, before zero or after the cutoff at the right. But it doesn't need to, it could be positive for all the numbers and the area still being 1 if it gets really, really, really tiny at the tails. And it also needs to be positive or 0 for all values. 
+it needs to be defined for all the numbers in the real line. That means that it can actually be zero for many values. For example, before zero or after the cutoff at the right. But it doesn't need to, it could be positive for all the numbers and the area still being 1 if it gets really, really, really tiny at the tails. And it also needs to be positive or 0 for all values.
 
 And it also needs to be positive or 0 for all values. This is reasonable because otherwise it would get placed in negative probabilities.
 
@@ -1060,7 +1094,6 @@ the area under the curve has to be 1
 <div align="center">
   <img src="/assets/img/probability/pdf.png" alt= "cont" width="400" height="200" />
 </div>
-
 
 **Summary PMF and PDF**
 
@@ -1082,3 +1115,169 @@ To really summarize, on the left, you have a PDF which is written as a function 
   <img src="/assets/img/probability/cdf1.png" alt= "cont" width="400" height="200" />
 </div>
 #
+
+#
+
+These are evaluation metrics used to assess the performance of classification models, particularly in binary classification. Each metric has its own use case, and the choice of metric depends on the specific goals and context of your problem. Here’s an overview of each metric:
+
+1. **Accuracy (acc)**:
+
+   - **Definition**: The ratio of correctly predicted instances to the total instances.
+   - **Use Case**: Best used when the class distribution is balanced and all classes are equally important.
+
+2. **Balanced Accuracy**:
+
+   - **Definition**: The average of recall obtained on each class.
+   - **Use Case**: Useful when the dataset is imbalanced.
+
+3. **MCC (Matthews Correlation Coefficient)**:
+
+   - **Definition**: Takes into account true and false positives and negatives and is generally regarded as a balanced measure.
+   - **Use Case**: Suitable for imbalanced datasets.
+
+4. **ROC AUC (roc_auc)**:
+
+   - **Definition**: The area under the Receiver Operating Characteristic curve.
+   - **Use Case**: Used for evaluating binary classifiers, particularly when classes are imbalanced.
+
+5. **ROC AUC OVO Macro (roc_auc_ovo_macro)**:
+
+   - **Definition**: Macro-averaged ROC AUC for one-vs-one classification.
+   - **Use Case**: Used for multiclass problems evaluated in a binary context.
+
+6. **Log Loss (log_loss, nll)**:
+
+   - **Definition**: Measures the performance of a classification model where the output is a probability value between 0 and 1.
+   - **Use Case**: Useful when you need probability outputs, and lower values indicate better performance.
+
+7. **PAC (Prediction Accuracy Classifier)**:
+
+   - **Definition**: Specific to the proportion of correct predictions.
+   - **Use Case**: Another form of accuracy.
+
+8. **PAC Score**:
+
+   - **Definition**: Related to PAC, often used in specific contexts.
+   - **Use Case**: Similar to PAC.
+
+9. **Quadratic Kappa**:
+
+   - **Definition**: A measure of inter-rater agreement or classifier performance that takes the agreement occurring by chance into account.
+   - **Use Case**: Useful in ordinal classification.
+
+10. **Average Precision**:
+
+    - **Definition**: The average of the precision scores calculated at each threshold.
+    - **Use Case**: Evaluates the model’s ability to return relevant instances.
+
+11. **Precision**:
+
+    - **Definition**: The ratio of true positive predictions to the total predicted positives.
+    - **Use Case**: Important when the cost of false positives is high.
+
+12. **Precision (macro, micro, weighted)**:
+
+    - **Macro**: Precision calculated independently for each class and then averaged.
+    - **Micro**: Precision calculated globally by counting total true positives and false positives.
+    - **Weighted**: Precision weighted by the number of true instances for each class.
+    - **Use Case**: Macro for class imbalances; micro and weighted for varying class sizes.
+
+13. **Recall**:
+
+    - **Definition**: The ratio of true positive predictions to the total actual positives.
+    - **Use Case**: Important when the cost of false negatives is high.
+
+14. **Recall (macro, micro, weighted)**:
+
+    - **Macro**: Recall calculated independently for each class and then averaged.
+    - **Micro**: Recall calculated globally by counting total true positives and false negatives.
+    - **Weighted**: Recall weighted by the number of true instances for each class.
+    - **Use Case**: Macro for class imbalances; micro and weighted for varying class sizes.
+
+15. **F1 Score (f1)**:
+
+    - **Definition**: The harmonic mean of precision and recall.
+    - **Use Case**: Useful when you need a balance between precision and recall.
+
+16. **F1 Score (macro, micro, weighted)**:
+    - **Macro**: F1 score calculated independently for each class and then averaged.
+    - **Micro**: F1 score calculated globally by counting total true positives, false negatives, and false positives.
+    - **Weighted**: F1 score weighted by the number of true instances for each class.
+    - **Use Case**: Macro for class imbalances; micro and weighted for varying class sizes.
+
+These metrics help you understand different aspects of model performance, and choosing the right one depends on the specific needs of your project and the nature of your data. For example, in highly imbalanced datasets, metrics like ROC AUC, F1 score, or MCC might be more informative than accuracy.
+
+"binary": [
+"accuracy",
+"acc",
+"balanced_accuracy",
+"mcc",
+"roc_auc_ovo_macro",
+"log_loss",
+"nll",
+"pac",
+"pac_score",
+"quadratic_kappa",
+"roc_auc",
+"average_precision",
+"precision",
+"precision_macro",
+"precision_micro",
+"precision_weighted",
+"recall",
+"recall_macro",
+"recall_micro",
+"recall_weighted",
+"f1",
+"f1_macro",
+"f1_micro",
+"f1_weighted"
+]
+
+The variance threshold is used to remove features with low variance, which are considered less informative for machine learning models. Here's how it affects your model and its relationship with the target variable:
+
+Impact on the Model:
+Reduction of Overfitting: Features with low variance may not contribute significant information to the model and can lead to overfitting. Removing these features helps in creating a more generalizable model.
+Model Complexity: Reducing the number of features decreases the complexity of the model, making it simpler and often improving its performance and interpretability.
+Training Time: Fewer features mean less data to process, which can reduce the training time for your model.
+Dependency on Target Variable:
+VarianceThreshold does not consider the target variable when selecting features; it purely looks at the variance of the features themselves. Therefore, features with low variance are not necessarily independent of the target variable, but they are less likely to be useful because they provide little variability for the model to learn from.
+
+To assess the dependency of features on the target variable, you should use feature selection techniques that consider the relationship between features and the target variable, such as:
+
+Correlation Coefficient: Calculate the correlation between each feature and the target variable. Features with high correlation (positive or negative) are more likely to be important.
+Mutual Information: Measures the mutual dependence between the feature and the target variable.
+Feature Importance from Tree-based Models: Tree-based models like Random Forests and Gradient Boosting provide feature importance scores.
+Univariate Feature Selection: Use statistical tests to select features based on their univariate statistical significance (e.g., SelectKBest with f_classif).
+
+Significance of P-value:
+P-value Definition:
+
+The p-value indicates the probability that the observed relationship between a feature and the target variable is due to chance.
+Lower p-values suggest stronger evidence against the null hypothesis (which states that there is no relationship between the feature and the target variable).
+Thresholds for Significance:
+
+Common thresholds for significance are 0.05, 0.01, or 0.001.
+If a feature has a p-value less than the chosen threshold, it is considered statistically significant and likely has a meaningful relationship with the target variable.
+Feature Selection:
+
+Features with low p-values (below the threshold) are typically considered important and are selected for use in the model.
+Features with high p-values are considered less important or irrelevant and can be removed.
+
+Interpreting P-values in Your Context:
+In the context of your dataset and feature selection process, the p-values help you determine which features are likely to be informative for predicting the target variable 'C'. Here’s a step-by-step explanation using your dataset:
+
+Load and Preprocess Data:
+
+Convert datetime columns to numerical format and standardize the features.
+Apply VarianceThreshold:
+
+Remove features with low variance that are unlikely to be informative.
+Statistical Test (ANOVA F-test):
+
+Use SelectKBest with the f_classif function to perform an ANOVA F-test between each feature and the target variable.
+Obtain p-values for each feature indicating their significance.
+Interpret P-values:
+
+Low p-values (< 0.05, for example) suggest that the feature is significantly related to the target variable and should be considered in the model.
+High p-values (> 0.05) suggest that the feature is not significantly related to the target variable and can be removed.
