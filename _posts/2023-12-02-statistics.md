@@ -260,6 +260,12 @@ mode = [key for key, value in count_dict.items() if value == max(count_dict.valu
 ```
 
 ### Variance and Standard Deviation
+Variance - Think of it as an average of how far each data point is from the mean, but squared (meaning the distance is magnified).Useful for understanding the spread of data, but the squared units can be hard to interpret directly.
+
+Standard Deviation:
+This makes the units the same as the original data, which is easier to understand.
+Represents the typical distance a data point falls from the mean.
+A higher standard deviation indicates a larger spread of data points.
 
 ```python
 mean = sum(x) / n
@@ -268,6 +274,10 @@ variance = sum((num - mean) ** 2 for num in x) / n
 
 std_dev = variance ** 0.5
 ```
+Why are they important?
+
+They help you interpret the average (mean) of your data. A high mean with a high standard deviation tells you the data is spread out, while a high mean with a low standard deviation suggests the data points are clustered around the mean.
+They are used in various statistical tests to compare datasets, assess risk (e.g., financial markets), and build models based on the data's distribution.
 
 ### Weighted Mean
 
