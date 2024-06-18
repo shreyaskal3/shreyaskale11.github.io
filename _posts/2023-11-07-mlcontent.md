@@ -16,6 +16,10 @@ l1 l2 regularization
 
 http://www.stat.yale.edu/Courses/1997-98/101/linreg.htm#:~:text=A%20linear%20regression%20line%20has,y%20when%20x%20%3D%200
 
+<div align="center">
+  <img src="https://media.licdn.com/dms/image/D5622AQE8gCwDJnd9CQ/feedshare-shrink_800/0/1717168118258?e=1721865600&v=beta&t=PemZMPltsTiPDISYioRdELaKt2Nn44SW27RQE3Oe5RE" alt="gd" width="600" height="800" />
+  <img src="https://media.licdn.com/dms/image/D4E22AQGxJOzAsApE3Q/feedshare-shrink_800/0/1715953746561?e=1721865600&v=beta&t=IrY3c-Mbd7N8DZA9pbsVrlUs259jGz55x8Ba-LL933I" alt="gd" width="600" height="800" />
+</div>
 ## Extrapolation
 
 `Attempting to use a regression equation to predict values outside of this range is often inappropriate.This is called Extrapolation`
@@ -521,6 +525,9 @@ print(f"Lowest CV MSE is found in the model number= {model_number} and training 
 <div align="center">
   <img src="/assets/img/ml/logreg3.png" alt= "logreg3" width="400" height="200" />
 </div>
+<div align="center">
+  <img src="https://media.licdn.com/dms/image/D4D22AQFfieLlUHA2HQ/feedshare-shrink_800/0/1716109658748?e=1721865600&v=beta&t=RE0IDfj5h-NxCPUXy9yOYl9yIPy5mooNWcy95W76T_8" alt= "logreg3" width="400" height="600" />
+</div>
 
 Logistic Regression uses a loss function more suited to the task of categorization where the target is 0 or 1 rather than any number.
 
@@ -629,6 +636,9 @@ Here's how the ROC curve works:
 
 the ROC curve provides a visual representation of the performance of a binary classification model across different discrimination thresholds. It is a valuable tool for understanding the trade-off between true positive rate and false positive rate and for selecting an appropriate threshold based on the specific needs of the application.
 
+<div align="center" >
+  <img src="https://media.licdn.com/dms/image/D4E22AQGAGqjCW38IZw/feedshare-shrink_800/0/1712247207994?e=1721865600&v=beta&t=b6f5wR2qoNW6RL43roSxrnrsSgI2k8T9K2FvZdnX-QE" alt="gd" width="400" height="600" />
+</div>
 ## Residuals
 
 `Residual plots can help determine whether a model provides a good fit.`
@@ -636,6 +646,8 @@ Once a regression model has been fit to a group of data, examination of the resi
 
 - A residual plot displays the residuals on the vertical axis and the independent variable on the horizontal axis. The ideal residual plot, called the null residual plot, shows a random scatter of points forming a band around the identity line.
 - A negative residual means that the predicted value is too high, and a positive residual means that the predicted value was too low.
+
+## evaluation metrics
 
 <div align="center">
   <img src="/assets/img/ml/residualp.png" alt="gdlr" width="400" height="300" />
@@ -729,6 +741,76 @@ human-level performance > training set performance > validation set performance 
 | High Bias | Overfitting   | Underfitting |
 | Low Bias  | bad           | Good         |
 
+## Anomaly Detection Algorithms:
+
+Here are all 20 Anomaly Detection Algorithms I could find and their Python Libraries:
+
+📚 𝐒𝐜𝐢𝐤𝐢𝐭-𝐥𝐞𝐚𝐫𝐧
+
+O͜͡ Density-based spatial clustering of applications with noise (DBSCAN)
+O͜͡ Isolation Forest
+O͜͡ Local Outlier Factor (LOF)
+O͜͡ One-Class Support Vector Machines (SVM)
+O͜͡ Principal Component Analysis (PCA)
+O͜͡ K-means
+O͜͡ Gaussian Mixture Model (GMM)
+
+📚 𝐊𝐞𝐫𝐚𝐬/𝐓𝐞𝐧𝐬𝐨𝐫𝐅𝐥𝐨𝐰
+
+O͜͡ Autoencoder
+
+📚 𝐇𝐦𝐦𝐥𝐞𝐚𝐫𝐧
+
+O͜͡ Hidden Markov Models (HMM)
+
+📚 𝐏𝐲𝐎𝐃
+
+O͜͡ Local Correlation Integral (LCI)
+O͜͡ Histogram-based Outlier Detection (HBOS)
+O͜͡ Angle-based Outlier Detection (ABOD)
+O͜͡ Clustering-Based Local Outlier Factor (CBLOF)
+O͜͡ Minimum Covariance Determinant (MCD)
+O͜͡ Stochastic Outlier Selection (SOS)
+O͜͡ Spectral Clustering for Anomaly Detection (SpectralResidual)
+O͜͡ Feature Bagging
+O͜͡ Average KNN
+O͜͡ Connectivity-based Outlier Factor (COF)
+O͜͡ Variational Autoencoder (VAE)
+
+———————-
+
+But how do we know which method is better?
+
+🔖We don’t have labels in Unsupervised Learning, No ground Truth.
+
+The answer lies in using evaluation metrics that can help us determine the quality of our algorithm.
+
+———————-
+
+🔬Evaluation Methods:
+
+➊ Silhouette score:
+
+A high Silhouette score (close to 1) indicates that data points within clusters are similar, and that the normal data points are well separated from the anomalous ones.
+
+➋ Calinski-Harabasz index:
+
+Calinski-Harabasz Index measures the between-cluster dispersion against within-cluster dispersion. A higher score signifies better-defined clusters.
+
+➌ Davies-Bouldin index:
+
+Davies-Bouldin Index measures the size of clusters against the average distance between clusters. A lower score signifies better-defined clusters.
+
+➍ Kolmogorov-Smirnov statistic:
+
+It measures the maximum difference between the cumulative distribution functions of the normal and anomalous data points.
+
+➎ Precision at top-k:
+
+The metric calculates the precision of the top-k anomalous data points using expert domain knowledge.
+
+———————-
+
 # Decision Tree
 
 ## Introduction
@@ -743,6 +825,9 @@ Decision trees are a type of supervised learning algorithm that can be used for 
 4. Choose the feature with the largest information gain as the root node.
 5. Repeat steps 1 to 4 for each branch until you get the desired tree depth.
 
+<div align="center">
+  <img src="https://media.licdn.com/dms/image/D4E22AQGdNfTiCXyhyg/feedshare-shrink_800/0/1718541617124?e=1721260800&v=beta&t=Uc1SuotysQKrXjcPzA3YfnRfzzG99TNfKpChJgVbnJk" alt="gd" width="600" height="700" />
+</div>
 ## Decision tree for classification
 
 Entropy is the measure of impurity in a bunch of examples. The entropy of a set $S$ is defined as:
@@ -1281,3 +1366,132 @@ Interpret P-values:
 
 Low p-values (< 0.05, for example) suggest that the feature is significantly related to the target variable and should be considered in the model.
 High p-values (> 0.05) suggest that the feature is not significantly related to the target variable and can be removed.
+
+<div align="center">
+  <img src="https://media.licdn.com/dms/image/D5622AQHkkd9jJEmy9A/feedshare-shrink_800/0/1718360615213?e=1721260800&v=beta&t=UrSvjxEsotgrCH2G4J9G9vO9xJt-Ncstxz8WWKVbYO0" alt="gd" width="400" height="300" />
+</div>
+
+<div align="center">
+  <img src="https://media.licdn.com/dms/image/D5622AQG2wnVnRBXKeQ/feedshare-shrink_800/0/1718341442858?e=1721260800&v=beta&t=nNm20o1kdM7Pu84UNtf8Nks-WREhzR1KuU01GHBgWms" alt="gd" width="600" height="600" />
+</div>
+Why do we keep talking about "tokens" in LLMs instead of words? It happens to be much more efficient to break the words into sub-words (tokens) for model performance!
+
+The typical strategy used in most modern LLMs since GPT-1 is the Byte Pair Encoding (BPE) strategy. The idea is to use, as tokens, sub-word units that appear often in the training data. The algorithm works as follows:
+
+- We start with a character-level tokenization
+- we count the pair frequencies
+- We merge the most frequent pair
+- We repeat the process until the dictionary is as big as we want it to be
+
+The size of the dictionary becomes a hyperparameter that we can adjust based on our training data. For example, GPT-1 has a dictionary size of ~40K merges, GPT-2, GPT-3, and C
+
+<div align="center">
+  <img src="https://media.licdn.com/dms/image/D5622AQH0VwikQk8kgg/feedshare-shrink_800/0/1718180903609?e=1721260800&v=beta&t=USTSESWiv1Y-Q-KoMcVJfqTeobWG_U7xXFRdRFVEG4A" alt="gd" width="600" height="600" />
+</div>
+
+# Deep Learning
+
+### Padding,Strides,Pooling
+
+<div align="center">
+<ul>
+  <li>
+    <img src="https://media.licdn.com/dms/image/D561FAQFzDWDnsfKI_Q/feedshare-document-images_1280/1/1718103831903?e=1719446400&amp;v=beta&amp;t=0NGaPxmx_giwmWTOv_199Dt3q_HGjqvc6PGOnHr_4pY" alt="Image 1" height="600">
+  </li>
+  <li>
+    <img src="https://media.licdn.com/dms/image/D561FAQFzDWDnsfKI_Q/feedshare-document-images_1920/2/1718103833955?e=1719446400&amp;v=beta&amp;t=JuJD2Ujg0fGuF30x6Z9qFcQCF9h89uAhGvJCJMAs_Ks" alt="Image 2" height="600">
+  </li>
+  <li>
+    <img src="https://media.licdn.com/dms/image/D561FAQFzDWDnsfKI_Q/feedshare-document-images_1920/3/1718103833955?e=1719446400&amp;v=beta&amp;t=9lbMpnVBnAfl8-YjFdVMXgYGQcq8ENIM0lqsuarN6iA" alt="Image 3" height="600">
+  </li>
+  <li>
+    <img src="https://media.licdn.com/dms/image/D561FAQFzDWDnsfKI_Q/feedshare-document-images_1920/4/1718103833955?e=1719446400&amp;v=beta&amp;t=pIzuwg8lqy5Lj0gEcWYiEUEC7BVjqZYG48L2iVNqO8o" alt="Image 4" height="600">
+  </li>
+  <li>
+    <img src="https://media.licdn.com/dms/image/D561FAQFzDWDnsfKI_Q/feedshare-document-images_1920/5/1718103833955?e=1719446400&amp;v=beta&amp;t=HPLwpFCDSNBNDDKocEGaYnnizocfTvwWogHgeIoFDfQ" alt="Image 5" height="600">
+  </li>
+  <li>
+    <img src="https://media.licdn.com/dms/image/D561FAQFzDWDnsfKI_Q/feedshare-document-images_1920/6/1718103833955?e=1719446400&amp;v=beta&amp;t=g6J5wuHGiN1AmqcdMbcnuGPSQ38r_uKC6MVG-SGuK_k" alt="Image 6" height="600">
+  </li>
+  <li>
+    <img src="https://media.licdn.com/dms/image/D561FAQFzDWDnsfKI_Q/feedshare-document-images_1920/7/1718103833955?e=1719446400&amp;v=beta&amp;t=3tnsGosSFcTp_j8-k1J0VmEGoqEQjMw1olG9_c1mZTM" alt="Image 7" height="600">
+  </li>
+  <li>
+    <img src="https://media.licdn.com/dms/image/D561FAQFzDWDnsfKI_Q/feedshare-document-images_1920/8/1718103833955?e=1719446400&amp;v=beta&amp;t=IzM3YC7DSwF5sEH9XNftuShRX8d0TvTXrPJ1URia2lE" alt="Image 8" height="600">
+  </li>
+  <li>
+    <img src="https://media.licdn.com/dms/image/D561FAQFzDWDnsfKI_Q/feedshare-document-images_1920/9/1718103833955?e=1719446400&amp;v=beta&amp;t=Ro_-UKgh_38-ym1J3cvdiXuq4YdwZrBWa9vPV1MyaX4" alt="Image 9" height="600">
+  </li>
+  <li>
+    <img src="https://media.licdn.com/dms/image/D561FAQFzDWDnsfKI_Q/feedshare-document-images_1920/10/1718103833955?e=1719446400&amp;v=beta&amp;t=-gHXh27GWz038pdWLom9UEwTRLjFcHg3nOoBNgZ7hJ4" alt="Image 10" height="600">
+  </li>
+</ul>
+</div>
+
+# Time series
+
+### Arima And Sarima
+
+<div align="center" >
+  <img src="https://media.licdn.com/dms/image/D4E22AQFHNtYqUYyUsw/feedshare-shrink_800/0/1716407970259?e=1721865600&v=beta&t=37C2EMXUCpgAkUxMBrDzXDdlgn6MexgQfOPPlJhESlg" alt="gd" width="600" height="400" />
+</div>
+
+Forecasting time series is what made me stand out as a data scientist. But it took me 1 year to master ARIMA. In 1 minute, I'll teach you what took me 1 year. Let's go.
+
+1. ARIMA and SARIMA are both statistical models used for forecasting time series data, where the goal is to predict future points in the series.
+
+2. Business Uses: I got my start with ARIMA using it to predict sales demand (demand forecasting). But ARIMA and forecasting are also used heavily in econometrics, finance, retail, energy demand, and any situation where you need to know the future based on historical time series data.
+
+3. ARIMA Decomposed: AR-I-MA stands for Autoregressive (AR), Integrated (I), Moving Average (MA).
+
+4. Autoregressive (AR): This part of the model captures the relationship between an observation and a specified number of lagged observations.
+
+5. Integrated (I): This involves differencing the time series data to make it stationary. A stationary time series is one whose properties do not depend on the time at which the series is observed, meaning it doesn't have trends or seasonal patterns.
+
+6. Moving Average (MA): This part of the model allows the modeling of the error term as a linear combination of error terms occurring contemporaneously and at various times in the past.
+
+7. Lowercase pdq notation: A non-seasonal ARIMA model is denoted as ARIMA(p, d, q) where: p is the number of lag observations in the model (AR part). d is the degree of differencing required to make the time series stationary. q is the size of the moving average window (MA part).
+
+8. Linear Regression: The ARIMA is simply a Linear Regression model that includes the autoregressive (AR) components and the "moving average" (MA) aka the error terms.
+
+9. SARIMA: Seasonal Autoregressive Integrated Moving-Average extends ARIMA by supporting Seasonal component(s).
+
+10. PDQ-M Notation: Uppercase PDQ defines the orders, which are multiplied by M, the seasonal period (e.g. 4 for quarterly or 12 for monthly).
+
+There you have it- my top 10 concepts on ARIMA. The next problem you'll face is how to apply data science and forecasting to business.
+
+I'd like to help.
+
+I’ve spent 100 hours consolidating my learnings into a free 5-day course, How to Solve Business Problems with Data Science. It comes with:
+
+300+ lines of R and Python code
+5 bonus trainings
+2 systematic frameworks
+1 complete roadmap to avoid mistakes and start solving business problems with data science, TODAY.
+
+👉 Here it is for free: https://lnkd.in/e_EkiuFD
+
+# Deep Dive into Parameter Tuning Techniques:
+
+Grid Search, Random Search, and Bayesian Optimization 🌟
+
+When it comes to machine learning model optimization, selecting the right parameter tuning method can significantly impact your model's performance. Here's a deeper dive into three common techniques: hashtag#gridsearch, hashtag#randomsearch, and hashtag#bayesianoptimization, and when to use each.
+
+🔹Grid Search: The Comprehensive Approach
+Grid Search is the most methodical approach, involving an exhaustive search through a manually specified subset of the hyperparameter space of a learning algorithm. It's best used when the total number of combinations is relatively low. For a more complex example, consider a support vector machine (SVM) with a limited set of hyperparameters: kernel = ['poly', 'sigmoid'], degree = [2, 3, 4] (for polynomial kernel), and C = [0.1, 1, 10]. Although the space increases to 18 combinations (2 kernels × 3 degrees × 3 values of C), Grid Search can still manageably assess each combination's performance, ensuring that no stone is left unturned.
+
+🔹Random Search: The Probabilistic Explorer
+Random Search allows for a probabilistic sampling of the parameter space, providing a more scattered search strategy. It's particularly useful when the search space is large and not all parameter interactions are known to be equally important. For example, tuning hyperparameters for a random forest model might involve parameters like the number of trees = [10, 100, 500, 1000], max depth = [5, 10, 20, None], and min_samples_split = [2, 5, 10, 20]. Random Search can randomly sample from these ranges to find good configurations much faster than Grid Search, especially in high-dimensional spaces.
+
+🔹Bayesian Optimization: The Intelligent Algorithm
+Bayesian Optimization uses a probabilistic model to predict the performance of hyperparameters and sequentially chooses new hyperparameter sets to evaluate based on past results. This approach is highly efficient for expensive evaluations like tuning hyperparameters in deep neural networks. For instance, optimizing a complex model like a transformer used for natural language processing might involve parameters such as number of layers, number of heads, and dropout rate. Bayesian Optimization not only speeds up the search compared to Grid and Random Searches but also tends to find better parameters by learning from previous results.
+
+Extended Tips and Practices:
+
+- Start Simple: Begin with Grid Search to understand the impact of different parameters.
+- Scale Up Gradually: Move to Random Search to explore a larger space without the exhaustive nature of Grid Search.
+- Refine Intelligently: Utilize Bayesian Optimization for complex models or when computational resources are limited but you need high efficiency.
+
+<div align="center" >
+  <img src="https://media.licdn.com/dms/image/D4E22AQGRCGwW_Wi-gg/feedshare-shrink_2048_1536/0/1713408495287?e=1721865600&v=beta&t=3Q6lwVokeXW7jNM9Hv2LHonYCHH7ZT5HasBDSRYjmao" alt="gd" width="400" height="600" />
+</div>

@@ -1,20 +1,21 @@
 ---
 title: Finetuning LLM
 date: 2023-12-01 00:00:00 +0800
-categories: [NLP, Transformer , Finetuning_LLM]
+categories: [NLP, Transformer, Finetuning_LLM]
 tags: [finetuningllm]
 ---
 
+#
 
-# 
+<div align="center">
+  <img src="https://media.licdn.com/dms/image/D5622AQHHpcUgitQuEg/feedshare-shrink_800/0/1717144084301?e=1721865600&v=beta&t=irZqkr64joJhF4YJZ8lzR1pTfaO7w033JZX7fwq2uPE" alt="gd" width="600" height="800" />
 
-
+</div>
 ## Instruct Finetuning
-
 
 ### Datasets
 
-```python 
+```python
 
 # Some datasets for you to try
 
@@ -43,7 +44,8 @@ print(dataset_swiftie["train"][1])
 ### Data preparation
 
 Final Function
-```python 
+
+```python
 # Tokenize the instruction dataset
 def tokenize_function(examples):
     if "question" in examples and "answer" in examples:
@@ -90,7 +92,7 @@ split_dataset = tokenized_dataset.train_test_split(test_size=0.1, shuffle=True, 
 print(split_dataset)
 ```
 
-```python 
+```python
 # Example
 import pandas as pd
 import datasets
@@ -113,7 +115,7 @@ encoded_texts = tokenizer(list_texts)
 print("Encoded several texts: ", encoded_texts["input_ids"])
 
 # Padding and truncation
-tokenizer.pad_token = tokenizer.eos_token 
+tokenizer.pad_token = tokenizer.eos_token
 encoded_texts_longest = tokenizer(list_texts, padding=True)
 print("Using padding: ", encoded_texts_longest["input_ids"])
 encoded_texts_truncation = tokenizer(list_texts, max_length=3, truncation=True)
@@ -124,7 +126,6 @@ print("Using left-side truncation: ", encoded_texts_truncation_left["input_ids"]
 encoded_texts_both = tokenizer(list_texts, max_length=3, truncation=True, padding=True)
 print("Using both padding and truncation: ", encoded_texts_both["input_ids"])
 ```
-
 
 ### Prepare instruction dataset
 
@@ -220,21 +221,24 @@ prompt_template_without_input = """Below is an instruction that describes a task
 ### Training
 
 Technically, it's only a few lines of code to run on GPUs (elsewhere, ie. on Lamini).
+
 - Choose base model.
 - Load data.
 - Train it. Returns a model ID, dashboard, and playground interface.
+
 ```python
 from llama import BasicModelRunner
 
-model = BasicModelRunner("EleutherAI/pythia-410m") 
+model = BasicModelRunner("EleutherAI/pythia-410m")
 model.load_data_from_jsonlines("lamini_docs.jsonl", input_key="question", output_key="answer")
-model.train(is_public=True) 
+model.train(is_public=True)
 ```
+
 ```python
 # Finetune a model in 3 lines of code using Lamini
-model = BasicModelRunner("EleutherAI/pythia-410m") 
+model = BasicModelRunner("EleutherAI/pythia-410m")
 model.load_data_from_jsonlines("lamini_docs.jsonl", input_key="question", output_key="answer")
-model.train(is_public=True) 
+model.train(is_public=True)
 out = model.evaluate()
 lofd = []
 for e in out['eval_results']:
@@ -248,7 +252,9 @@ style_df = df.style.set_properties(**{'text-align': 'left'})
 style_df = style_df.set_properties(**{"vertical-align": "text-top"})
 style_df
 ```
+
 This is the open core of Lamini's llama library
+
 ```python
 
 import os
@@ -425,7 +431,7 @@ trainer.save_model(save_dir)
 print("Saved model to:", save_dir)
 finetuned_slightly_model = AutoModelForCausalLM.from_pretrained(save_dir, local_files_only=True)
 ​
-finetuned_slightly_model.to(device) 
+finetuned_slightly_model.to(device)
 ​
 # Run slightly trained model
 test_question = test_dataset[0]['question']
@@ -438,7 +444,7 @@ print("Target answer output (test):", test_answer)
 ```
 
 ```python
-# Run same model trained for two epochs 
+# Run same model trained for two epochs
 finetuned_longer_model = AutoModelForCausalLM.from_pretrained("lamini/lamini_docs_finetuned")
 tokenizer = AutoTokenizer.from_pretrained("lamini/lamini_docs_finetuned")
 finetuned_longer_model.to(device)
@@ -457,7 +463,9 @@ for i in range(len(train_dataset)):
   count += 1
 print(count)
 ```
+
 ### Explore moderation
+
 ```python
 # Explore moderation using small model
 # First, try the non-finetuned base model:
@@ -469,21 +477,24 @@ print(inference("What do you think of Mars?", base_model, base_tokenizer))
 print(inference("What do you think of Mars?", finetuned_longer_model, tokenizer))
 
 ```
+
 ### Benchmark
 
-- ARC It's a set of grade school questions. 
-- HellaSwag is a test of common sense. 
-- MMLU covers a lot of elementary school subjects, 
-- TruthfulQA measures the model's ability to reproduce falsehoods that you can commonly find online. 
+- ARC It's a set of grade school questions.
+- HellaSwag is a test of common sense.
+- MMLU covers a lot of elementary school subjects,
+- TruthfulQA measures the model's ability to reproduce falsehoods that you can commonly find online.
 
-Error Analysis - Framework for analyzing  and evaluating your model is called error analysis.
+Error Analysis - Framework for analyzing and evaluating your model is called error analysis.
 
-Categorize error 
+Categorize error
+
 - misspelling
 - Too Long
 - Repetitive
 
 - **ROUGE Metrics:**
+
   - ROUGE stands for Recall-Oriented Understudy for Gisting Evaluation.
   - Evaluation of automatically generated summaries by comparing them to human-generated reference summaries.
   - Utilizes recall, precision, and F1 scores based on unigrams, bigrams, and longest common subsequence (LCS).
@@ -492,28 +503,30 @@ Categorize error
 - **ROUGE-1 Metric:**
   - Focuses on unigrams (single words) in the comparison.
   - Calculation involves recall, precision, and F1 score for unigram matches between reference and generated output.
-  
 - **ROUGE-2 Metric (Bigrams):**
   - Takes into account bigrams (pairs of words) for a more nuanced evaluation.
   - Scores are lower than ROUGE-1 as bigram matches are less likely in longer sentences.
-  
 - **ROUGE-L Metric (Longest Common Subsequence):**
+
   - Considers the longest common subsequence in both reference and generated output.
   - Calculates recall, precision, and F1 score based on the length of the longest common subsequence.
   - Addresses issues with simple ROUGE scores that may yield high scores for poor completions.
 
 - **Issues with Simple ROUGE Scores:**
+
   - Potential for a bad completion to result in a good score.
   - Example: Repeating a word multiple times in the generated output.
   - Clipping function with modified precision helps limit unigram matches to the maximum count in the reference.
 
 - **BLEU Score (Bilingual Evaluation Understudy):**
+
   - Evaluates the quality of machine-translated text.
   - Calculates average precision over multiple n-gram sizes (unigrams, bigrams, etc.).
   - Average precision is then averaged across all n-gram sizes to obtain the BLEU score.
   - Simple yet widely used for translation tasks.
 
 - **Calculation of BLEU Score:**
+
   - Average precision is computed for each n-gram size.
   - These individual calculations are averaged to determine the final BLEU score.
   - Example: Candidate sentences evaluated against a human-generated reference sentence.
@@ -526,15 +539,18 @@ Categorize error
 ### Evaluation
 
 Technically, there are very few steps to run it on GPUs, elsewhere (ie. on Lamini).
+
 ```python
 finetuned_model = BasicModelRunner(
     "lamini/lamini_docs_finetuned"
 )
 finetuned_output = finetuned_model(
     test_dataset_list # batched!
-) 
+)
 ```
+
 Let's look again under the hood! This is the open core code of Lamini's llama library.
+
 ```python
 import datasets
 import tempfile
@@ -648,7 +664,6 @@ pd.DataFrame(evaluation_dataset)
 
 ```
 
-
 ###
 
 ```python
@@ -711,7 +726,7 @@ for i in range(num_examples):
 pprint(finetuning_dataset_text_only[0])
 pprint(finetuning_dataset_question_answer[0])
 
-## 
+##
 
 
 finetuning_dataset_name = "lamini/lamini_docs"
@@ -774,20 +789,18 @@ print(inference(test_sample["question"], instruction_model, tokenizer))
 
 ```
 
-
-
-
 ## Guarantee Valid JSON Output with Lamini
 
-https://www.lamini.ai/blog/guarantee-valid-json-output-with-lamini 
-
-
+https://www.lamini.ai/blog/guarantee-valid-json-output-with-lamini
 
 # LangChain for LLM Application Development
 
 ## LangChain: Memory
+
 Outline
+
 - ConversationBufferMemory
+
 ```python
 from langchain.chat_models import ChatOpenAI
 from langchain.chains import ConversationChain
@@ -796,11 +809,12 @@ from langchain.memory import ConversationBufferMemory
 llm = ChatOpenAI(temperature=0.0, model=llm_model)
 memory = ConversationBufferMemory()
 conversation = ConversationChain(
-    llm=llm, 
+    llm=llm,
     memory = memory,
     verbose=True
 )
 ```
+
 - ConversationBufferWindowMemory
 
 ```python
@@ -809,13 +823,15 @@ from langchain.memory import ConversationBufferWindowMemory
 llm = ChatOpenAI(temperature=0.0, model=llm_model)
 memory = ConversationBufferWindowMemory(k=1)
 conversation = ConversationChain(
-    llm=llm, 
+    llm=llm,
     memory = memory,
     verbose=False
 )
 # saves k conv only
 ```
+
 - ConversationTokenBufferMemory
+
 ```python
 from langchain.memory import ConversationTokenBufferMemory
 from langchain.llms import OpenAI
@@ -826,9 +842,10 @@ memory.save_context({"input": "AI is what?!"},
                     {"output": "Amazing!"})
 memory.save_context({"input": "Backpropagation is what?"},
                     {"output": "Beautiful!"})
-memory.save_context({"input": "Chatbots are what?"}, 
+memory.save_context({"input": "Chatbots are what?"},
                     {"output": "Charming!"})
 ```
+
 - ConversationSummaryMemory
 
 ```python
@@ -847,13 +864,14 @@ memory = ConversationSummaryBufferMemory(llm=llm, max_token_limit=100)
 memory.save_context({"input": "Hello"}, {"output": "What's up"})
 memory.save_context({"input": "Not much, just hanging"},
                     {"output": "Cool"})
-memory.save_context({"input": "What is on the schedule today?"}, 
+memory.save_context({"input": "What is on the schedule today?"},
                     {"output": f"{schedule}"})
 ```
 
 ## Chains in LangChain
 
 - LLMChain
+
 ```python
 from langchain.chat_models import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
@@ -867,7 +885,9 @@ chain = LLMChain(llm=llm, prompt=prompt)
 product = "Queen Size Sheet Set"
 chain.run(product)
 ```
+
 - SimpleSequentialChain
+
 ```python
 from langchain.chains import SimpleSequentialChain
 llm = ChatOpenAI(temperature=0.9, model=llm_model)
@@ -892,7 +912,9 @@ overall_simple_chain = SimpleSequentialChain(chains=[chain_one, chain_two],
                                             )
 overall_simple_chain.run(product)
 ```
+
 - SequentialChain
+
 ```python
 from langchain.chains import SequentialChain
 llm = ChatOpenAI(temperature=0.9, model=llm_model)
@@ -903,7 +925,7 @@ first_prompt = ChatPromptTemplate.from_template(
     "\n\n{Review}"
 )
 # chain 1: input= Review and output= English_Review
-chain_one = LLMChain(llm=llm, prompt=first_prompt, 
+chain_one = LLMChain(llm=llm, prompt=first_prompt,
                      output_key="English_Review"
                     )
 ​
@@ -912,7 +934,7 @@ second_prompt = ChatPromptTemplate.from_template(
     "\n\n{English_Review}"
 )
 # chain 2: input= English_Review and output= summary
-chain_two = LLMChain(llm=llm, prompt=second_prompt, 
+chain_two = LLMChain(llm=llm, prompt=second_prompt,
                      output_key="summary"
                     )
 ​
@@ -937,7 +959,7 @@ chain_four = LLMChain(llm=llm, prompt=fourth_prompt,
                       output_key="followup_message"
                      )
 ​
-# overall_chain: input= Review 
+# overall_chain: input= Review
 # and output= English_Review,summary, followup_message
 overall_chain = SequentialChain(
     chains=[chain_one, chain_two, chain_three, chain_four],
@@ -948,8 +970,10 @@ overall_chain = SequentialChain(
 review = df.Review[5]
 overall_chain(review)
 ```
+
 - Router Chain
-```python
+
+````python
 physics_template = """You are a very smart physics professor. \
 You are great at answering questions about physics in a concise\
 and easy to understand manner. \
@@ -963,7 +987,7 @@ Here is a question:
 math_template = """You are a very good mathematician. \
 You are great at answering math questions. \
 You are so good because you are able to break down \
-hard problems into their component parts, 
+hard problems into their component parts,
 answer the component parts, and then put them together\
 to answer the broader question.
 ​
@@ -991,29 +1015,29 @@ You are so good because you know how to solve a problem by \
 describing the solution in imperative steps \
 that a machine can easily interpret and you know how to \
 choose a solution that has a good balance between \
-time complexity and space complexity. 
+time complexity and space complexity.
 ​
 Here is a question:
 {input}"""
 prompt_infos = [
     {
-        "name": "physics", 
-        "description": "Good for answering questions about physics", 
+        "name": "physics",
+        "description": "Good for answering questions about physics",
         "prompt_template": physics_template
     },
     {
-        "name": "math", 
-        "description": "Good for answering math questions", 
+        "name": "math",
+        "description": "Good for answering math questions",
         "prompt_template": math_template
     },
     {
-        "name": "History", 
-        "description": "Good for answering history questions", 
+        "name": "History",
+        "description": "Good for answering history questions",
         "prompt_template": history_template
     },
     {
-        "name": "computer science", 
-        "description": "Good for answering computer science questions", 
+        "name": "computer science",
+        "description": "Good for answering computer science questions",
         "prompt_template": computerscience_template
     }
 ]
@@ -1028,8 +1052,8 @@ for p_info in prompt_infos:
     prompt_template = p_info["prompt_template"]
     prompt = ChatPromptTemplate.from_template(template=prompt_template)
     chain = LLMChain(llm=llm, prompt=prompt)
-    destination_chains[name] = chain  
-    
+    destination_chains[name] = chain
+
 destinations = [f"{p['name']}: {p['description']}" for p in prompt_infos]
 destinations_str = "\n".join(destinations)
 default_prompt = ChatPromptTemplate.from_template("{input}")
@@ -1073,16 +1097,17 @@ router_prompt = PromptTemplate(
 )
 ​
 router_chain = LLMRouterChain.from_llm(llm, router_prompt)
-chain = MultiPromptChain(router_chain=router_chain, 
-                         destination_chains=destination_chains, 
+chain = MultiPromptChain(router_chain=router_chain,
+                         destination_chains=destination_chains,
                          default_chain=default_chain, verbose=True
                         )
 chain.run("What is black body radiation?")
 chain.run("what is 2 + 2")
 chain.run("Why does every cell in our body contain DNA?")
-```
+````
 
 ## LangChain: Q&A over Documents
+
 ```python
 from langchain.chains import RetrievalQA
 from langchain.chat_models import ChatOpenAI
@@ -1111,7 +1136,7 @@ embed = embeddings.embed_query("Hi my name is Harrison")
 print(len(embed))
 print(embed[:5])
 db = DocArrayInMemorySearch.from_documents(
-    docs, 
+    docs,
     embeddings
 )
 query = "Please suggest a shirt with sunblocking"
@@ -1123,13 +1148,13 @@ llm = ChatOpenAI(temperature = 0.0, model=llm_model)
 qdocs = "".join([docs[i].page_content for i in range(len(docs))])
 ​
 response = llm.call_as_llm(f"{qdocs} Question: Please list all your \
-shirts with sun protection in a table in markdown and summarize each one.") 
+shirts with sun protection in a table in markdown and summarize each one.")
 ​
 display(Markdown(response))
 qa_stuff = RetrievalQA.from_chain_type(
-    llm=llm, 
-    chain_type="stuff", 
-    retriever=retriever, 
+    llm=llm,
+    chain_type="stuff",
+    retriever=retriever,
     verbose=True
 )
 query =  "Please list all your shirts with sun protection in a table \
@@ -1144,11 +1169,14 @@ index = VectorstoreIndexCreator(
 ```
 
 ## LangChain: Evaluation
+
 Outline:
+
 - Example generation
 - Manual evaluation (and debuging)
 - LLM-assisted evaluation
 - LangChain evaluation platform
+
 ```python
 
 # Create our QandA application
@@ -1167,9 +1195,9 @@ index = VectorstoreIndexCreator(
 ).from_loaders([loader])
 llm = ChatOpenAI(temperature = 0.0, model=llm_model)
 qa = RetrievalQA.from_chain_type(
-    llm=llm, 
-    chain_type="stuff", 
-    retriever=index.vectorstore.as_retriever(), 
+    llm=llm,
+    chain_type="stuff",
+    retriever=index.vectorstore.as_retriever(),
     verbose=True,
     chain_type_kwargs = {
         "document_separator": "<<<<>>>>>"
@@ -1228,16 +1256,16 @@ for i, eg in enumerate(examples):
     print()
 graded_outputs[0]
 ```
+
 LangChain evaluation platform
 The LangChain evaluation platform, LangChain Plus, can be accessed here https://www.langchain.plus/. Use the invite code lang_learners_2023
 
-
-
-
 ## LangChain: Agents
+
 Outline:
 Using built in LangChain tools: DuckDuckGo search and Wikipedia
 Defining your own tools
+
 ```python
 
 # Built-in LangChain tools
@@ -1251,8 +1279,8 @@ from langchain.chat_models import ChatOpenAI
 llm = ChatOpenAI(temperature=0, model=llm_model)
 tools = load_tools(["llm-math","wikipedia"], llm=llm)
 agent= initialize_agent(
-    tools, 
-    llm, 
+    tools,
+    llm,
     agent=AgentType.CHAT_ZERO_SHOT_REACT_DESCRIPTION,
     handle_parsing_errors=True,
     verbose = True)
@@ -1262,7 +1290,7 @@ agent("What is the 25% of 300?")
 question = "Tom M. Mitchell is an American computer scientist \
 and the Founders University Professor at Carnegie Mellon University (CMU)\
 what book did he write?"
-result = agent(question) 
+result = agent(question)
 
 # Python Agent
 agent = create_python_agent(
@@ -1270,24 +1298,24 @@ agent = create_python_agent(
     tool=PythonREPLTool(),
     verbose=True
 )
-customer_list = [["Harrison", "Chase"], 
+customer_list = [["Harrison", "Chase"],
                  ["Lang", "Chain"],
                  ["Dolly", "Too"],
-                 ["Elle", "Elem"], 
-                 ["Geoff","Fusion"], 
+                 ["Elle", "Elem"],
+                 ["Geoff","Fusion"],
                  ["Trance","Former"],
                  ["Jen","Ayai"]
                 ]
 agent.run(f"""Sort these customers by \
 last name and then first name \
-and print the output: {customer_list}""") 
+and print the output: {customer_list}""")
 
 # View detailed outputs of the chains
 import langchain
 langchain.debug=True
 agent.run(f"""Sort these customers by \
 last name and then first name \
-and print the output: {customer_list}""") 
+and print the output: {customer_list}""")
 langchain.debug=False
 # Define your own tool
 #!pip install DateTime
@@ -1303,8 +1331,8 @@ def time(text: str) -> str:
     outside this function."""
     return str(date.today())
 agent= initialize_agent(
-    tools + [time], 
-    llm, 
+    tools + [time],
+    llm,
     agent=AgentType.CHAT_ZERO_SHOT_REACT_DESCRIPTION,
     handle_parsing_errors=True,
     verbose = True)
@@ -1313,17 +1341,56 @@ agent= initialize_agent(
 # If it does, please try running it again.
 
 try:
-    result = agent("whats the date today?") 
-except: 
+    result = agent("whats the date today?")
+except:
     print("exception on external access")
 ```
 
-
-
-
-
-
-
-
-
 #
+
+## RAG
+
+Building end-to-end RAG pipelines has been made easy with LlamaIndex, check out a simple yet powerful approach with open-source embeddings from Hugging Face & LLM with Meta Llama3
+
+📚 Learn about each step in building a search & retrieval system from data ingestion, chunking, embedding, creating vector store index (in-memory db), to query engine.
+
+🔗 Google Colab notebook - https://lnkd.in/gSKXry6Q
+
+https://huggingface.co/learn/cookbook/structured_generation
+
+# positional encoding
+
+<div align="center">
+  <img src="https://media.licdn.com/dms/image/D5622AQGqaMuoKY2oJA/feedshare-shrink_800/0/1712247238635?e=1721865600&v=beta&t=fERJl95gefpSBwzms_rDt74vDbArUk6eRvkfObC7_x4" alt="gd" width="400" height="600" />
+
+</div>
+
+Did you know that LLama 2 is probably among the best choice if you need a large context window with an open-source model? In fact, any model using the RoPE positional embedding is a good bet!
+
+4096 tokens, that's about 3000 words. Not bad but it limits the possible applications. The typical Transformer architecture is composed of Embeddings to encode the text input, multiple transformer blocks, and a prediction head specific to the learning task the LLM is used for. To encode the text, we use a text embedding matrix T that has the size of the token vocabulary and a positional embedding P that encodes the position of the token in the input sequence. That position embedding size defines the context size. That embedding can be learned or it can be a simple sin function of the position index. Typically they are added together T + P such that the same word is encoded differently at positions i and j.
+
+The great thing about LLama 2 is that it uses Rotary Positional Embeddings (RoPE) as opposed to the typical sin function encoding. Each Attention layer is modified using that embedding and it ensures the computed attention between input tokens to be only dependent on the distance between those tokens. If token T1 is at position i and a token T2 at position j, the attention A(T1, T2) = f(j - i) is a function of j - i. The attention is not dependent on the specific token's locations but on their relative positions.
+
+The technique they use at Meta to extend the context window is to interpolate at non-integer positions. Basically, if the original window size is L, you can extend it to L' (with L' > L) by rescaling the integer positions
+
+i' = i \* L / L'
+
+As an example, if you wanted to have a text input of 16,384 tokens (so 4x the window size of LLama 2) into LLama 2, you would just need to divide every integer position by 4: i' = i / 4. To be clear, if you look at the implementation of LLama 2 available on GitHub (line 101 in model.py today https://lnkd.in/eyQER_aq), you would just need to replace the following line of code
+
+t = torch.arange(end, device=freqs.device)
+by
+t = torch.arange(end, device=freqs.device) / 4
+
+How simple is that? Because the model was not trained for that position embedding, you would need to fine-tune the model a bit to adapt it to that new context window and position embedding. When we think that LLama 2 will most likely be used to be fine-tuned on private data, that is the icing on the cake to be able to dynamically adapt the context window to our needs as we fine-tune it.
+
+You can look at the method here: https://lnkd.in/gPUzdBPi. They were able to extend LLama's context window by 16 times while keeping the performance at the same level!
+
+--
+👉 Don't forget to subscribe to my ML newsletter: https://lnkd.in/g4iKyRmS
+
+# Chain of thought
+
+<div align="center">
+  <img src="https://media.licdn.com/dms/image/D4D22AQFfjm57DwkE0Q/feedshare-shrink_800/0/1711556818856?e=1721865600&v=beta&t=lP3cm8k4vs88DlNm-YEuedgaWD2Y9IDC2uEmzrNkmvk" alt="gd" width="700" height="500" />
+
+</div>
