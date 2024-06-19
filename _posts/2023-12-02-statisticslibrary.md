@@ -80,6 +80,73 @@ The `ddof` parameter stands for Delta Degrees of Freedom and is used in the stan
 
 The coefficient of variation is a powerful tool for understanding and comparing the relative variability of different datasets. It's especially useful in fields requiring comparative analysis and in scenarios where the data scales are significantly different. By using `scipy.stats.variation`, you can easily compute this measure and gain insights into the consistency and reliability of your data.
 
+The coefficient of variation (CV) is a unitless measure of relative variability that allows you to compare the dispersion of different datasets regardless of their units or scales. A CV of 1.091 means that the standard deviation is approximately 109.1% of the mean, indicating a high level of variability relative to the mean.
+
+### Interpretation of CV Values
+
+1. **Relative to Zero**:
+   - The CV is always a positive value since both the standard deviation and mean are positive. A CV close to zero indicates low variability relative to the mean.
+   - Higher CV values indicate greater variability.
+
+2. **Thresholds**:
+   - **Low CV**: Typically, a CV < 1 indicates low variability relative to the mean.
+   - **High CV**: A CV > 1, as in your case (1.091), indicates high variability. This means that the data points are spread out widely relative to the mean.
+
+### Example Context for CV
+
+- **Comparing Different Data Sets**: When comparing the variability of two different datasets, you can use their CVs to determine which dataset has more relative variability.
+- **Quality Control**: In manufacturing, a lower CV indicates a more consistent product quality.
+- **Financial Analysis**: Investors might use CV to compare the risk (volatility) of different assets.
+
+### Practical Example
+
+Let's put the CV of 1.091 into perspective using another dataset:
+
+```python
+import pandas as pd
+from scipy.stats import variation
+
+# New example DataFrame with different data
+data = {
+    'num_legs': [4, 5, 6, 5, 5],  # Less variability
+    'num_wings': [1, 1, 1, 1, 1],  # No variability
+    'num_specimen_seen': [10, 12, 11, 13, 11]  # Moderate variability
+}
+
+df_example = pd.DataFrame(data)
+
+# Compute the coefficient of variation for each column
+cv_num_legs_example = variation(df_example['num_legs'])
+cv_num_wings_example = variation(df_example['num_wings'])
+cv_num_specimen_seen_example = variation(df_example['num_specimen_seen'])
+
+print(f"Coefficient of Variation for num_legs (example): {cv_num_legs_example}")
+print(f"Coefficient of Variation for num_wings (example): {cv_num_wings_example}")
+print(f"Coefficient of Variation for num_specimen_seen (example): {cv_num_specimen_seen_example}")
+```
+
+Output might look like:
+
+```
+Coefficient of Variation for num_legs (example): 0.10540925533894604
+Coefficient of Variation for num_wings (example): 0.0
+Coefficient of Variation for num_specimen_seen (example): 0.0975900072948533
+```
+
+### Comparison
+
+- **num_legs (original)**: CV = 1.091
+- **num_legs (example)**: CV = 0.105
+  - This indicates that the original 'num_legs' dataset has much higher variability relative to its mean compared to the example dataset.
+- **num_wings (example)**: CV = 0
+  - This indicates no variability (all values are the same).
+- **num_specimen_seen (example)**: CV = 0.098
+  - This indicates moderate variability, much lower than the original 'num_legs'.
+
+### Conclusion
+
+A CV of 1.091 indicates high relative variability for the 'num_legs' column. This means the standard deviation is slightly higher than the mean, suggesting that the data points are widely spread out. Comparing this to other datasets with lower CVs can provide insights into how variable your data is relative to others.
+
 # sns
 
 ### EDA
