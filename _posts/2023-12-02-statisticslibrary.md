@@ -15,6 +15,71 @@ SciPy has many functions for performing hypothesis tests that return a test stat
 
 The headings below are based on common uses of the functions within, but due to the wide variety of statistical procedures, any attempt at coarse-grained categorization will be imperfect. Also, note that tests within the same heading are not interchangeable in general (e.g. many have different distributional assumptions).
 
+The coefficient of variation (CV) is a statistical measure of the relative variability of data points in a data series around the mean. It is calculated as the ratio of the standard deviation (\(\sigma\)) to the mean (\(\mu\)), often expressed as a percentage:
+
+\[ \text{CV} = \frac{\sigma}{\mu} \]
+
+### Significance of the Coefficient of Variation
+
+1. **Relative Measure of Dispersion**:
+   - Unlike the standard deviation which provides an absolute measure of dispersion, the CV is a relative measure. This makes it useful for comparing the degree of variation from one data series to another, even if the means are drastically different.
+
+2. **Scale-Invariant**:
+   - Since the CV is a ratio, it is scale-invariant. This property makes it useful for comparing variability between datasets with different units or widely different means.
+
+3. **Comparison Across Different Data Sets**:
+   - CV is particularly useful when comparing the variability of data sets with different units or scales. For instance, it can be used to compare the risk (volatility) of investments that have different expected returns.
+
+4. **Suitability in Certain Fields**:
+   - The CV is often used in fields such as finance, economics, and the life sciences where the absolute measure of dispersion may not be as meaningful as the relative measure.
+
+### Use in Hypothesis Testing
+
+When conducting hypothesis tests, understanding the variation within your data is crucial. The CV can help in several ways:
+
+- **Assessing Data Reliability**: High CV values indicate a lot of variability relative to the mean, which might suggest less reliable data.
+- **Normalization**: It helps in normalizing the data, particularly when the means of the datasets being compared are significantly different.
+- **Comparative Studies**: In comparative studies, CV can be used to assess whether the relative variability of different groups is significantly different.
+
+### Example Calculation
+
+Here is how you can calculate the coefficient of variation for your dataset using `scipy.stats.variation`:
+
+```python
+import pandas as pd
+import numpy as np
+from scipy.stats import variation
+
+# Example DataFrame
+df = pd.DataFrame({
+    'num_legs': [2, 4, 8, 0, 0],
+    'num_wings': [2, 0, 0, 0, 0],
+    'num_specimen_seen': [10, 2, 1, 8, 0]
+}, index=['falcon', 'dog', 'spider', 'fish', 'empty'])
+
+# Compute the coefficient of variation for each column
+cv_num_legs = variation(df['num_legs'])
+cv_num_wings = variation(df['num_wings'])
+cv_num_specimen_seen = variation(df['num_specimen_seen'])
+
+print(f"Coefficient of Variation for num_legs: {cv_num_legs}")
+print(f"Coefficient of Variation for num_wings: {cv_num_wings}")
+print(f"Coefficient of Variation for num_specimen_seen: {cv_num_specimen_seen}")
+```
+
+In this example, `scipy.stats.variation` is used to compute the CV for each column in the DataFrame. The results give you a measure of relative variability for `num_legs`, `num_wings`, and `num_specimen_seen`.
+
+The `nan_policy` parameter in the `variation` function allows you to specify how to handle NaNs in your data:
+- `'propagate'` (default): Returns NaN if the input contains NaNs.
+- `'omit'`: Ignores NaNs when performing the calculation.
+- `'raise'`: Raises an error if NaNs are present.
+
+The `ddof` parameter stands for Delta Degrees of Freedom and is used in the standard deviation calculation. The default is 0.
+
+### Conclusion
+
+The coefficient of variation is a powerful tool for understanding and comparing the relative variability of different datasets. It's especially useful in fields requiring comparative analysis and in scenarios where the data scales are significantly different. By using `scipy.stats.variation`, you can easily compute this measure and gain insights into the consistency and reliability of your data.
+
 # sns
 
 ### EDA
