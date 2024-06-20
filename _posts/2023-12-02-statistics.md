@@ -260,12 +260,19 @@ mode = [key for key, value in count_dict.items() if value == max(count_dict.valu
 ```
 
 ### Variance and Standard Deviation
+
 Variance - Think of it as an average of how far each data point is from the mean, but squared (meaning the distance is magnified).Useful for understanding the spread of data, but the squared units can be hard to interpret directly.
 
 Standard Deviation:
 This makes the units the same as the original data, which is easier to understand.
 Represents the typical distance a data point falls from the mean.
 A higher standard deviation indicates a larger spread of data points.
+
+Difference between Variance & Standard Deviation¶
+
+Variance is a method to find or obtain the measure between the variables that how are they different from one another, whereas standard deviation shows us how the data set or the variables differ from the mean or the average value from the data set.
+
+Variance helps to find the distribution of data in a population from a mean, and standard deviation also helps to know the distribution of data in population, but standard deviation gives more clarity about the deviation of data from a mean.
 
 ```python
 mean = sum(x) / n
@@ -274,6 +281,7 @@ variance = sum((num - mean) ** 2 for num in x) / n
 
 std_dev = variance ** 0.5
 ```
+
 Why are they important?
 
 They help you interpret the average (mean) of your data. A high mean with a high standard deviation tells you the data is spread out, while a high mean with a low standard deviation suggests the data points are clustered around the mean.
@@ -314,9 +322,101 @@ def interquartileRange(values, freqs):
     return q3 - q1
 ```
 
+### Kurtosis and skewness
+
+Kurtosis and skewness are measures of the shape of a distribution.
+
+1. **Skewness**:
+
+   - Skewness measures the symmetry of a distribution.
+   - A skewness value of 0 indicates a symmetrical distribution.
+   - Positive skewness (greater than 0) indicates a distribution with a longer right tail, meaning it has more values on the left side of the distribution mean.
+   - Negative skewness (less than 0) indicates a distribution with a longer left tail, meaning it has more values on the right side of the distribution mean.
+
+2. **Kurtosis**:
+   - Kurtosis measures the tail heaviness of a distribution.
+   - A kurtosis value of 3 (excess kurtosis) is considered normal and indicates a distribution with tails similar to a normal distribution.
+   - Excess kurtosis greater than 3 indicates heavier tails, which means more values in the tails compared to a normal distribution.
+   - Excess kurtosis less than 3 indicates lighter tails, meaning fewer values in the tails compared to a normal distribution.
+
+Interpreting the values:
+
+- For skewness, a value closer to 0 indicates less skew. Positive or negative values indicate the direction of the skew.
+- For kurtosis, a value of 3 indicates a normal distribution. Values above 3 indicate heavier tails, and values below 3 indicate lighter tails compared to a normal distribution.
+
+It's important to note that interpretation may vary depending on the context and the specific distribution of your data.
+
+Shape of Data
+
+i) Symmetric
+In the symmetric shape of the graph, the data is distributed the same on both sides.
+In symmetric data, the mean and median are located close together.
+The curve formed by this symmetric graph is called a normal curve.
+
+ii) Skewness
+Skewness is the measure of the asymmetry of the distribution of data.
+The data is not symmetrical (i.e) it is skewed towards one side.
+
+--> Skewness is classified into two types.
+
+- Positive Skew
+- Negative Skew
+
+  1.Positively skewed:
+
+In a Positively skewed distribution, the data values are clustered around the left side of the distribution and the right side is longer.
+The mean and median will be greater than the mode in the positive skew.
+
+2.Negatively skewed
+
+In a Negatively skewed distribution, the data values are clustered around the right side of the distribution and the left side is longer.
+The mean and median will be less than the mode.
+
+iii) Kurtosis
+
+Kurtosis is the measure of describing the distribution of data.
+
+This data is distributed in different ways. They are:
+
+- Platykurtic
+- Mesokurtic
+- Leptokurtic
+
+  1.Platykurtic: The platykurtic shows a distribution with flat tails. Here the data is distributed faltly . The flat tails indicated the small outliers in the distribution.
+
+  2.Mesokurtic: In Mesokurtic, the data is widely distributed. It is normally distributed and it also matches normal distribution.
+
+  3.Leptokurtic: In leptokurtic, the data is very closely distributed. The height of the peak is greater than width of the peak.
+
 # Describing probability distributions and probability distributions with multiple variables
 
 # Sampling and Point estimation
+
+Inferential Statistics¶
+Back to Table of Contents
+
+Inferential Statistics - offers methods to study experiments done on small samples of data and chalk out the inferences to the entire population (entire domain).
+
+2.1 Population Vs Samples:
+In statistics, the population is a set of all elements or items that you’re interested in. Populations are often vast, which makes them inappropriate for collecting and analyzing data. That’s why statisticians usually try to make some conclusions about a population by choosing and examining a representative subset of that population.
+
+This subset of a population is called a sample. Ideally, the sample should preserve the essential statistical features of the population to a satisfactory extent. That way, you’ll be able to use the sample to glean conclusions about the population.
+
+<div align="center" >
+  <img src="https://cdn.analyticsvidhya.com/wp-content/uploads/2019/05/Screenshot-21.png" alt="gd" width="400" height="200" />
+</div>
+
+Data Sampling:
+
+Data sampling is a statistical analysis technique used to select, manipulate and analyze a representative subset of data points to identify patterns and trends in the larger data set being examined.
+Different types of sampling technique:
+
+Probability Sampling: In probability sampling, every element of the population has an equal chance of being selected. Probability sampling gives us the best chance to create a sample that is truly representative of the population
+Non-Probability Sampling: In non-probability sampling, all elements do not have an equal chance of being selected. Consequently, there is a significant risk of ending up with a non-representative sample which does not produce generalizable results
+
+<div align="center" >
+  <img src="https://cdn.analyticsvidhya.com/wp-content/uploads/2019/05/Screenshot-20.png" alt="gd" width="400" height="200" />
+</div>
 
 ## Population and Sampling
 
@@ -1064,6 +1164,95 @@ Where:
 - $ p_0 $: Hypothesized population proportion
 
 The observed test statistic is compared to the critical value or p-value to make a decision.
+
+## **ANOVA (Analysis of Variance)**
+
+### Definition:
+
+ANOVA is a statistical technique used to compare the means of two or more groups to determine if there are any statistically significant differences between them. It helps in understanding whether the variation in the data is due to the effect of the independent variable(s) or due to random chance.
+
+### Key Concepts:
+
+1. **Groups (Levels):** Different categories or treatments being compared.
+2. **Dependent Variable:** The outcome variable that is measured in the study.
+3. **Independent Variable:** The factor or factors being manipulated to observe their effect on the dependent variable.
+4. **Between-Group Variance:** Variation due to the differences between the groups.
+5. **Within-Group Variance:** Variation due to differences within each group.
+
+### Types of ANOVA:
+
+1. **One-Way ANOVA:** Compares the means of three or more unrelated groups based on one independent variable.
+2. **Two-Way ANOVA:** Compares the means based on two independent variables and can also evaluate the interaction effect between them.
+3. **Repeated Measures ANOVA:** Compares the means of the same group at different times or under different conditions.
+
+### Process:
+
+1. **Hypotheses Formulation:**
+
+   - Null Hypothesis (\(H_0\)): The means of the groups are equal.
+   - Alternative Hypothesis (\(H_1\)): At least one group mean is different.
+
+2. **Calculating ANOVA:**
+
+   - **Sum of Squares Between (SSB):** Measures the variance between the groups.
+   - **Sum of Squares Within (SSW):** Measures the variance within each group.
+   - **Total Sum of Squares (SST):** The total variance in the data.
+
+   \[ SST = SSB + SSW \]
+
+   - **Mean Square Between (MSB):** Average between-group variance.
+
+   \[ MSB = \frac{SSB}{df\_{between}} \]
+
+   - **Mean Square Within (MSW):** Average within-group variance.
+
+   \[ MSW = \frac{SSW}{df\_{within}} \]
+
+   - **F-Ratio:** Ratio of between-group variance to within-group variance.
+
+   \[ F = \frac{MSB}{MSW} \]
+
+3. **Decision Making:**
+
+   - Calculate the F-statistic using the F-distribution table based on the degrees of freedom.
+   - Compare the calculated F-value with the critical F-value from the table at a chosen significance level (e.g., \(\alpha = 0.05\)).
+   - Determine the p-value corresponding to the F-statistic.
+
+   - If \( p \leq \alpha \), reject the null hypothesis (\(H_0\)).
+   - If \( p > \alpha \), fail to reject the null hypothesis (\(H_0\)).
+
+### Assumptions:
+
+1. **Independence:** Observations within each group must be independent.
+2. **Normality:** The data within each group should be approximately normally distributed.
+3. **Homogeneity of Variances:** The variance among the groups should be approximately equal (homoscedasticity).
+
+### Applications:
+
+ANOVA is widely used in various fields such as:
+
+- **Psychology:** To compare the effectiveness of different therapies.
+- **Agriculture:** To evaluate the impact of different fertilizers on crop yield.
+- **Medicine:** To compare the effects of different drugs on patient recovery rates.
+- **Business:** To assess the impact of different marketing strategies on sales.
+
+### Example:
+
+Consider a study to compare the test scores of students from three different teaching methods (A, B, C).
+
+1. Formulate the hypotheses:
+
+   - \(H_0\): Mean scores of students in all three methods are equal.
+   - \(H_1\): At least one mean score is different.
+
+2. Collect and organize the data.
+3. Calculate SSB, SSW, MSB, MSW, and the F-ratio.
+4. Determine the p-value and compare it with the significance level.
+5. Draw conclusions based on the results.
+
+### Conclusion:
+
+ANOVA is a powerful statistical tool for comparing means across multiple groups and determining if the differences are statistically significant. By following the process and ensuring assumptions are met, researchers can make informed decisions about the effects of different factors on a dependent variable.
 
 # Analysis in Machine Learning
 
