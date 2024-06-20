@@ -609,6 +609,18 @@ output = no_dups(str_input)
 print(output)
 ```
 
+```python
+a = "abcbcde"
+o = []
+for i in a:
+  if i in o:
+    o.clear()
+    o.append(i)
+  else:
+    o.append(i)
+
+o
+```
 
 ### Rotate Matrix
 You are given an n*n matrix. You must rotate it to the right by 90 degrees.

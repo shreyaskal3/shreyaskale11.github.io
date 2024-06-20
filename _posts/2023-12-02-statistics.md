@@ -284,7 +284,7 @@ std_dev = variance ** 0.5
 
 Why are they important?
 
-They help you interpret the average (mean) of your data. A high mean with a high standard deviation tells you the data is spread out, while a high mean with a low standard deviation suggests the data points are clustered around the mean.
+They help you interpret the average (mean) of your data. `A high mean with a high standard deviation tells you the data is spread out, while a high mean with a low standard deviation suggests the data points are clustered around the mean`.
 They are used in various statistical tests to compare datasets, assess risk (e.g., financial markets), and build models based on the data's distribution.
 
 ### Weighted Mean
