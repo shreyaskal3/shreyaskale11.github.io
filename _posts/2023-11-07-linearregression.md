@@ -31,6 +31,7 @@ math: true
   </summary>
 <p>
 In the context of machine learning and optimization, "gradient" and "descent" in "gradient descent" refer to specific mathematical and conceptual elements used in the algorithm for finding the minimum of a function.
+</p>
 
 ### Gradient
 
@@ -68,7 +69,6 @@ Here:
 
 Each variant has its own trade-offs in terms of speed, accuracy, and computational efficiency.
 
-</p>
 </details>
 
 <details>
