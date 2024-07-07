@@ -1,8 +1,8 @@
 ---
 title: Azure Data Engineering Roadmap
 date: 2024-05-04 00:00:00 +0800
-categories: [Azure Data Engineering]
-tags: [SQL,SQL SERVER,Data Warehouse, Python, Azure Databricks, Azure Data Factory, AzuAzure Synapse, Microsoft Fabric]
+categories: [Data Engineering,Azure]
+tags: [Azure]
 math: True
 ---
 

@@ -1,11 +1,9 @@
 ---
-title: NLP Notes
+title: Regular Expression
 date: 2023-09-03 00:00:00 +0800
-categories: [NLP]
-tags: [NLPnotes]
+categories: [NLP, Regular Expression]
+tags: [Regular Expression]
 ---
-
-
 
 # Python Regular Expression Cheat Sheet
 
@@ -71,8 +69,6 @@ tags: [NLPnotes]
 - `re.finditer(pattern, string)`: Returns an iterator of match objects for all occurrences.
 - `re.sub(pattern, replacement, string)`: Replaces occurrences of the pattern with the replacement.
 
-
-
 ```python
 import re
 
@@ -95,14 +91,12 @@ print(domain)  # Output: @example.com
 
 ### Split a paragraph into sentences
 
-```python 
+```python
 input = input()
 split = input.split('.')
 for i in split:
     print(f"{(i).strip()}.")
 ```
-
-
 
 ## Perplexity Calculation
 
@@ -112,9 +106,6 @@ The formula for perplexity in the case of a unigram model is:
 
 $$ \text{Perplexity} = 2^{H(p)} $$
 
-$$ H(p) = - \sum_{x \in \mathcal{X}} p(x) \log_2 p(x) $$
+$$ H(p) = - \sum\_{x \in \mathcal{X}} p(x) \log_2 p(x) $$
 
 where $ H(p) $ is the cross-entropy of the unigram model.
-
-
-

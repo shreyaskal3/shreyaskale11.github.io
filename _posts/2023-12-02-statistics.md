@@ -6,6 +6,149 @@ tags: [Statistics]
 math: True
 ---
 
+# Q&A
+
+<details>
+  <summary>
+    What is conditional probability?
+  </summary>
+
+Conditional probability is the probability of an event occurring given that another event has already occurred. It is calculated using the formula:
+$ P(A|B) = \frac{P(A \cap B)}{P(B)} $
+where $ P(A|B) $ is the conditional probability of event A occurring given that event B has occurred, $ P(A \cap B) $ is the probability of both events A and B occurring, and $ P(B) $ is the probability of event B occurring.
+
+</details>
+
+<details>
+  <summary>
+    What is Bayes' theorem and how is it used?
+  </summary>
+
+Bayes' theorem describes the probability of an event based on prior knowledge of conditions that might be related to the event. It is expressed as:
+$ P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)} $
+where $ P(A|B) $ is the posterior probability of event A occurring given event B, $ P(B|A) $ is the likelihood of event B occurring given event A, $ P(A) $ is the prior probability of event A, and $ P(B) $ is the marginal probability of event B. It is used in various fields including statistics, medicine, and machine learning for updating the probability of a hypothesis as more evidence becomes available.
+
+</details>
+
+<details>
+  <summary>
+    What are probability distributions?
+  </summary>
+
+Probability distributions describe how the probabilities are distributed over the values of the random variable. They can be discrete or continuous. Examples include:
+
+- **Discrete Probability Distributions**: e.g., Binomial distribution, Poisson distribution.
+- **Continuous Probability Distributions**: e.g., Normal distribution, Exponential distribution.
+
+Each distribution is defined by its probability density function (pdf) or probability mass function (pmf) and its parameters.
+
+</details>
+
+<details>
+  <summary>
+    What is entropy in the context of information theory?
+  </summary>
+
+Entropy is a measure of the uncertainty or randomness in a set of data. In information theory, it quantifies the average amount of information produced by a stochastic source of data. The entropy $ H(X) $ of a discrete random variable $ X $ with probability mass function $ P(x) $ is defined as:
+$ H(X) = -\sum\_{x \in X} P(x) \log_2 P(x) $
+Entropy is used in various fields including data compression, cryptography, and machine learning to measure the unpredictability or information content.
+
+</details>
+
+<details>
+  <summary>
+    How do you calculate the mean of a dataset?
+  </summary>
+
+The mean (or average) of a dataset is calculated by summing all the values in the dataset and then dividing by the number of values. The formula for the mean $ \mu $ is:
+$ \mu = \frac{1}{n} \sum\_{i=1}^{n} x_i $
+where $ x_i $ represents each value in the dataset and $ n $ is the total number of values.
+
+</details>
+
+<details>
+  <summary>
+    How do you calculate the median of a dataset?
+  </summary>
+
+The median is the middle value of a dataset when it is ordered in ascending or descending order. If the number of values $ n $ is odd, the median is the middle value. If $ n $ is even, the median is the average of the two middle values. The steps to calculate the median are:
+
+1. Order the dataset from smallest to largest.
+2. If $ n $ is odd, the median is the value at position $ \frac{n+1}{2} $.
+3. If $ n $ is even, the median is the average of the values at positions $ \frac{n}{2} $ and $ \frac{n}{2} + 1 $.
+
+</details>
+
+<details>
+  <summary>
+    What is the mode of a dataset?
+  </summary>
+
+The mode is the value that appears most frequently in a dataset. A dataset may have one mode, more than one mode, or no mode at all if no value repeats. It is especially useful for categorical data where we want to know the most common category.
+
+</details>
+
+<details>
+  <summary>
+    How can you apply Bayes' theorem to real-world problems, such as medical diagnosis or spam email detection?
+  </summary>
+
+Bayes' theorem can be applied to real-world problems by updating the probability of a hypothesis as new evidence is presented. For example:
+
+**Medical Diagnosis**: Suppose a patient tests positive for a disease. Bayes' theorem can be used to calculate the probability that the patient actually has the disease, taking into account the accuracy of the test and the prevalence of the disease in the population.
+
+Given:
+
+- $ P(D) $: The prior probability of having the disease.
+- $ P(\neg D) $: The prior probability of not having the disease.
+- $ P(T|D) $: The probability of testing positive if the patient has the disease (sensitivity).
+- $ P(T|\neg D) $: The probability of testing positive if the patient does not have the disease (false positive rate).
+
+The posterior probability $ P(D|T) $ that the patient has the disease given a positive test result can be calculated as:
+$ P(D|T) = \frac{P(T|D) \cdot P(D)}{P(T)} $
+where $ P(T) = P(T|D) \cdot P(D) + P(T|\neg D) \cdot P(\neg D) $.
+
+**Spam Email Detection**: In spam filtering, Bayes' theorem can help determine the probability that an email is spam based on the occurrence of certain words.
+
+Given:
+
+- $ P(S) $: The prior probability of any email being spam.
+- $ P(\neg S) $: The prior probability of any email not being spam.
+- $ P(W|S) $: The probability of a word appearing in a spam email.
+- $ P(W|\neg S) $: The probability of a word appearing in a non-spam email.
+
+The posterior probability $ P(S|W) $ that an email is spam given the presence of a word can be calculated as:
+$ P(S|W) = \frac{P(W|S) \cdot P(S)}{P(W)} $
+where $ P(W) = P(W|S) \cdot P(S) + P(W|\neg S) \cdot P(\neg S) $.
+
+Bayes' theorem provides a framework for updating probabilities based on new evidence, making it a powerful tool for decision-making in various fields.
+
+</details>
+
+<details>
+  <summary>
+    Calculate the entropy of a dataset where the probability distribution of the outcomes is {0.4, 0.6}.
+  </summary>
+
+Entropy $ H $ is calculated using the formula:
+$ H(X) = -\sum\_{i} P(x_i) \log_2 P(x_i) $
+
+For a dataset with probability distribution $ \{0.4, 0.6\} $:
+$ H(X) = - (0.4 \log_2 0.4 + 0.6 \log_2 0.6) $
+
+Calculate each term:
+$ 0.4 \log_2 0.4 = 0.4 \times -1.32193 = -0.52877 $
+$ 0.6 \log_2 0.6 = 0.6 \times -0.73697 = -0.44218 $
+
+Sum these values:
+$ H(X) = - (-0.52877 + -0.44218) $
+$ H(X) = 0.52877 + 0.44218 $
+$ H(X) = 0.97095 $
+
+Therefore, the entropy of the dataset is approximately 0.971 bits.
+
+</details>
+
 # Probability and Probability Distributions
 
 <div align="center" >
@@ -1189,8 +1332,8 @@ ANOVA is a statistical technique used to compare the means of two or more groups
 
 1. **Hypotheses Formulation:**
 
-   - Null Hypothesis (\(H_0\)): The means of the groups are equal.
-   - Alternative Hypothesis (\(H_1\)): At least one group mean is different.
+   - Null Hypothesis ($H_0$): The means of the groups are equal.
+   - Alternative Hypothesis ($H_1$): At least one group mean is different.
 
 2. **Calculating ANOVA:**
 
@@ -1198,28 +1341,28 @@ ANOVA is a statistical technique used to compare the means of two or more groups
    - **Sum of Squares Within (SSW):** Measures the variance within each group.
    - **Total Sum of Squares (SST):** The total variance in the data.
 
-   \[ SST = SSB + SSW \]
+   $ SST = SSB + SSW $
 
    - **Mean Square Between (MSB):** Average between-group variance.
 
-   \[ MSB = \frac{SSB}{df\_{between}} \]
+   $ MSB = \frac{SSB}{df\_{between}} $
 
    - **Mean Square Within (MSW):** Average within-group variance.
 
-   \[ MSW = \frac{SSW}{df\_{within}} \]
+   $ MSW = \frac{SSW}{df\_{within}} $
 
    - **F-Ratio:** Ratio of between-group variance to within-group variance.
 
-   \[ F = \frac{MSB}{MSW} \]
+   $ F = \frac{MSB}{MSW} $
 
 3. **Decision Making:**
 
    - Calculate the F-statistic using the F-distribution table based on the degrees of freedom.
-   - Compare the calculated F-value with the critical F-value from the table at a chosen significance level (e.g., \(\alpha = 0.05\)).
+   - Compare the calculated F-value with the critical F-value from the table at a chosen significance level (e.g., $\alpha = 0.05$).
    - Determine the p-value corresponding to the F-statistic.
 
-   - If \( p \leq \alpha \), reject the null hypothesis (\(H_0\)).
-   - If \( p > \alpha \), fail to reject the null hypothesis (\(H_0\)).
+   - If $ p \leq \alpha $, reject the null hypothesis ($H_0$).
+   - If $ p > \alpha $, fail to reject the null hypothesis ($H_0$).
 
 ### Assumptions:
 
@@ -1242,8 +1385,8 @@ Consider a study to compare the test scores of students from three different tea
 
 1. Formulate the hypotheses:
 
-   - \(H_0\): Mean scores of students in all three methods are equal.
-   - \(H_1\): At least one mean score is different.
+   - $H_0$: Mean scores of students in all three methods are equal.
+   - $H_1$: At least one mean score is different.
 
 2. Collect and organize the data.
 3. Calculate SSB, SSW, MSB, MSW, and the F-ratio.

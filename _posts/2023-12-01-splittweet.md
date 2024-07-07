@@ -1,11 +1,12 @@
 ---
 title: NLP Tweet Split
 date: 2023-12-01 00:00:00 +0800
-categories: [NLP, Tweetsplit]
+categories: [NLP, Examples]
 tags: [nlpproblem]
 ---
 
 # Tweet Split
+
 Given a set of Twitter hashtags, split each hashtag into its constituent words. For example:
 
 wearethepeople is split into we are the people

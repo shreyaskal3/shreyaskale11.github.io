@@ -1,7 +1,7 @@
 ---
 title: Statistics
 date: 2023-12-02 00:00:00 +0800
-categories: [StatisticsLibrary]
+categories: [Statistics, StatisticsLibrary]
 tags: [Statistics]
 math: True
 ---
@@ -22,12 +22,15 @@ The coefficient of variation (CV) is a statistical measure of the relative varia
 ### Significance of the Coefficient of Variation
 
 1. **Relative Measure of Dispersion**:
+
    - Unlike the standard deviation which provides an absolute measure of dispersion, the CV is a relative measure. This makes it useful for comparing the degree of variation from one data series to another, even if the means are drastically different.
 
 2. **Scale-Invariant**:
+
    - Since the CV is a ratio, it is scale-invariant. This property makes it useful for comparing variability between datasets with different units or widely different means.
 
 3. **Comparison Across Different Data Sets**:
+
    - CV is particularly useful when comparing the variability of data sets with different units or scales. For instance, it can be used to compare the risk (volatility) of investments that have different expected returns.
 
 4. **Suitability in Certain Fields**:
@@ -70,6 +73,7 @@ print(f"Coefficient of Variation for num_specimen_seen: {cv_num_specimen_seen}")
 In this example, `scipy.stats.variation` is used to compute the CV for each column in the DataFrame. The results give you a measure of relative variability for `num_legs`, `num_wings`, and `num_specimen_seen`.
 
 The `nan_policy` parameter in the `variation` function allows you to specify how to handle NaNs in your data:
+
 - `'propagate'` (default): Returns NaN if the input contains NaNs.
 - `'omit'`: Ignores NaNs when performing the calculation.
 - `'raise'`: Raises an error if NaNs are present.
@@ -85,6 +89,7 @@ The coefficient of variation (CV) is a unitless measure of relative variability 
 ### Interpretation of CV Values
 
 1. **Relative to Zero**:
+
    - The CV is always a positive value since both the standard deviation and mean are positive. A CV close to zero indicates low variability relative to the mean.
    - Higher CV values indicate greater variability.
 

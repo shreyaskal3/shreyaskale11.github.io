@@ -26,256 +26,6 @@ http://www.stat.yale.edu/Courses/1997-98/101/linreg.htm#:~:text=A%20linear%20reg
 
 Whenever a linear regression model is fit to a group of data, the range of the data should be carefully observed. Attempting to use a regression equation to predict values outside of this range is often inappropriate, and may yield incredible answers. This practice is known as extrapolation. Consider, for example, a linear model which relates weight gain to age for young children. Applying such a model to adults, or even teenagers, would be absurd, since the relationship between age and weight gain is not consistent for all age groups.
 
-## Gradient descent
-
-It can be used for any optimization linear regresion as well as deep learning.
-
-In linear regression,
-$$f_{w,b}(x^{(i)}) = w*x^{(i)}+b $$
-
-we utilize input training data to fit the parameters $w$,$b$ by` minimizing a measure of the error between our predictions $f_{w,b}(x^{(i)})$` and the actual data $y^{(i)}$. The measure is called the $cost$, $J(w,b)$. In training we measure the cost over all of our training samples $x^{(i)},y^{(i)}$.
-
-$$\text{Objective - } min (J_{w,b}) = \frac{1}{2m}\sum\limits_{i=1}^{m-1} (f_{w,b}(x^{(i)})  - y^{(i)})^2  $$
-
-<div align="center">
-  <img src="/assets/img/ml/gd.png" alt="gd" width="400" height="200" />
-  <img src="/assets/img/ml/gdd.png" alt="gdd" width="400" height="200" />
-</div>
-
-> This cost function graph is for deep learning.For linear regression mostly it is in convex shape.
-
-Simultaneously update w and b,
-
-$$
-\text{repeat until converge }
-\begin{cases}
-w := w - \alpha \frac{\partial J(w,b)}{\partial w} \\
-b := b - \alpha \frac{\partial J(w,b)}{\partial b}
-\end{cases}
-$$
-
-> After updating w, pre-updated w should be passed while calculating $\frac{\partial J(w,b)}{\partial b}$
-
-if $\frac{\partial J(w,b)}{\partial w}$ is slope when
-+ve -> w decreases (moves towards left)
--ve -> w increases (moves towards right)
-
-<div align="center">
-  <img src="/assets/img/ml/gdlr.png" alt="gdlr" width="400" height="200" />
-</div>
-
-the gradient descent is with gradient of cost w.r.t to w and b
-
-$$
-\text{repeat until converge }
-\begin{cases}
-w := w - \alpha \frac{1}{m}\sum\limits_{i=1}^{m-1} (f_{w,b}(x^{(i)})  - y^{(i)})x^{(i)} \\
-b := b - \alpha \frac{1}{m}\sum\limits_{i=1}^{m-1} (f_{w,b}(x^{(i)})  - y^{(i)})
-\end{cases}
-$$
-
-When using `square error cost function`,the cost function does not and `will never have multiple local minima`. It has a single global minimum because of this bowl-shape. The technical term for this is that this cost function is a `convex function`. Informally, a convex function is of bowl-shaped function and it cannot have any local minima other than the single global minimum. When you implement `gradient descent on a convex function`, one nice property is that so long as you're learning rate is chosen appropriately, it will always converge to the global minimum.
-
-<div align="center">
-  <img src="/assets/img/ml/gdsqerror.png"  alt= "gdsqerror" width="400" height="200" />
-</div>
-
-Here's a plot of the model and data on the upper left and a contour plot of the cost function on the upper right and at the bottom is the surface plot of the same cost function. Often w and b will both be initialized to 0, but for this demonstration, lets initialized `w = -0.1 and b = 900`. So this corresponds to `f(x) = -0.1x + 900`.
-
-The cost is decreasing at each update. So the parameters w and b are following this trajectory.
-
-<div align="center">
-  <img src="/assets/img/ml/gdeg.png" alt= "gdeg" width="400" height="200" />
-</div>
-
-So in computing grading descent, when computing derivatives, batch gradient descent is computing the sum from i =1 to m, smaller subsets of the training data at each update step.
-
-```python
-import numpy as np
-
-def model_function(x,w,b):
-    return np.dot(x,w)+b
-
-def cost_function(x,y,w,b):
-    m = x.shape[0]
-    f_wb = model_function(x,w,b)
-    total_loss =  (np.sum((f_wb - y)**2))/(2*m)
-    return total_loss
-
-def compute_gradient(x,y,w,b):
-    m = x.shape[0]
-    f_wb = model_function(x,w,b)
-    dj_db = (1/m)*np.sum((f_wb - y))
-    dj_dw = (1/m)*np.sum(x.T*(f_wb - y))
-    return dj_dw,dj_db
-
-def compute_gradient_descent(x,y,w,b,alpha,iterations=100):
-    m = x.shape[0]
-
-    for i in range(iterations):
-        dj_dw,dj_db = compute_gradient(x,y,w,b)
-
-        w = w - alpha *(1/m)* dj_dw
-        b = b - alpha *(1/m)* dj_db
-
-        if i%100==0:
-            print(i,cost_function(x,y,w,b))
-    return w,b
-
-X_train = np.array([[2104, 5, 1, 45],
-                    [1416, 3, 2, 40],
-                    [852, 2, 1, 35]])
-y_train = np.array([460, 232, 178])
-
-w = np.random.rand(X_train.shape[1])
-# w_init = np.array([ 0.39133535, 18.75376741, -53.36032453, -26.42131618])
-
-# w = np.zeros_like(w_init)
-b = 0
-alpha = 5.0e-7
-# dj_db,dj_dw = compute_gradient(x_train,y_train,w,b)
-w_n ,b_n = compute_gradient_descent(X_train,y_train,w,b,alpha,1000)
-print(w_n ,b_n)
-for i in range(X_train.shape[0]):
-    print(f"prediction: {np.dot(X_train[i], w_n) + b_n:0.2f}, target value: {y_train[i]}")
-```
-
-Result:
-
-```python
-0 209314.1336159363
-100 671.6664448665141
-200 671.6661571235436
-300 671.6658693815885
-400 671.6655816406517
-500 671.6652939007305
-600 671.6650061618273
-700 671.6647184239407
-800 671.6644306870704
-900 671.6641429512182
-[ 0.2083132  -0.60111553 -0.18031452 -0.17953791] -0.0011102253224113373
-prediction: 427.02, target value: 460
-prediction: 285.62, target value: 232
-prediction: 169.82, target value: 178
-```
-
-## Multiple Linear Regression
-
-Multiple regression refers to a statistical technique that extends simple linear regression to handle the relationship between `a dependent variable and two or more independent variables`.
-
-<!-- <div align="center">
-  <img src="/assets/img/ml/multireg.png"  width="400" height="200" />
-</div> -->
-
-> Multivariate Regression: Multivariate regression is a more general term that encompasses regression models with multiple dependent variables. It allows for the simultaneous modeling of the relationships between `multiple independent variables and multiple dependent variables`.
-
-Gradient descent for multiple regression
-
-<!-- <div align="center">
-  <img src="/assets/img/ml/multiregg.png"  width="400" height="200" />
-</div> -->
-
-## Normal Equation
-
-The normal equation is a method used to find the optimal parameters (coefficients) for a linear regression model analytically. It provides a closed-form solution for the coefficients that minimize the cost function. Here is the normal equation for linear regression:
-
-For a linear regression model with \(n\) training examples, \(m\) features, and a target variable, the normal equation is given by:
-
-$$\theta = (X^TX)^{-1}X^TY $$
-
-Where:
-
-- $\theta$ is the vector of coefficients (parameters) that minimizes the cost function.
-- $X$ is the matrix of features (design matrix) with dimensions $n \times (m+1)$, where each row represents a training example, and the first column is all ones (for the bias term).
-- $Y$ is the vector of target values with dimensions $n \times 1$.
-
-Steps to use the normal equation:
-
-1. **Feature Scaling:** Ensure that the features are on a similar scale to help the optimization converge faster.
-
-2. **Add Bias Term:** Include a column of ones in the feature matrix \(X\) for the bias term.
-
-3. **Apply the Normal Equation:** Use the formula to calculate the optimal coefficients $\theta$.
-
-4. **Make Predictions:** Once you have the coefficients, you can use them to make predictions on new data.
-
-It's worth noting that while the normal equation provides an analytical solution, it may `not be efficient for very large datasets` because the matrix inversion operation $(X^TX)^{-1}$ has a time complexity of approximately $O(m^3)$, where \(m\) is the number of features.
-
-<div align="center">
-  <img src="/assets/img/ml/normaleq.png" alt= "normaleq" width="400" height="200" />
-</div>
-
-## Feature Scaling
-
-When a possible `range of values of a feature is large`, like the size and square feet which goes all the way up to 2000. It's more likely that a good model will learn to choose a `relatively small parameter value`, like 0.1. Likewise, when the possible values of the feature are small, like the number of bedrooms, then a reasonable value for its parameters will be relatively large like 50.
-
-<div align="center">
-  <img src="/assets/img/ml/feasc0.png" alt= "feasc0" width="400" height="200" />
-</div>
-
-A contour plot where the horizontal axis has a much narrower range, say between zero and one, whereas the vertical axis takes on much larger values, say between 10 and 100. So the `contours form ovals or ellipses` and they're short on one side and longer on the other. And this is because a very small change to w1 can have a very large impact on the estimated price and that's a very large impact on the cost J. Because w1 tends to be multiplied by a very large number, the size and square feet. In contrast, it takes a much larger change in w2 in order to change the predictions much. And thus small changes to w2, don't change the cost function nearly as much.
-
-Because the contours are so tall and skinny gradient descent may end up bouncing back and forth for a long time before it can finally find its way to the global minimum. In situations like this, a useful thing to do is to scale the features.
-
-<div align="center">
-  <img src="/assets/img/ml/feasc.png" alt= "feasc" width="400" height="200" />
-</div>
-
-The key point is that the re scale x1 and x2 are both now taking comparable ranges of values to each other. And if you run gradient descent on a cost function to find on this, re scaled x1 and x2 using this transformed data, then the contours will look more like this more like circles and less tall and skinny. And gradient descent can find a much more direct path to the global minimum.
-
-<div align="center">
-  <img src="/assets/img/ml/feasc1.png" alt= "feasc1" width="400" height="200" />
-</div>
-
-**Feature Scaling**
-
-Feature scaling is a method used to normalize the range of independent variables or features of data. In data processing, it is also known as data normalization and is generally performed during the data preprocessing step.
-
-min-max scaling
-
-$$x_{norm} = \frac{x - x_{min}}{x_{max} - x_{min}}$$
-
-standardization(standard scores (also called z scores))
-
-$$x_{std} = \frac{x - \mu}{\sigma}$$
-
-where $\mu$ is the mean (average) and $\sigma$ is the standard deviation from the mean
-
-## Polynomial Regression
-
-When data doesn't fit linearly,so try for higher dimensions.
-
-**Evaluate model**
-
-Mean Squared Error (MSE)
-
-$$MSE = \frac{1}{n}\sum_{i=1}^{n}(y_i - \hat{y_i})^2$$
-$$or$$
-$$MSE = \frac{1}{2n}\sum_{i=1}^{n}(y_i - f(x_i))^2$$
-where
-
-- $y_i$ is the true value and $\hat{y_i}$ is the predicted value
-- $n$ is the number of observations
-
-Root Mean Squared Error (RMSE)
-
-$$RMSE = \sqrt{\frac{1}{n}\sum_{i=1}^{n}(y_i - \hat{y_i})^2}$$
-
-R-squared (Coefficient of Determination)
-
-$$R^2 = 1 - \frac{SS_{res}}{SS_{tot}}$$
-$$ SS*{res} = \sum*{i=1}^{n}(y*i - \hat{y_i})^2$$
-$$ SS*{tot} = \sum\_{i=1}^{n}(y_i - \bar{y_i})^2$$
-
-where
-
-- $SS_{res}$ is the sum of squares of residuals
-- $SS_{tot}$ is the total sum of squares
-- $y_i$ is the true value
-- $\bar{y_i}$ is the mean of $y_i$
-- $\hat{y_i}$ is the predicted value
-- $n$ is the number of observations
-
 **Adding Polynomial Feature**
 
 Polynomial regression is a form of regression analysis in which the relationship between the independent variable $x$ and the dependent variable $y$ is modelled as an $n$th degree polynomial in $x$.Rising the degree of the polynomial, we can get a more complex model.And the model will be more flexible and can fit the data better.
@@ -811,119 +561,26 @@ The metric calculates the precision of the top-k anomalous data points using exp
 
 ———————-
 
-# Decision Tree
+## Dropout
 
-## Introduction
+**Dropout** is a regularization technique used to prevent overfitting in neural networks. It works by randomly "dropping out" (setting to zero) a fraction of the neurons during training. This forces the network to learn more robust features that are not dependent on specific neurons. Here’s why dropout is significant:
 
-Decision trees are a type of supervised learning algorithm that can be used for both classification and regression tasks. The goal is to create a model that predicts the value of a target variable by learning simple decision rules inferred from the data features.
+1. **Prevents Overfitting**: By randomly ignoring certain neurons during training, the network becomes less likely to rely on specific neurons and learns to generalize better.
+2. **Improves Generalization**: It helps the network perform well on unseen data by making it more robust and less sensitive to the noise in the training data.
+3. **Acts as an Ensemble**: At each training iteration, a different subset of the network is trained, which can be thought of as training an ensemble of smaller networks. During inference, all neurons are used, approximating the effect of averaging the predictions of many different networks.
 
-## Decision tree Steps
+## Batch Normalization
 
-1. Calculate the entropy of the target.
-2. Calculate the entropy of the target for each feature.
-3. Calculate the information gain for each feature.
-4. Choose the feature with the largest information gain as the root node.
-5. Repeat steps 1 to 4 for each branch until you get the desired tree depth.
+**Batch Normalization** is a technique to improve the training of deep neural networks by normalizing the inputs of each layer so that they have a mean of zero and a standard deviation of one. Here’s why batch normalization is significant:
 
-<div align="center">
-  <img src="https://media.licdn.com/dms/image/D4E22AQGdNfTiCXyhyg/feedshare-shrink_800/0/1718541617124?e=1721260800&v=beta&t=Uc1SuotysQKrXjcPzA3YfnRfzzG99TNfKpChJgVbnJk" alt="gd" width="600" height="700" />
-</div>
-## Decision tree for classification
+1. **Stabilizes Learning**: By normalizing the inputs, it mitigates the issue of internal covariate shift, where the distribution of inputs to a layer changes during training. This stabilization helps in faster convergence.
+2. **Allows Higher Learning Rates**: It makes the training more stable, allowing the use of higher learning rates, which can speed up the training process.
+3. **Acts as Regularization**: It has a slight regularization effect by adding noise to the training process, reducing the need for other regularization techniques like dropout.
+4. **Improves Gradient Flow**: It reduces the problem of vanishing or exploding gradients, making it easier to train deeper networks.
 
-Entropy is the measure of impurity in a bunch of examples. The entropy of a set $S$ is defined as:
+In summary, dropout and batch normalization are two crucial techniques in modern deep learning. Dropout helps in preventing overfitting by randomly dropping neurons during training, while batch normalization stabilizes and accelerates training by normalizing the inputs of each layer. Both techniques contribute to building more efficient and effective neural networks.
 
-$$
-H(S) = -\sum_{i=1}^{c} p_i \log_2(p_i)
-$$
-
-where $p_i$ is the proportion of the ith class.
-
-The entropy is 0 if all samples at a node belong to the same class, and the entropy is maximal if we have a uniform class distribution. For example, in a binary class setting, the entropy is 0 if $p_1 = 1$ or $p_2 = 0$. If the classes are distributed uniformly with $p_1 = p_2 = 0.5$, the entropy is 1. Therefore, we can say that the entropy reaches its maximum value if the classes are uniformly distributed.
-
-The following equation shows how to calculate the entropy of a dataset $D$:
-
-$$
-H(D) = -\sum_{i=1}^{c} p_i \log_2(p_i)
-$$
-
-where
-
-- $p_i$ is the proportion of the ith class
-- $c$ is the number of classes
-- $y$ is the class label.
-
-For $y = 0$ and $y = 1$ (binary class setting), we can rewrite the equation as follows:
-
-$$
-H(D_1) = -p_1 \log_2(p_1) - (1 - p_1) \log_2(1 - p_1)
-$$
-
-where
-
-- $ p_1 $ is the proportion of the positive class
-- $p_2 = 1 - p_1$ is the proportion of the negative class
-- $D_1$ is the dataset of the left node.
-
-The information gain is the entropy of the dataset before the split minus the weighted entropy after the split by an attribute. The following equation shows how to calculate the information gain $IG$ for a decision tree:
-
-$$
-IG(D_p, f) = H(D_p) - \sum_{j=1}^{m} \frac{N_j}{N_p} H(D_j)
-$$
-
-$$
-IG(D_p, f) = H(D_p) - \sum_{j=1}^{m} \frac{N_j}{N_p} \left(-p_{j1} \log_2(p_{j1}) - p_{j2} \log_2(p_{j2})\right)
-$$
-
-where
-
-- $f$ is the feature to perform the split
-- $D_p$ and $D_j$ are the dataset of the parent and $j$th child node
-- $N_p$ is the total number of samples at the parent node
-- $N_j$ is the number of samples in the $j$th child node
-- $m$ is the number of child nodes
-
-For $y = 0$ and $y = 1$ and $m = 2$(binary class setting) and two child nodes, we can rewrite the equation as follows:
-$$ IG(D*p, f) = H(D_p) - \sum*{j=1}^{2} \frac{N*j}{N_p} H(D_j) $$
-$$ IG(D_p, f) = H(D_p) - (\frac{N*{left}}{N*p} H(D*{left}) + \frac{N*{right}}{N_p} H(D*{right})) $$
-$$ IG(D*p, f) = H(D_p) - (\frac{N*{left}}{N*p} \left(-p*{left1} \log*2(p*{left1}) - (1 - p*{left1}) \log_2(1 - p*{left1})\right) + \frac{N*{right}}{N_p} \left(-p*{right1} \log*2(p*{right1}) - (1 - p*{right1}) \log_2(1 - p*{right1})\right)) $$
-
-where
-where
-
-- $p_{j1}$ is the proportion of the positive class in the $j$th child node
-- $p_{j2} = 1 - p_{j1}$ is the proportion of the negative class in the $j$th child node
-
-## Gini impurity
-
-Gini impurity is another criterion that is often used in training decision trees:
-
-$$Gini(p) = \sum_{k=1}^{|\mathcal{Y}|} p_{k} (1 - p_{k}) = \sum_{k=1}^{|\mathcal{Y}|} p_{k} - \sum_{k=1}^{|\mathcal{Y}|} p_{k}^2 = 1 - \sum_{k=1}^{|\mathcal{Y}|} p_{k}^2$$
-
-where $p_{k}$ is the proportion of the $k$th class.
-
-Imformation gain for the Gini impurity is calculated as follows:
-
-$$IG(D_p, f) = Gini(D_p) - \sum_{j=1}^{m} \frac{N_j}{N_p} Gini(D_j)$$
-
-where $f$ is the feature to perform the split, $D_p$ and $D_j$ are the dataset of the parent and $j$th child node, $N_p$ is the total number of samples at the parent node, and $N_j$ is the number of samples in the $j$th child node.
-
-## Classification error
-
-The classification error is another criterion that is often used in training decision trees:
-
-$$E = 1 - \max_k p_{k}$$
-
-where $p_{k}$ is the proportion of the $k$th class.
-
-The information gain ratio is another criterion that is often used in training decision trees:
-
-$$IGR(D_p, f) = \frac{IG(D_p, f)}{H(D_p)}$$
-
-where $f$ is the feature to perform the split, $D_p$ and $D_j$ are the dataset of the parent and $j$th child node, $N_p$ is the total number of samples at the parent node, and $N_j$ is the number of samples in the $j$th child node.
-
-The following code implements the entropy and information gain equations:
-
-Both decision trees and gradient boosting are machine learning techniques that can be used for making predictions by dividing the input space.
+Covariate shift is a situation in which the distribution of the model's input features in production changes compared to what the model has seen during training and validation. Covariate shift is a change in the distribution of the model's inputs between training and production data.
 
 #
 
@@ -937,9 +594,9 @@ Both decision trees and gradient boosting are machine learning techniques that c
 **Formula**:
 $ P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)} $
 
-- \( P(A|B) \) is the probability of event A occurring given that B has occurred.
-- \( P(B|A) \) is the probability of event B occurring given that A has occurred.
-- \( P(A) \) and \( P(B) \) are the probabilities of events A and B occurring independently.
+- $ P(A|B) $ is the probability of event A occurring given that B has occurred.
+- $ P(B|A) $ is the probability of event B occurring given that A has occurred.
+- $ P(A) $ and $ P(B) $ are the probabilities of events A and B occurring independently.
 
 **Application**:
 
@@ -971,15 +628,15 @@ Suppose we want to classify an email as spam (S) or not spam (NS) based on the o
 
 **Features**:
 
-- \( P(\text{"free"}|S) = 0.8 \)
-- \( P(\text{"discount"}|S) = 0.6 \)
-- \( P(\text{"free"}|NS) = 0.1 \)
-- \( P(\text{"discount"}|NS) = 0.2 \)
+- $ P(\text{"free"}|S) = 0.8 $
+- $ P(\text{"discount"}|S) = 0.6 $
+- $ P(\text{"free"}|NS) = 0.1 $
+- $ P(\text{"discount"}|NS) = 0.2 $
 
 **Prior Probabilities**:
 
-- \( P(S) = 0.4 \)
-- \( P(NS) = 0.6 \)
+- $ P(S) = 0.4 $
+- $ P(NS) = 0.6 $
 
 **Naive Bayes Calculation**:
 $$ P(S|\text{"free", "discount"}) \propto P(S) \cdot P(\text{"free"}|S) \cdot P(\text{"discount"}|S) $$
@@ -1387,45 +1044,6 @@ The size of the dictionary becomes a hyperparameter that we can adjust based on 
 
 <div align="center">
   <img src="https://media.licdn.com/dms/image/D5622AQH0VwikQk8kgg/feedshare-shrink_800/0/1718180903609?e=1721260800&v=beta&t=USTSESWiv1Y-Q-KoMcVJfqTeobWG_U7xXFRdRFVEG4A" alt="gd" width="600" height="600" />
-</div>
-
-# Deep Learning
-
-### Padding,Strides,Pooling
-
-<div align="center">
-<ul>
-  <li>
-    <img src="https://media.licdn.com/dms/image/D561FAQFzDWDnsfKI_Q/feedshare-document-images_1280/1/1718103831903?e=1719446400&amp;v=beta&amp;t=0NGaPxmx_giwmWTOv_199Dt3q_HGjqvc6PGOnHr_4pY" alt="Image 1" height="600">
-  </li>
-  <li>
-    <img src="https://media.licdn.com/dms/image/D561FAQFzDWDnsfKI_Q/feedshare-document-images_1920/2/1718103833955?e=1719446400&amp;v=beta&amp;t=JuJD2Ujg0fGuF30x6Z9qFcQCF9h89uAhGvJCJMAs_Ks" alt="Image 2" height="600">
-  </li>
-  <li>
-    <img src="https://media.licdn.com/dms/image/D561FAQFzDWDnsfKI_Q/feedshare-document-images_1920/3/1718103833955?e=1719446400&amp;v=beta&amp;t=9lbMpnVBnAfl8-YjFdVMXgYGQcq8ENIM0lqsuarN6iA" alt="Image 3" height="600">
-  </li>
-  <li>
-    <img src="https://media.licdn.com/dms/image/D561FAQFzDWDnsfKI_Q/feedshare-document-images_1920/4/1718103833955?e=1719446400&amp;v=beta&amp;t=pIzuwg8lqy5Lj0gEcWYiEUEC7BVjqZYG48L2iVNqO8o" alt="Image 4" height="600">
-  </li>
-  <li>
-    <img src="https://media.licdn.com/dms/image/D561FAQFzDWDnsfKI_Q/feedshare-document-images_1920/5/1718103833955?e=1719446400&amp;v=beta&amp;t=HPLwpFCDSNBNDDKocEGaYnnizocfTvwWogHgeIoFDfQ" alt="Image 5" height="600">
-  </li>
-  <li>
-    <img src="https://media.licdn.com/dms/image/D561FAQFzDWDnsfKI_Q/feedshare-document-images_1920/6/1718103833955?e=1719446400&amp;v=beta&amp;t=g6J5wuHGiN1AmqcdMbcnuGPSQ38r_uKC6MVG-SGuK_k" alt="Image 6" height="600">
-  </li>
-  <li>
-    <img src="https://media.licdn.com/dms/image/D561FAQFzDWDnsfKI_Q/feedshare-document-images_1920/7/1718103833955?e=1719446400&amp;v=beta&amp;t=3tnsGosSFcTp_j8-k1J0VmEGoqEQjMw1olG9_c1mZTM" alt="Image 7" height="600">
-  </li>
-  <li>
-    <img src="https://media.licdn.com/dms/image/D561FAQFzDWDnsfKI_Q/feedshare-document-images_1920/8/1718103833955?e=1719446400&amp;v=beta&amp;t=IzM3YC7DSwF5sEH9XNftuShRX8d0TvTXrPJ1URia2lE" alt="Image 8" height="600">
-  </li>
-  <li>
-    <img src="https://media.licdn.com/dms/image/D561FAQFzDWDnsfKI_Q/feedshare-document-images_1920/9/1718103833955?e=1719446400&amp;v=beta&amp;t=Ro_-UKgh_38-ym1J3cvdiXuq4YdwZrBWa9vPV1MyaX4" alt="Image 9" height="600">
-  </li>
-  <li>
-    <img src="https://media.licdn.com/dms/image/D561FAQFzDWDnsfKI_Q/feedshare-document-images_1920/10/1718103833955?e=1719446400&amp;v=beta&amp;t=-gHXh27GWz038pdWLom9UEwTRLjFcHg3nOoBNgZ7hJ4" alt="Image 10" height="600">
-  </li>
-</ul>
 </div>
 
 # Time series
