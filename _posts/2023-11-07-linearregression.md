@@ -26,49 +26,56 @@ math: true
   }
 </style>
 <details>
-  <summary>
-    What is Gradient Descent in Machine Learning?
-  </summary>
+  <summary>What is Gradient Descent in Machine Learning?</summary>
+
+#### Gradient
+
 <p>
-In the context of machine learning and optimization, "gradient" and "descent" in "gradient descent" refer to specific mathematical and conceptual elements used in the algorithm for finding the minimum of a function.
+The gradient is a vector that contains the partial derivatives of a function with respect to its input variables. In simpler terms, it points in the direction of the greatest rate of increase of the function. For a function $ f(x_1, x_2, \ldots, x_n) $, the gradient is given by:
+\[ \nabla f = \left( \frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \ldots, \frac{\partial f}{\partial x_n} \right) \]
 </p>
 
-### Gradient
-
-The gradient is a vector that contains the partial derivatives of a function with respect to its input variables. In simpler terms, `it points in the direction of the greatest rate of increase of the function.` For a function $ f(x_1, x_2, \ldots, x_n) $, the gradient is given by:
-
-$ \nabla f = \left( \frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \ldots, \frac{\partial f}{\partial x_n} \right) $
-
+<p>
 In the context of a loss function in machine learning, the gradient provides information on how to adjust the model parameters to decrease the loss.
+</p>
 
-### Descent
+#### Descent
 
+<p>
 "Descent" refers to the iterative process of moving in the direction opposite to the gradient in order to minimize the function. This is because the gradient points in the direction of the steepest ascent, so moving in the opposite direction (i.e., the negative gradient) will lead to the steepest decrease. The basic update rule for gradient descent is:
+\[ \theta_{\text{new}} = \theta_{\text{old}} - \eta \nabla f(\theta_{\text{old}}) \]
+</p>
 
-$ \theta*{new} = \theta*{old} - \eta \nabla f(\theta\_{old}) $
-
+<p>
 Here:
+<ul>
+  <li><strong>θ_old</strong> are the current parameters.</li>
+  <li><strong>θ_new</strong> are the updated parameters.</li>
+  <li><strong>η</strong> is the learning rate, a hyperparameter that controls the size of the step taken in the direction of the negative gradient.</li>
+  <li><strong>∇f(θ_old)</strong> is the gradient of the function evaluated at the current parameters.</li>
+</ul>
+</p>
 
-- $ \theta\_{old} $ are the current parameters.
-- $ \theta\_{new} $ are the updated parameters.
-- $ \eta $ is the learning rate, a hyperparameter that controls the size of the step taken in the direction of the negative gradient.
-- $ \nabla f(\theta\_{old}) $ is the gradient of the function evaluated at the current parameters.
+#### Gradient Descent Algorithm
 
-### Gradient Descent Algorithm
+<ol>
+  <li><strong>Initialize</strong> the parameters (weights) randomly.</li>
+  <li><strong>Compute the gradient</strong> of the loss function with respect to the parameters.</li>
+  <li><strong>Update the parameters</strong> by moving them in the direction opposite to the gradient.</li>
+  <li><strong>Repeat</strong> steps 2 and 3 until convergence (i.e., until the parameters do not change significantly or a maximum number of iterations is reached).</li>
+</ol>
 
-1. **Initialize** the parameters (weights) randomly.
-2. **Compute the gradient** of the loss function with respect to the parameters.
-3. **Update the parameters** by moving them in the direction opposite to the gradient.
-4. **Repeat** steps 2 and 3 until convergence (i.e., until the parameters do not change significantly or a maximum number of iterations is reached).
+#### Variants of Gradient Descent
 
-### Variants of Gradient Descent
+<ol>
+  <li><strong>Batch Gradient Descent</strong>: Uses the entire dataset to compute the gradient at each step.</li>
+  <li><strong>Stochastic Gradient Descent (SGD)</strong>: Uses one randomly chosen data point to compute the gradient at each step.</li>
+  <li><strong>Mini-batch Gradient Descent</strong>: Uses a small random subset of the dataset to compute the gradient at each step.</li>
+</ol>
 
-1. **Batch Gradient Descent**: Uses the entire dataset to compute the gradient at each step.
-2. **Stochastic Gradient Descent (SGD)**: Uses one randomly chosen data point to compute the gradient at each step.
-3. **Mini-batch Gradient Descent**: Uses a small random subset of the dataset to compute the gradient at each step.
-
+<p>
 Each variant has its own trade-offs in terms of speed, accuracy, and computational efficiency.
-
+</p>
 </details>
 
 <details>
