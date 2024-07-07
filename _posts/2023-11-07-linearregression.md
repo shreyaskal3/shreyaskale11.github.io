@@ -8,6 +8,23 @@ math: true
 
 # Q&A
 
+<style>
+  details {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0.5em;
+    margin-bottom: 1em;
+  }
+  
+  summary {
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  p {
+    margin-top: 1em;
+  }
+</style>
 <details>
   <summary>
     What is Gradient Descent in Machine Learning?
