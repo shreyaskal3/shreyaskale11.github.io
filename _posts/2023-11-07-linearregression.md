@@ -10,7 +10,7 @@ math: true
 
 <style>
   details {
-    border: 1px solid #d1d1d1;
+    border: 1px solid #999;
     border-radius: 4px;
     padding: 0.5em;
     margin-bottom: 1em;
