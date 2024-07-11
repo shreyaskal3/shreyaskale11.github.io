@@ -302,6 +302,72 @@ Optimizers are algorithms or methods used to adjust the weights of neural networ
 
 </details>
 
+<details>
+<summary>What is Backpropagation?</summary>
+Backpropagation, short for "backward propagation of errors," is a fundamental algorithm used in training artificial neural networks. It is the method by which a neural network learns by updating its weights to minimize the error in its predictions. Backpropagation involves a forward pass and a backward pass through the network.
+
+<h3>Key Concepts:</h3>
+
+<ol>
+<li><strong>Forward Pass:</strong> 
+   <ul>
+   <li>In the forward pass, the input data is passed through the network layer by layer to compute the output predictions.</li>
+   <li>Each layer consists of neurons that apply an activation function to the weighted sum of inputs from the previous layer.</li>
+   <li>The final output is compared to the actual target values using a loss function, which measures the error in predictions.</li>
+   </ul>
+</li>
+
+<li><strong>Backward Pass:</strong>
+   <ul>
+   <li>In the backward pass, the error is propagated backward through the network to update the weights.</li>
+   <li>The gradient of the loss function with respect to each weight is calculated using the chain rule of calculus.</li>
+   <li>These gradients indicate how much each weight contributes to the total error.</li>
+   </ul>
+</li>
+
+<li><strong>Gradient Descent:</strong>
+   <ul>
+   <li>Weights are updated using gradient descent, an optimization algorithm that minimizes the loss function.</li>
+   <li>In each iteration, weights are adjusted in the opposite direction of the gradient by a small step size known as the learning rate.</li>
+   </ul>
+</li>
+</ol>
+
+<h3>Mathematical Formulation:</h3>
+
+<ol>
+<li><strong>Forward Pass:</strong>
+
+For each layer $ l $, compute the pre-activation $ z^{(l)} $ and activation $ a^{(l)} $:
+$ z^{(l)} = W^{(l)} a^{(l-1)} + b^{(l)} $
+$ a^{(l)} = \sigma(z^{(l)}) $
+where $ W^{(l)} $ and $ b^{(l)} $ are the weights and biases of layer $ l $, and $ \sigma $ is the activation function.
+
+<strong>Backward Pass:</strong>
+Compute the error term $ \delta $ for the output layer:
+$ \delta^{(L)} = \frac{\partial L}{\partial a^{(L)}} \odot \sigma'(z^{(L)}) $
+where $ L $ is the loss function and $ \odot $ denotes element-wise multiplication.</li>
+
+Propagate the error backward through each layer:
+$ \delta^{(l)} = \left( W^{(l+1)} \right)^T \delta^{(l+1)} \odot \sigma'(z^{(l)}) $
+where $ \sigma' $ is the derivative of the activation function.
+
+Compute the gradients of the loss with respect to weights and biases:
+$ \frac{\partial L}{\partial W^{(l)}} = \delta^{(l)} \left( a^{(l-1)} \right)^T $
+$ \frac{\partial L}{\partial b^{(l)}} = \delta^{(l)} $
+
+<strong>Weight Update:</strong>
+Update the weights and biases using gradient descent:
+$ W^{(l)} \leftarrow W^{(l)} - \alpha \frac{\partial L}{\partial W^{(l)}} $
+$ b^{(l)} \leftarrow b^{(l)} - \alpha \frac{\partial L}{\partial b^{(l)}} $
+where $ \alpha $ is the learning rate.
+
+</ol>
+
+<h3>Summary:</h3>
+<p>Backpropagation is an essential algorithm for training neural networks. By iteratively adjusting weights based on the gradients of the loss function, it allows the network to learn from errors and improve its predictions. This process enables deep learning models to perform complex tasks such as image recognition, natural language processing, and more.</p>
+</details>
+
 # Deep Learning
 
 ### Padding,Strides,Pooling

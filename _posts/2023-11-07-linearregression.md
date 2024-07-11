@@ -31,8 +31,8 @@ math: true
 #### Gradient
 
 <p>
-The gradient is a vector that contains the partial derivatives of a function with respect to its input variables. In simpler terms, it points in the direction of the greatest rate of increase of the function. For a function $ f(x_1, x_2, \ldots, x_n) $, the gradient is given by:
-\[ \nabla f = \left( \frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \ldots, \frac{\partial f}{\partial x_n} \right) \]
+The gradient is a vector that contains the partial derivatives of a function with respect to its input variables. In simpler terms, it points in the direction of the greatest rate of increase of the function. For a function  \( f(x_1, x_2, \ldots, x_n) \) , the gradient is given by:
+$ \nabla f = \left( \frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \ldots, \frac{\partial f}{\partial x_n} \right) $
 </p>
 
 <p>
@@ -43,7 +43,7 @@ In the context of a loss function in machine learning, the gradient provides inf
 
 <p>
 "Descent" refers to the iterative process of moving in the direction opposite to the gradient in order to minimize the function. This is because the gradient points in the direction of the steepest ascent, so moving in the opposite direction (i.e., the negative gradient) will lead to the steepest decrease. The basic update rule for gradient descent is:
-\[ \theta_{\text{new}} = \theta_{\text{old}} - \eta \nabla f(\theta_{\text{old}}) \]
+$ \theta_{\text{new}} = \theta_{\text{old}} - \eta \nabla f(\theta_{\text{old}}) $
 </p>
 
 <p>
@@ -82,208 +82,329 @@ Each variant has its own trade-offs in terms of speed, accuracy, and computation
   <summary>
     Why don't we directly zero the derivative for gradient descent to get the optimal value?
   </summary>
-
-Directly zeroing the derivative to find the optimal value is feasible in simple, low-dimensional problems with a convex loss function. However, in the context of machine learning, particularly with complex models and high-dimensional data, this approach is impractical. Here's an example to illustrate this:
-
-### Example: Linear Regression
-
-Consider a simple linear regression problem where we want to minimize the Mean Squared Error (MSE) loss function:
-
-$ \text{Loss} = \frac{1}{N} \sum\_{i=1}^N (y_i - (mx_i + b))^2 $
-
-To find the optimal parameters $ m $ and $ b $, we can take the derivative of the loss function with respect to these parameters, set them to zero, and solve for $ m $ and $ b $:
-
-1. Compute the partial derivatives:
-   $ \frac{\partial \text{Loss}}{\partial m} = -\frac{2}{N} \sum*{i=1}^N x_i (y_i - (mx_i + b)) $
-   $ \frac{\partial \text{Loss}}{\partial b} = -\frac{2}{N} \sum*{i=1}^N (y_i - (mx_i + b)) $
-
-2. Set the derivatives to zero and solve:
-   $ \sum*{i=1}^N x_i y_i - m \sum*{i=1}^N x*i^2 - b \sum*{i=1}^N x*i = 0 $
-   $ \sum*{i=1}^N y*i - m \sum*{i=1}^N x_i - Nb = 0 $
-
-For linear regression, these equations can be solved analytically. However, this approach quickly becomes impractical for more complex scenarios:
-
-### Complexity and Non-Convexity
-
-1. **Non-Linear Models**: In neural networks, the loss function is highly non-linear and can have multiple local minima and maxima. There is no closed-form solution to directly solve for the weights.
-
-2. **High Dimensionality**: For deep learning models, the number of parameters can be in the millions. Solving the derivative equations for each parameter analytically is computationally infeasible.
-
-3. **Computational Efficiency**: Gradient Descent iteratively updates the parameters using a simple rule, which makes it scalable for large datasets and models. It efficiently handles high-dimensional optimization problems by making small adjustments in the direction that reduces the loss function the most.
-
-### Iterative Approach with Gradient Descent
-
-Gradient Descent iteratively updates the parameters using the gradient of the loss function:
-$ \theta := \theta - \alpha \nabla \text{Loss}(\theta) $
-
-Where $ \theta $ represents the parameters (e.g., $ m $ and $ b $), $ \alpha $ is the learning rate, and $ \nabla \text{Loss}(\theta) $ is the gradient.
-
-This approach allows us to:
-
-- Handle complex, non-convex loss functions.
-- Scale to high-dimensional parameter spaces.
-- Adapt to various optimization problems efficiently.
-
-In summary, while zeroing the derivative works for simple problems, Gradient Descent's iterative method is essential for optimizing complex, high-dimensional models in machine learning.
-
+  <p>
+    Directly zeroing the derivative to find the optimal value is feasible in simple, low-dimensional problems with a convex loss function. However, in the context of machine learning, particularly with complex models and high-dimensional data, this approach is impractical. Here's an example to illustrate this:
+  </p>
+  <h4>Example: Linear Regression</h4>
+  <p>
+    Consider a simple linear regression problem where we want to minimize the Mean Squared Error (MSE) loss function:
+  </p>
+  <p>
+    $ \text{Loss} = \frac{1}{N} \sum_{i=1}^N (y_i - (mx_i + b))^2 $
+  </p>
+  <p>
+    To find the optimal parameters $ m $ and $ b $, we can take the derivative of the loss function with respect to these parameters, set them to zero, and solve for $ m $ and $ b $:
+  </p>
+  <ol>
+    <li>
+      Compute the partial derivatives:<br>
+      $ \frac{\partial \text{Loss}}{\partial m} = -\frac{2}{N} \sum_{i=1}^N x_i (y_i - (mx_i + b)) $<br>
+      $ \frac{\partial \text{Loss}}{\partial b} = -\frac{2}{N} \sum_{i=1}^N (y_i - (mx_i + b)) $
+    </li>
+    <li>
+      Set the derivatives to zero and solve:<br>
+      $ \sum_{i=1}^N x_i y_i - m \sum_{i=1}^N x_i^2 - b \sum_{i=1}^N x_i = 0 $<br>
+      $ \sum_{i=1}^N y_i - m \sum_{i=1}^N x_i - Nb = 0 $
+    </li>
+  </ol>
+  <p>
+    For linear regression, these equations can be solved analytically. However, this approach quickly becomes impractical for more complex scenarios:
+  </p>
+  <h4>Complexity and Non-Convexity</h4>
+  <ul>
+    <li>
+      <b>Non-Linear Models:</b> In neural networks, the loss function is highly non-linear and can have multiple local minima and maxima. There is no closed-form solution to directly solve for the weights.
+    </li>
+    <li>
+      <b>High Dimensionality:</b> For deep learning models, the number of parameters can be in the millions. Solving the derivative equations for each parameter analytically is computationally infeasible.
+    </li>
+    <li>
+      <b>Computational Efficiency:</b> Gradient Descent iteratively updates the parameters using a simple rule, which makes it scalable for large datasets and models. It efficiently handles high-dimensional optimization problems by making small adjustments in the direction that reduces the loss function the most.
+    </li>
+  </ul>
+  <h4>Iterative Approach with Gradient Descent</h4>
+  <p>
+    Gradient Descent iteratively updates the parameters using the gradient of the loss function:
+    $ \theta := \theta - \alpha \nabla \text{Loss}(\theta) $
+  </p>
+  <p>
+    Where $ \theta $ represents the parameters (e.g., $ m $ and $ b $), $ \alpha $ is the learning rate, and $ \nabla \text{Loss}(\theta) $ is the gradient.
+  </p>
+  <p>
+    This approach allows us to:
+  </p>
+  <ul>
+    <li>Handle complex, non-convex loss functions.</li>
+    <li>Scale to high-dimensional parameter spaces.</li>
+    <li>Adapt to various optimization problems efficiently.</li>
+  </ul>
+  <p>
+    In summary, while zeroing the derivative works for simple problems, Gradient Descent's iterative method is essential for optimizing complex, high-dimensional models in machine learning.
+  </p>
 </details>
 
 <details>
   <summary>
     What is backpropagation?
   </summary>
-
-**Backpropagation** (short for "backward propagation of errors") is a key algorithm used to train neural networks. It is a supervised learning algorithm that calculates the gradient of the loss function with respect to each weight in the network and updates the weights to minimize the loss. Here’s a detailed explanation:
-
-### Steps in Backpropagation:
-
-1. **Forward Pass**:
-
-   - The input data is passed through the network, layer by layer, to compute the output.
-   - At each layer, the input is transformed using the weights and activation functions to produce an output.
-
-2. **Compute Loss**:
-
-   - The output of the network is compared to the true target values using a loss function.
-   - Common loss functions include Mean Squared Error (MSE) for regression tasks and Cross-Entropy Loss for classification tasks.
-   - The loss function quantifies the error between the predicted output and the actual target.
-
-3. **Backward Pass (Backpropagation)**:
-   - The goal is to minimize the loss function by adjusting the weights of the network.
-   - Using the chain rule of calculus, the gradient of the loss function with respect to each weight is calculated. This involves the following steps:
-     - **Calculate the gradient of the loss with respect to the output layer**.
-     - **Propagate the gradient backward through each layer** by computing the gradient of the loss with respect to the weights and inputs of that layer.
-     - **Update the weights** using gradient descent (or its variants) by subtracting a fraction of the gradient from the weights.
-   - Mathematically, the weight update rule is:\
-     $
-     w_{ij} \leftarrow w_{ij} - \eta \frac{\partial L}{\partial w_{ij}}
-     $
-     where $ w*{ij} $ is the weight connecting neuron $ i $ to neuron $ j $, $ \eta $ is the learning rate, and $ \frac{\partial L}{\partial w*{ij}} $ is the gradient of the loss function with respect to the weight $ w\_{ij} $.
-
-### Detailed Example:
-
-Consider a simple neural network with one hidden layer:
-
-1. **Forward Pass**:
-
-   - Input: $ x $
-   - Hidden Layer: $ h = f(Wx + b) $
-   - Output Layer: $ y = g(Vh + c) $\
-     where $ W $ and $ V $ are weight matrices, $ b $ and $ c $ are bias vectors, and $ f $ and $ g $ are activation functions.
-
-2. **Compute Loss**:
-
-   - Loss: $ L = \text{LossFunction}(y, \text{target}) $
-
-3. **Backward Pass**:
-
-   - Compute gradient of $ L $ with respect to $ y $: $ \frac{\partial L}{\partial y} $
-   - Propagate the gradient to the output layer:
-
-     $
-     \frac{\partial L}{\partial V} = \frac{\partial L}{\partial y} \cdot h^T
-     $\
-     $
-     \frac{\partial L}{\partial c} = \frac{\partial L}{\partial y}
-     $
-
-   - Compute gradient of $ L $ with respect to hidden layer: $ \frac{\partial L}{\partial h} $
-   - Propagate the gradient to the hidden layer:
-
-     $
-     \frac{\partial L}{\partial W} = \frac{\partial L}{\partial h} \cdot x^T
-     $\
-     $
-     \frac{\partial L}{\partial b} = \frac{\partial L}{\partial h}
-     $
-
-   - Update weights and biases using the computed gradients:
-
-     $
-     W \leftarrow W - \eta \frac{\partial L}{\partial W}
-     $\
-     $
-     V \leftarrow V - \eta \frac{\partial L}{\partial V}
-     $\
-     $
-     b \leftarrow b - \eta \frac{\partial L}{\partial b}
-     $\
-     $
-     c \leftarrow c - \eta \frac{\partial L}{\partial c}
-     $
-
-### Key Points:
-
-- **Chain Rule**: Backpropagation uses the chain rule to compute the gradient of the loss function with respect to each weight by breaking it down into simpler, local gradients.
-- **Efficiency**: By reusing intermediate computations from the forward pass, backpropagation is computationally efficient.
-- **Gradient Descent**: Backpropagation is typically combined with gradient descent (or its variants like SGD, Adam) to iteratively update the weights and minimize the loss.
-
-Backpropagation is fundamental to training deep neural networks and has enabled the development of complex models capable of solving a wide range of tasks in machine learning and artificial intelligence.
-
+  <p>
+    <b>Backpropagation</b> (short for "backward propagation of errors") is a key algorithm used to train neural networks. It is a supervised learning algorithm that calculates the gradient of the loss function with respect to each weight in the network and updates the weights to minimize the loss. Here’s a detailed explanation:
+  </p>
+  <h4>Steps in Backpropagation:</h4>
+  <ol>
+    <li>
+      <b>Forward Pass:</b>
+      <ul>
+        <li>The input data is passed through the network, layer by layer, to compute the output.</li>
+        <li>At each layer, the input is transformed using the weights and activation functions to produce an output.</li>
+      </ul>
+    </li>
+    <li>
+      <b>Compute Loss:</b>
+      <ul>
+        <li>The output of the network is compared to the true target values using a loss function.</li>
+        <li>Common loss functions include Mean Squared Error (MSE) for regression tasks and Cross-Entropy Loss for classification tasks.</li>
+        <li>The loss function quantifies the error between the predicted output and the actual target.</li>
+      </ul>
+    </li>
+    <li>
+      <b>Backward Pass (Backpropagation):</b>
+      <ul>
+        <li>The goal is to minimize the loss function by adjusting the weights of the network.</li>
+        <li>Using the chain rule of calculus, the gradient of the loss function with respect to each weight is calculated. This involves the following steps:</li>
+        <ul>
+          <li>Calculate the gradient of the loss with respect to the output layer.</li>
+          <li>Propagate the gradient backward through each layer by computing the gradient of the loss with respect to the weights and inputs of that layer.</li>
+          <li>Update the weights using gradient descent (or its variants) by subtracting a fraction of the gradient from the weights.</li>
+        </ul>
+        <li>Mathematically, the weight update rule is:</li>
+        <p>$ w_{ij} \leftarrow w_{ij} - \eta \frac{\partial L}{\partial w_{ij}} $</p>
+        <li>where $ w_{ij} $ is the weight connecting neuron $ i $ to neuron $ j $, $ \eta $ is the learning rate, and $ \frac{\partial L}{\partial w_{ij}} $ is the gradient of the loss function with respect to the weight $ w_{ij} $.</li>
+      </ul>
+    </li>
+  </ol>
+  <h4>Detailed Example:</h4>
+  <p>Consider a simple neural network with one hidden layer:</p>
+  <ol>
+    <li>
+      <b>Forward Pass:</b>
+      <ul>
+        <li>Input: $ x $</li>
+        <li>Hidden Layer: $ h = f(Wx + b) $</li>
+        <li>Output Layer: $ y = g(Vh + c) $</li>
+        <li>where $ W $ and $ V $ are weight matrices, $ b $ and $ c $ are bias vectors, and $ f $ and $ g $ are activation functions.</li>
+      </ul>
+    </li>
+    <li>
+      <b>Compute Loss:</b>
+      <ul>
+        <li>Loss: $ L = \text{LossFunction}(y, \text{target}) $</li>
+      </ul>
+    </li>
+    <li>
+      <b>Backward Pass:</b>
+      <ul>
+        <li>Compute gradient of $ L $ with respect to $ y $: $ \frac{\partial L}{\partial y} $</li>
+        <li>Propagate the gradient to the output layer:</li>
+        <ul>
+          <li>$ \frac{\partial L}{\partial V} = \frac{\partial L}{\partial y} \cdot h^T $</li>
+          <li>$ \frac{\partial L}{\partial c} = \frac{\partial L}{\partial y} $</li>
+        </ul>
+        <li>Compute gradient of $ L $ with respect to hidden layer: $ \frac{\partial L}{\partial h} $</li>
+        <li>Propagate the gradient to the hidden layer:</li>
+        <ul>
+          <li>$ \frac{\partial L}{\partial W} = \frac{\partial L}{\partial h} \cdot x^T $</li>
+          <li>$ \frac{\partial L}{\partial b} = \frac{\partial L}{\partial h} $</li>
+        </ul>
+        <li>Update weights and biases using the computed gradients:</li>
+        <ul>
+          <li>$ W \leftarrow W - \eta \frac{\partial L}{\partial W} $</li>
+          <li>$ V \leftarrow V - \eta \frac{\partial L}{\partial V} $</li>
+          <li>$ b \leftarrow b - \eta \frac{\partial L}{\partial b} $</li>
+          <li>$ c \leftarrow c - \eta \frac{\partial L}{\partial c} $</li>
+        </ul>
+      </ul>
+    </li>
+  </ol>
+  <h4>Key Points:</h4>
+  <ul>
+    <li><b>Chain Rule:</b> Backpropagation uses the chain rule to compute the gradient of the loss function with respect to each weight by breaking it down into simpler, local gradients.</li>
+    <li><b>Efficiency:</b> By reusing intermediate computations from the forward pass, backpropagation is computationally efficient.</li>
+    <li><b>Gradient Descent:</b> Backpropagation is typically combined with gradient descent (or its variants like SGD, Adam) to iteratively update the weights and minimize the loss.</li>
+  </ul>
+  <p>
+    Backpropagation is fundamental to training deep neural networks and has enabled the development of complex models capable of solving a wide range of tasks in machine learning and artificial intelligence.
+  </p>
 </details>
 
 <details>
   <summary>
     What happen if I get rid of 1/m from cost function ?
   </summary>
+  <p>
+    If you remove the factor of $ \frac{1}{m} $ from the cost function in the context of gradient descent, where $ m $ is the number of training examples, the implications can be significant. Here’s a detailed explanation of the potential effects:
+  </p>
+  <h4>Standard Cost Function</h4>
+  <p>
+    The standard cost function for linear regression (mean squared error) is typically given by:
+  </p>
+  <p>
+    $ J(\theta) = \frac{1}{2m} \sum_{i=1}^m (h_\theta(x_i) - y_i)^2 $
+  </p>
+  <p>
+    where:
+  </p>
+  <ul>
+    <li>$ m $ is the number of training examples.</li>
+    <li>$ h_\theta(x_i) $ is the hypothesis function.</li>
+    <li>$ y_i $ is the actual output.</li>
+  </ul>
+  <h4>Gradient of the Cost Function</h4>
+  <p>
+    The gradient of this cost function is:
+  </p>
+  <p>
+    $ \nabla J(\theta) = \frac{1}{m} \sum_{i=1}^m (h_\theta(x_i) - y_i) x_i $
+  </p>
+  <h4>Effect of Removing $ \frac{1}{m} $</h4>
+  <p>
+    If you remove the $ \frac{1}{m} $ factor, the cost function becomes:
+  </p>
+  <p>
+    $ J'(\theta) = \frac{1}{2} \sum_{i=1}^m (h_\theta(x_i) - y_i)^2 $
+  </p>
+  <p>
+    The gradient then becomes:
+  </p>
+  <p>
+    $ \nabla J'(\theta) = \sum_{i=1}^m (h_\theta(x_i) - y_i) x_i $
+  </p>
+  <h4>Implications</h4>
+  <ol>
+    <li><b>Scaling of the Gradient:</b> Without the $ \frac{1}{m} $ factor, the gradient will be $ m $ times larger, because each term in the sum is not averaged over the number of training examples.</li>
+    <li><b>Learning Rate Adjustment:</b> To counteract the larger gradient, you would need to adjust the learning rate $ \eta $. Specifically, you would need to divide the learning rate by $ m $ to maintain similar update steps. If the learning rate is not adjusted, the updates to the parameters will be much larger, which could cause the gradient descent algorithm to overshoot the minimum and fail to converge.</li>
+    <li><b>Effect on Convergence:</b> With a larger gradient (if learning rate is not adjusted), the gradient descent algorithm might oscillate and diverge instead of converging to the minimum. Proper convergence requires careful tuning of the learning rate, which becomes more challenging without the $ \frac{1}{m} $ factor.</li>
+    <li><b>Batch Size Sensitivity:</b> If using mini-batch gradient descent, the size of the mini-batch would directly affect the scale of the gradient, leading to inconsistent updates unless the learning rate is dynamically adjusted based on the mini-batch size.</li>
+  </ol>
+  <h4>Example</h4>
+  <p>
+    Suppose you have a dataset with $ m = 1000 $ examples, and you are using a learning rate $ \eta = 0.01 $.
+  </p>
+  <p>
+    <b>With $ \frac{1}{m} $:</b><br>
+    $ \theta_{\text{new}} = \theta_{\text{old}} - 0.01 \cdot \frac{1}{m} \sum_{i=1}^m \nabla f(\theta, x_i, y_i) $
+  </p>
+  <p>
+    <b>Without $ \frac{1}{m} $:</b><br>
+    $ \theta_{\text{new}} = \theta_{\text{old}} - 0.01 \cdot \sum_{i=1}^m \nabla f(\theta, x_i, y_i) $
+  </p>
+  <p>
+    In the second case, the updates to $ \theta $ will be 1000 times larger, leading to potential overshooting.
+  </p>
+  <h4>Conclusion</h4>
+  <p>
+    Removing the $ \frac{1}{m} $ factor from the cost function significantly affects the scale of the gradients and, consequently, the parameter updates. To ensure proper convergence of the gradient descent algorithm, you would need to appropriately adjust the learning rate. The factor $ \frac{1}{m} $ helps in normalizing the gradient, making the updates consistent regardless of the size of the dataset.
+  </p>
+</details>
 
-If you remove the factor of $ \frac{1}{m} $ from the cost function in the context of gradient descent, where $ m $ is the number of training examples, the implications can be significant. Here’s a detailed explanation of the potential effects:
+<details>
+  <summary>What is Cross-Validation?</summary>
+  <p>
+    Cross-validation is a statistical method used to evaluate and improve the performance of machine learning models. It involves partitioning the data into subsets, training the model on some of these subsets (the training set), and testing it on the remaining subsets (the validation or testing set). The process is repeated multiple times with different partitions to ensure the model's performance is robust and not dependent on a particular data split.
+  </p>
 
-### Standard Cost Function
+  <summary>Types of Cross-Validation</summary>
+  <ul>
+    <li>
+      <b>K-Fold Cross-Validation:</b> The data is divided into $ k $ equally sized folds. The model is trained $ k $ times, each time using $ k-1 $ folds for training and the remaining fold for validation. The performance metric is averaged over the $ k $ runs.
+    </li>
+    <li>
+      <b>Stratified K-Fold Cross-Validation:</b> Similar to k-fold, but ensures each fold has a similar distribution of the target variable, which is especially useful for imbalanced datasets.
+    </li>
+    <li>
+      <b>Leave-One-Out Cross-Validation (LOOCV):</b> Each data point is used as a validation set exactly once, and the model is trained on all remaining data points. This is a special case of k-fold where $ k $ is equal to the number of data points.
+    </li>
+    <li>
+      <b>Leave-P-Out Cross-Validation:</b> Similar to LOOCV, but $ p $ data points are left out for validation in each iteration.
+    </li>
+    <li>
+      <b>Time Series Cross-Validation:</b> Used for time series data where the order of data points matters. The training set is progressively expanded, and the model is evaluated on the subsequent data points.
+    </li>
+  </ul>
 
-The standard cost function for linear regression (mean squared error) is typically given by:
+  <summary>Importance of Cross-Validation</summary>
+  <ul>
+    <li>
+      <b>Model Performance Estimation:</b> Cross-validation provides a more accurate estimate of a model's performance on unseen data compared to a single train-test split.
+    </li>
+    <li>
+      <b>Mitigating Overfitting:</b> It helps detect overfitting by evaluating how well the model generalizes to new data. If the model performs significantly better on training data compared to validation data, it may be overfitting.
+    </li>
+    <li>
+      <b>Hyperparameter Tuning:</b> Cross-validation is commonly used in conjunction with grid search or random search to find the best hyperparameters for a model.
+    </li>
+    <li>
+      <b>Model Comparison:</b> It allows for the fair comparison of different models or algorithms by providing a reliable measure of their performance.
+    </li>
+    <li>
+      <b>Data Utilization:</b> By using multiple splits of the data, cross-validation ensures that every data point is used for both training and validation, leading to a more robust evaluation.
+    </li>
+  </ul>
 
-$ J(\theta) = \frac{1}{2m} \sum*{i=1}^m (h*\theta(x_i) - y_i)^2 $
+  <summary>Example</summary>
 
-where:
+<code>
 
-- $ m $ is the number of training examples.
-- $ h\_\theta(x_i) $ is the hypothesis function.
-- $ y_i $ is the actual output.
+```python
+from sklearn.model_selection import cross_val_score
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.datasets import load_iris
 
-### Gradient of the Cost Function
+# Load data
 
-The gradient of this cost function is:
+data = load_iris()
+X, y = data.data, data.target
 
-$ \nabla J(\theta) = \frac{1}{m} \sum*{i=1}^m (h*\theta(x_i) - y_i) x_i $
+# Define model
 
-### Effect of Removing $ \frac{1}{m} $
+model = RandomForestClassifier()
 
-If you remove the $ \frac{1}{m} $ factor, the cost function becomes:
+# Perform 5-fold cross-validation
 
-$ J'(\theta) = \frac{1}{2} \sum*{i=1}^m (h*\theta(x_i) - y_i)^2 $
+scores = cross_val_score(model, X, y, cv=5)
 
-The gradient then becomes:
+print("Cross-validation scores:", scores)
+print("Average cross-validation score:", scores.mean())
+```
 
-$ \nabla J'(\theta) = \sum*{i=1}^m (h*\theta(x_i) - y_i) x_i $
-
-### Implications
-
-1. **Scaling of the Gradient**: Without the $ \frac{1}{m} $ factor, the gradient will be $ m $ times larger, because each term in the sum is not averaged over the number of training examples.
-
-2. **Learning Rate Adjustment**: To counteract the larger gradient, you would need to adjust the learning rate $ \eta $. Specifically, you would need to divide the learning rate by $ m $ to maintain similar update steps. If the learning rate is not adjusted, the updates to the parameters will be much larger, which could cause the gradient descent algorithm to overshoot the minimum and fail to converge.
-
-3. **Effect on Convergence**: With a larger gradient (if learning rate is not adjusted), the gradient descent algorithm might oscillate and diverge instead of converging to the minimum. Proper convergence requires careful tuning of the learning rate, which becomes more challenging without the $ \frac{1}{m} $ factor.
-
-4. **Batch Size Sensitivity**: If using mini-batch gradient descent, the size of the mini-batch would directly affect the scale of the gradient, leading to inconsistent updates unless the learning rate is dynamically adjusted based on the mini-batch size.
-
-### Example
-
-Suppose you have a dataset with $ m = 1000 $ examples, and you are using a learning rate $ \eta = 0.01 $.
-
-- With $ \frac{1}{m} $:
-  $ \theta*{\text{new}} = \theta*{\text{old}} - 0.01 \cdot \frac{1}{m} \sum\_{i=1}^{m} \nabla f(\theta, x_i, y_i) $
-
-- Without $ \frac{1}{m} $:
-  $ \theta*{\text{new}} = \theta*{\text{old}} - 0.01 \cdot \sum\_{i=1}^{m} \nabla f(\theta, x_i, y_i) $
-
-In the second case, the updates to $ \theta $ will be 1000 times larger, leading to potential overshooting.
-
-### Conclusion
-
-Removing the $ \frac{1}{m} $ factor from the cost function significantly affects the scale of the gradients and, consequently, the parameter updates. To ensure proper convergence of the gradient descent algorithm, you would need to appropriately adjust the learning rate. The factor $ \frac{1}{m} $ helps in normalizing the gradient, making the updates consistent regardless of the size of the dataset.
+</code>
 
 </details>
+
+Yes, I have experience with some XAI (Explainable AI) methods. Here's a brief overview of each:
+
+A. **SHAP (SHapley Additive exPlanations)**:
+
+- SHAP values are a unified measure of feature importance based on cooperative game theory.
+- They provide consistency and local accuracy, making it possible to explain individual predictions.
+
+B. **LIME (Local Interpretable Model-agnostic Explanations)**:
+
+- LIME explains individual predictions by locally approximating the model around the prediction.
+- It generates interpretable models (e.g., linear models) to understand the behavior of complex models.
+
+C. **Integrated Gradients**:
+
+- A method for attributing the prediction of a deep network to its input features.
+- It works by integrating the gradients of the model's output with respect to the input along a straight path from a baseline to the input.
+
+D. **Other**:
+
+- **Partial Dependence Plots (PDPs)**: Show the relationship between a feature and the predicted outcome while keeping other features constant.
+- **Permutation Feature Importance**: Measures the change in model performance when a feature's values are randomly shuffled.
+- **Counterfactual Explanations**: Identify the minimal changes needed to a data point to change its prediction.
+
+These methods help in understanding and interpreting machine learning models, making them more transparent and trustworthy. Are there any specific XAI methods you're interested in or would like to discuss further?
 
 #
 
