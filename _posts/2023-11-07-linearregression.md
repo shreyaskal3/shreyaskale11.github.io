@@ -10,13 +10,14 @@ math: true
 
 <style>
   details {
-    border: 1px solid #999;
+    border: 1px solid #ccc;
     border-radius: 4px;
     padding: 0.5em;
     margin-bottom: 1em;
   }
   
   summary {
+    font-weight: bold;
     cursor: pointer;
   }
   
