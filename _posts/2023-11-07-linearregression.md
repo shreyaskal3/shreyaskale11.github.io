@@ -31,6 +31,10 @@ math: true
 #### Gradient
 
 <p>
+Gradient descent is an optimization algorithm used to minimize a function by iteratively moving towards the steepest descent, as defined by the negative of the gradient. It's widely used in machine learning and deep learning to optimize models by minimizing the loss function.
+</p>
+
+<p>
 The gradient is a vector that contains the partial derivatives of a function with respect to its input variables. In simpler terms, it points in the direction of the greatest rate of increase of the function. For a function  \( f(x_1, x_2, \ldots, x_n) \) , the gradient is given by:
 $ \nabla f = \left( \frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \ldots, \frac{\partial f}{\partial x_n} \right) $
 </p>
