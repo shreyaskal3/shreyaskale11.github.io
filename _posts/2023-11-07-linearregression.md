@@ -385,7 +385,15 @@ print("Average cross-validation score:", scores.mean())
 
 </details>
 
+<details>
+<summary>What is XAI (Explainable AI) methods</summary>
+
+<p>
+These methods help in understanding and interpreting machine learning models, making them more transparent and trustworthy.
+</p>
+<p>
 Yes, I have experience with some XAI (Explainable AI) methods. Here's a brief overview of each:
+</p>
 
 A. **SHAP (SHapley Additive exPlanations)**:
 
@@ -408,8 +416,7 @@ D. **Other**:
 - **Permutation Feature Importance**: Measures the change in model performance when a feature's values are randomly shuffled.
 - **Counterfactual Explanations**: Identify the minimal changes needed to a data point to change its prediction.
 
-These methods help in understanding and interpreting machine learning models, making them more transparent and trustworthy. Are there any specific XAI methods you're interested in or would like to discuss further?
-
+</details>
 #
 
 ## Gradient descent

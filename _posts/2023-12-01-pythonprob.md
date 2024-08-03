@@ -1,16 +1,14 @@
 ---
 title: Python Problem
 date: 2023-12-01 00:00:00 +0800
-categories: [python,pythonprob]
+categories: [python, pythonprob]
 tags: [pythonprob]
 ---
-
-
-
 
 ## Basic
 
 ### sort a list of elements using the bubble sort algorithm.
+
 ```python
 nums = [2,0,1,2,0,1]
 
@@ -22,7 +20,8 @@ for i in range(1,len(nums)):
 print(nums)
 ```
 
-### To print all possible permutations of a given string. 
+### To print all possible permutations of a given string.
+
 ```python
 def generate_permutations(s, start=0):
     if start == len(s) - 1:
@@ -46,6 +45,7 @@ generate_permutations(input_list)
 ```
 
 ### To get the factorial of a non-negative integer.
+
 ```python
 def factorial(n):
     if n == 0 or n == 1:
@@ -57,8 +57,8 @@ result = factorial(5)
 print("Factorial:", result)
 ```
 
-
 ### To get the Fibonacci series between 0 to 50.
+
 ```python
 def fibonacci(n):
     if n <= 1:
@@ -75,6 +75,7 @@ else:
 ```
 
 ### To find duplicates in a string
+
 ```python
 input_str = "hello world"
 seen_chars = set()
@@ -89,8 +90,8 @@ for char in input_str:
 print("Duplicates:", duplicates)
 ```
 
-
 ### HCF and LCM
+
 ```python
 def hcf(x, y):
     """This function implements the Euclidian algorithm
@@ -99,6 +100,7 @@ def hcf(x, y):
         x, y = y, x % y
     return x
 ```
+
 ```python
 def find_hcf(x, y, z):
     # Function to find the HCF of two numbers using Euclid's Algorithm
@@ -120,6 +122,7 @@ def lcm(x, y):
 ```
 
 ### To find the factors of a number
+
 ```python
 def print_factors(x):
     """This function takes a
@@ -130,33 +133,81 @@ def print_factors(x):
             print(i)
 ```
 
+### palindrome hunter
+
+You're a palindrome hunter exploring the vast jungle of strings! Your mission is to write a Python function that finds all palindromic substrings within a given string. Remember, a palindrome reads the same forwards and backwards. For example, in the word 'nayan', both 'aya' and 'nayan' are palindromes. Your function should return the count of all such palindromes. Note: Single characters are not considered palindromes for this challenge.
+
+Sample Input:
+s = "abcbapp"
+
+Sample Output:
+3
+
+Explanation:
+The palindromes are: 'bcb', 'abcba', and 'pp'. Total count: 3.
+
+```python
+# Please do not delete any part of the template code.
+# Code evaluation will fail if the template is deleted.
+# Add your code in the designated area.
+def count_palindromic_substrings(s)->int:
+    # Write your code below
+    # Keep the name and the datatype of the return variable as it is in the code template
+    count = 0
+    print(s)
+    if s[0]==s[1]:
+        count+=1
+    if s[-1]==s[-2]:
+        count+=1
+    for i in range(1,len(s)):
+        if i<=len(s)//2:
+            x = i
+        else:
+            x = len(s)-1-i
+        j = 0
+        while x>j:
+            # print(s[i-j-1],s[i],s[i+j+1])
+            if s[i-j-1]==s[i+j+1]:
+                # print(s[i-j-1],s[i],s[i+j+1])
+                count+=1
+            j+=1
+
+    return count
+
+if __name__ == '__main__':
+    s = "abcbapp"
+    print("Number of palindromic substrings:",count_palindromic_substrings(s))
 
 
+```
 
 ## Medium
-
 
 ### HCF
 
 Sagar, a mathematics and computer science student, needs to find the largest possible HCF (Highest Common Factor) that can be obtained using three distinct numbers less than or equal to a given number N. Help him solve this problem.
 
 Constraints
+
 - 1 <= T <= 10
 - 1 <= N <= 10^18
 
 Input
+
 - The first line contains an integer T, denoting the number of test cases.
 - For each test case, there is a line containing an integer N.
 
 Output
+
 - Output the answer for each test case on the next line.
 - If multiple answers are possible, print the smallest three numbers in increasing order.
 - If no solution is possible, print -1.
 
 | Sample Input | Sample Output |
-| --- | --- |
-| 2| -1 |
-2 | 1 2 3 |
+| ------------ | ------------- |
+| 2            | -1            |
+| 2            | 1 2 3         |
+
 5
 
 ```
@@ -165,6 +216,7 @@ n = 6 , hcf(2,4,6) = 2
 n = 9 , hcf(3,6,9) = 3
 n = 12 , hcf(4,8,12) = 4
 ```
+
 ```python
 n = int(input())                # number of test cases
 
@@ -175,8 +227,6 @@ for i in range(n):
         continue
     print(inp//3,(inp//3)*2,(inp//3)*3)
 ```
-
-
 
 ### Intersection of 3 Sorted Arrays
 
@@ -200,6 +250,7 @@ Constraints:
 Example:
 
 **Input:**
+
 ```
 5
 5
@@ -210,9 +261,11 @@ Example:
 ```
 
 **Output:**
+
 ```
 1 5
 ```
+
 ```python
 from collections import Counter
 def array_intersection (n1, n2, n3, arr1, arr2, arr3):
@@ -239,9 +292,11 @@ arr3 = list(map(int, input().split()))
 out_ = array_intersection(n1, n2, n3, arr1, arr2, arr3)
 print (' '.join(map(str, out_)))
 ```
+
 ---
 
 ### Missingno!
+
 You are given an integer n, along with an array of n-1 numbers in the range 1 to n, with no duplicates. One number is missing from the array. Find that number.
 
 Input:
@@ -263,28 +318,32 @@ Constraints:
 All elements in arr are unique
 
 **Input:**
+
 ```
 4
 4 1 2
 ```
 
 **Output:**
+
 ```
 3
 ```
+
 ```
 Explanation:
 sum of n numbers = n*(n+1)/2
 missing number = sum of n numbers - sum of array elements
 ```
+
 ```python
 def find_missing_number(n, arr):
     # Write your code here
     return (n*(n+1)//2) - sum(arr)
 ```
 
-
 ### Stuff Them Candies In!
+
 You are given an array candies, where candies[i] defines how many candies the i-th kid has. You are also given an integer, extra_candies, which can be distributed among the kids.
 
 For each kid, check if there is a way to distribute extra_candies such that that kid has the maximum number of candies. Multiple kids can have maximum candies.
@@ -308,12 +367,13 @@ Constraints:
 1 <= candies[i] <= 100
 
 1 <= extra_candies <= 50
+
 ```
-SAMPLE INPUT 
+SAMPLE INPUT
 5
 2 3 5 1 3
 3
-SAMPLE OUTPUT 
+SAMPLE OUTPUT
 1 1 1 0 1
 ```
 
@@ -322,28 +382,24 @@ def extra_candy (n, candies, extra_candies):
     # Write your code here
     diff = max(candies)-extra_candies
     return [1 if i >= diff else 0 for i in candies ]
-    
+
 n = int(input())
 candies = list(map(int, input().split()))
 extra_candies = int(input())
 
 out_ = extra_candy(n, candies, extra_candies)
 print (' '.join(map(str, out_)))
-``` 
-
-
-
-
-
+```
 
 ### Shuffle the Array!
+
 You are given an array nums consisting if 2n elements in the form [x1,x2,x3...xn,y1,y2,y3...yn].
 
 Return an array in the form [x1,y1,x2,y2,x3,y3...,xn,yn].
 
 Input:
 
-n -  Half the size of the array arr
+n - Half the size of the array arr
 
 arr - The array itself
 
@@ -358,11 +414,12 @@ Constraints:
 nums.length = 2n
 
 1 <= nums[i] <= 1000
+
 ```
-SAMPLE INPUT 
+SAMPLE INPUT
 3
 2 5 1 3 4 7
-SAMPLE OUTPUT 
+SAMPLE OUTPUT
 2 3 5 4 1 7
 ```
 
@@ -374,7 +431,7 @@ def shuffle (n, arr):
     out = []
     [out.extend([arr1[i],arr2[i]]) for i in range(n) ]
     return out
-    
+
 n = int(input())
 arr = list(map(int, input().split()))
 
@@ -399,12 +456,14 @@ Constraints:
 1 <= str.length <= 10000
 
 str consists of only lower case alphabets
+
 ```
-SAMPLE INPUT 
+SAMPLE INPUT
 abcddce
-SAMPLE OUTPUT 
+SAMPLE OUTPUT
 abe
 ```
+
 ```
 Explanation
 First, the 2 'd's are deleted from the string "abcddce", to make it "abcce"
@@ -414,14 +473,13 @@ Then, the two adjacent 'c's are removed, to make it "abe"
 Now, there are no longer any adjacent pairs. Hence, the result is "abe"
 ```
 
-
 ```python
 def remove_pair (str):
     # Write your code here
 
     stack = []
     i = 0
-    
+
     while i <len(str):
         if (len(stack)!=0) and (str[i] == stack[-1]):
             stack.pop()
@@ -437,6 +495,7 @@ print (out_)
 ```
 
 ### Good Pairing
+
 You are given an array arr in which a good pair is defined as a pair of numbers in the array which satisfy the following conditions:
 
 arr[i] = arr[j] (The two numbers must be equal)
@@ -460,13 +519,15 @@ Conditions:
 1 <= arr.length <= 100
 
 1 <= arr[i] <= 100
+
 ```
-SAMPLE INPUT 
+SAMPLE INPUT
 6
 1 2 3 1 1 3
-SAMPLE OUTPUT 
+SAMPLE OUTPUT
 4
 ```
+
 ```python
 from collections import Counter
 def good_pairs (n, arr):
@@ -490,6 +551,7 @@ print (out_)
 ```
 
 ### Golden Letters
+
 You are given a string key that contains a list of golden letters. You are also given another string str. Find out how many characters in str are golden letters.
 
 Input:
@@ -509,13 +571,15 @@ Constraints:
 1 <= str.length <= 10000
 
 key and str are made up of only upper-case and lower-case alphabets
+
 ```
-SAMPLE INPUT 
+SAMPLE INPUT
 wxYZ
 lmnoWwwxyZ
-SAMPLE OUTPUT 
+SAMPLE OUTPUT
 4
 ```
+
 ```python
 from collections import Counter
 def golden_char (key, str):
@@ -534,8 +598,8 @@ out_ = golden_char(key, str)
 print (out_)
 ```
 
-
 ### Longest String Without Repeating Characters
+
 You are given a string str. Find the length of the longest possible substring in str without ANY repeating characters.
 
 Input:
@@ -549,16 +613,19 @@ The length of the longest possible substring in str without repeating characters
 Constraits:
 
 1 <= str.length <= 10000
+
 ```
-SAMPLE INPUT 
+SAMPLE INPUT
 abcbcde
-SAMPLE OUTPUT 
+SAMPLE OUTPUT
 4
 ```
+
 ```
 Explanation
 "bcde" is the longest string in the input without any repeating characters, ie, each of the characters appears only once. The length of this string is 4, hence that is the output.
 ```
+
 ```python
 
 def no_dups (str):
@@ -580,7 +647,7 @@ def no_dups (str):
         if len(arr)>m:
             m = len(arr)
             marr = arr
-    # print(marr)   
+    # print(marr)
     return m
 
 str = input()
@@ -588,6 +655,7 @@ str = input()
 out_ = no_dups(str)
 print (out_)
 ```
+
 ```python
 def no_dups(s):
     n = len(s)
@@ -601,7 +669,7 @@ def no_dups(s):
         else:
             current_length+=1
         char_index[s[i]]=i
-        max_length = max(max_length,current_length) 
+        max_length = max(max_length,current_length)
     return max_length
 
 str_input = input()
@@ -623,20 +691,25 @@ o
 ```
 
 ### Rotate Matrix
-You are given an n*n matrix. You must rotate it to the right by 90 degrees.
+
+You are given an n\*n matrix. You must rotate it to the right by 90 degrees.
 
 Before Rotation:
+
 ```
 1 2 3
 4 5 6
 7 8 9
 ```
+
 After Rotation:
+
 ```
 7 4 1
 8 5 2
 9 6 3
 ```
+
 All modifications must take place on the same matrix. Do not create a new 2D array.
 
 Input:
@@ -654,17 +727,19 @@ Constraints:
 1 <= n <= 20
 
 -1000 <= arr[i] <= 1000
+
 ```
-SAMPLE INPUT 
+SAMPLE INPUT
 3
 1 2 3
 4 5 6
 7 8 9
-SAMPLE OUTPUT 
+SAMPLE OUTPUT
 7 4 1
 8 5 2
 9 6 3
 ```
+
 ```python
 def rotate_matrix (n, arr):
     # Write your code here
@@ -683,6 +758,7 @@ for i_out_ in out_:
 ```
 
 ### Jump Game
+
 You are given an array arr. You start from index 0, and the element at each index denotes the maximum distance you can jump from that index. For instance, in the following example:
 
 3 1 2 1 7
@@ -706,20 +782,22 @@ Constraints:
 1 <= arr.length <= 1000
 
 0 <= arr[i] <= 1000
+
 ```
-SAMPLE INPUT 
+SAMPLE INPUT
 6
 4 1 1 1 0 9
-SAMPLE OUTPUT 
+SAMPLE OUTPUT
 0
 ```
+
 ```python
 def can_jump (n, arr):
     # Write your code here
     """
     4
     4 1
-    4 
+    4
     """
 
     max = 0
@@ -773,15 +851,16 @@ key and str consist of only uppercase alphabets
 key has all 26 uppercase alphabets, jumbled in some order
 
 ```
-SAMPLE INPUT 
+SAMPLE INPUT
 HECABDFGIJKLMNOPQRSTUVWXYZ
 3
 HACKER
 EARTHS
 
-SAMPLE OUTPUT 
+SAMPLE OUTPUT
 1
 ```
+
 ```
 Explanation
 In the first sample above, the key is "HECABDFGIJKLMNOPQRSTUVWXYZ". The first characters of the words "HACKER", "EARTHS" and "CODEXPLAINED" are 'H', 'E' and 'C'. These are sorted correctly according to key, hence the output is 1.
@@ -791,7 +870,7 @@ In the second sample below, the two words are "AGENTS" and "AGENCY". The first 4
 In the third sample below, the two words are "XAVIER" and "XAVIE". Their first 5 characters are equal. At this point, the second string is terminated. However, the length of the first string is greater than that of the second. The first string is lexicographically GREATER than the second, and so the output is 0.
 ```
 
-```python 
+```python
     def is_lexicographic (key, n, str):
     # Write your code here
     d = {k:i for i,k in enumerate(key)}
@@ -818,9 +897,8 @@ for _ in range(n):
 
 out_ = is_lexicographic(key, n, str)
 print (out_)
-    
-```
 
+```
 
 ### Three Sum
 
@@ -847,17 +925,20 @@ Constaints:
 1 <= n <= 100
 
 -10000 <= arr[i] <= 10000
+
 ```
-SAMPLE INPUT 
+SAMPLE INPUT
 6
 0 8 6 2 -2 -14
-SAMPLE OUTPUT 
+SAMPLE OUTPUT
 2
 ```
+
 ```
 Explanation
 The two sets are (6,8,-14) and (-2,0,2).
 ```
+
 ```python
 def no_of_triplets (n, arr):
     # Write your code here
@@ -885,13 +966,13 @@ print (out_)
 
 ```
 
-
 ### Letter Combinations of a Phone Number
+
 You are given a string str containing only digits from 2 to 9 (including 2 and 9). You are also given the following mapping of digits, such as they are on a telephone. Return all possible letter combinations that the number could represent. The resultant array must be in ascending order.
 
 Input:
 
-str - A string 
+str - A string
 
 Output:
 
@@ -904,9 +985,9 @@ Constraints:
 str consists of only digits from 2 to 9
 
 ```
-SAMPLE INPUT 
+SAMPLE INPUT
 68
-SAMPLE OUTPUT 
+SAMPLE OUTPUT
 mt
 mu
 mv
@@ -921,7 +1002,7 @@ ov
 ```python
 def letter_combinations(digits):
     d = {'2':'abc', '3':'def', '4':'ghi', '5':'jkl', '6':'mno', '7':'pqrs', '8':'tuv', '9':'wxyz'}
-    
+
     def backtrack(index=0, current=''):
         if index == len(digits):
             combinations.append(current)
@@ -941,6 +1022,7 @@ for i in output:
 ```
 
 ### Generate Parentheses
+
 You are given an integer n. Generate all possible balanced parentheses containing n opening and closing parentheses and return a sorted array.
 
 A string of parentheses is considered well balanced if there are never more closing than opening parentheses at any point in the string.
@@ -958,9 +1040,9 @@ Constraints:
 1 <= n <= 10
 
 ```
-SAMPLE INPUT 
+SAMPLE INPUT
 3
-SAMPLE OUTPUT 
+SAMPLE OUTPUT
 ((()))
 (()())
 (())()
@@ -997,6 +1079,3 @@ out_ = gen_para(n)
 for i_out_ in out_:
     print (i_out_)
 ```
-
-
-
