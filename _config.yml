@@ -5,7 +5,7 @@ theme: jekyll-theme-chirpy
 
 # Change the following value to '/PROJECT_NAME' ONLY IF your site type is GitHub Pages Project sites
 # and doesn't have a custom domain.
-baseurl: ""
+baseurl: "/shreyaskale11.github.io"
 
 # The language of the webpage › http://www.lingoes.net/en/translator/langcode.htm
 # If it has the same name as one of the files in folder `_data/locales`, the layout language will also be changed,
@@ -28,10 +28,10 @@ description: ----
 #   Simplifying the complex, so you don't have to.
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
-url: "https://ainotes.in"
+url: "https://shreyaskal3.github.io"
 
 github:
-  username: ainotes # change to your github username
+  username: shreyaskal3 # change to your github username
 
 twitter:
   username: ainotes # change to your twitter username
@@ -44,7 +44,7 @@ social:
   links:
     # The first element serves as the copyright owner's link
     - https://twitter.com/ainotes # change to your twitter homepage
-    - https://github.com/ainotes # change to your github homepage
+    - https://github.com/shreyaskal3 # change to your github homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
     # - https://www.linkedin.com/in/username
